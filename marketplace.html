@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bold.ng | Marketplace Showroom</title>
+    
+    <!-- Speed Optimization: Resource Hints -->
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+ 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #000B18; 
+            color: white; 
+            min-height: 100vh; 
+        }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 140, 0, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+        .orange-gradient { background: linear-gradient(135deg, #FF6600 0%, #E65C00 100%); }
+        
+        /* Skeleton Animation for instant visual feedback */
+        .skeleton {
+            background: linear-gradient(90deg, #0a192f 25%, #162a4a 50%, #0a192f 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .loader {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #FF6600;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="flex flex-col">
+
+    
+
+    <!-- Navigation -->
+
+ 
+    <nav class="h-20 glass-card px-6 flex justify-between items-center sticky top-0 z-50">
+        <a href="index.html" class="flex items-center gap-4">
+            <div class="w-10 h-10 orange-gradient rounded-xl flex items-center justify-center font-black text-white italic">B</div>
+            <span class="text-2xl font-black tracking-tighter uppercase italic">Bold<span class="text-[#FF6600]">.ng</span></span>
+        </a>
+        <div class="flex items-center gap-8">
+            <a href="cart.html" class="text-sm font-bold uppercase tracking-widest text-[#FF6600]">Showroom</a>
+            <a href="vendors_profile.html" class="text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">Profile</a>
+            <a href="cart.html" class="relative p-2 hover:bg-white/5 rounded-full transition-all group">
+                <i class="fas fa-shopping-bag text-xl group-hover:text-[#FF6600]"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-[#FF6600] text-[10px] font-black px-1.5 py-0.5 rounded-full border-2 border-[#000B18] show">cart</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Marketplace View -->
+    <main class="flex-1 max-w-7xl mx-auto w-full px-6 py-12">
+        <header class="mb-12">
+            <h1 class="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-2">The <span class="text-[#FF6600]">Showroom</span></h1>
+            <div class="flex items-center gap-3">
+                <div id="sync-status-icon" class="loader scale-50"></div>
+                <span id="sync-text" class="text-white/30 font-bold uppercase tracking-widest text-[10px]">Updating Live Feed...</span>
+            </div>
+        </header>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Loading Skeletons -->
+            <div class="glass-card rounded-[2.5rem] p-5 h-80 skeleton opacity-50"></div>
+            <div class="glass-card rounded-[2.5rem] p-5 h-80 skeleton opacity-50"></div>
+            <div class="glass-card rounded-[2.5rem] p-5 h-80 skeleton opacity-50"></div>
+            <div class="glass-card rounded-[2.5rem] p-5 h-80 skeleton opacity-50"></div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        // Added Storage Imports for the upload engine
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD35odIjfILahBo2JEGWlCVChmfjHq6Rng",
+            authDomain: "boldng-web1.firebaseapp.com",
+            projectId: "boldng-web1",
+            storageBucket: "boldng-web1.firebasestorage.app",
+            messagingSenderId: "451061811783",
+            appId: "1:451061811783:web:b5d2870e86b7cdc517bf62"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const storage = getStorage(app);
+
+        /**
+         * CLOUD UPLOAD ENGINE
+         * Handles direct file uploads to Firebase Storage
+         */
+        export async function uploadToCloud(file, folder = 'listings', onProgress) {
+            return new Promise((resolve, reject) => {
+                if (!file) return reject("No file provided");
+                
+                const storageRef = ref(storage, `${folder}/${Date.now()}_${file.name}`);
+                const uploadTask = uploadBytesResumable(storageRef, file);
+
+                uploadTask.on('state_changed', 
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        if (onProgress) onProgress(Math.round(progress));
+                    }, 
+                    (error) => reject(error), 
+                    () => {
+                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                            resolve(downloadURL);
+                        });
+                    }
+                );
+            });
+        }
+
+        // SPEED HACK: Immediate Cache Hydration
+        const cached = JSON.parse(localStorage.getItem('bold_showroom_cache') || '[]');
+        if (cached.length > 0) {
+            renderProducts(cached);
+        }
+
+        let cart = JSON.parse(localStorage.getItem('bold_cart')) || [];
+
+        // Firebase Real-time Sync
+        signInAnonymously(auth).then(() => {
+            const q = query(collection(db, "listings"), orderBy("createdAt", "desc"), limit(24));
+            
+            onSnapshot(q, (snapshot) => {
+                const products = [];
+                snapshot.forEach(doc => products.push({ id: doc.id, ...doc.data() }));
+                
+                localStorage.setItem('bold_showroom_cache', JSON.stringify(products));
+                renderProducts(products);
+                
+                const syncIcon = document.getElementById('sync-status-icon');
+                if (syncIcon) syncIcon.outerHTML = '<div class="w-2 h-2 rounded-full bg-emerald-500"></div>';
+                const syncText = document.getElementById('sync-text');
+                if (syncText) syncText.innerText = 'Live Feed Active';
+            });
+        });
+
+        function renderProducts(items) {
+            const grid = document.getElementById('product-grid');
+            if (!grid) return;
+
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-20 text-center opacity-20 font-black uppercase italic tracking-widest">No listings available</div>`;
+                return;
+            }
+
+            grid.innerHTML = items.map(p => `
+                <div class="glass-card rounded-[2.5rem] p-5 flex flex-col group">
+                    <div class="aspect-square bg-white/5 rounded-[2rem] mb-6 overflow-hidden relative">
+                        <img src="${p.image}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        ${p.tier === 'premium' ? 
+                            `<span class="absolute top-4 right-4 bg-[#FF6600] text-[8px] font-black px-3 py-1 rounded-full uppercase italic shadow-lg">Premium</span>` : 
+                            ''
+                        }
+                    </div>
+                    <div class="px-2">
+                        <p class="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">${p.category || 'General'}</p>
+                        <h3 class="text-xl font-bold uppercase italic mb-4 truncate">${p.name}</h3>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-black italic text-[#FF6600]">₦${Number(p.price).toLocaleString()}</span>
+                            <button onclick="addToCart('${p.id}', '${p.name}', ${p.price}, '${p.image}')" class="orange-gradient w-10 h-10 rounded-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform">
+                                <i class="fas fa-plus text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.addToCart = (id, name, price, image) => {
+            cart.push({ id, name, price, image, cartId: Date.now() });
+            localStorage.setItem('bold_cart', JSON.stringify(cart));
+            updateCartBadge();
+            
+            const btn = event.currentTarget;
+            const originalIcon = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => btn.innerHTML = originalIcon, 1000);
+        };
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-count');
+            if (!badge) return;
+            badge.innerText = cart.length;
+            badge.style.display = cart.length > 0 ? 'block' : 'none';
+        }
+
+        updateCartBadge();
+    </script>
+</body>
+</html>

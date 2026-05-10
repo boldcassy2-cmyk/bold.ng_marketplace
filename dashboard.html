@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Bold.ng Seller</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        :root { --brand-orange: #f97316; --brand-dark: #020617; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--brand-dark); color: #f8fafc; margin: 0; }
+        .glass-panel { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .brand-gradient { background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%); }
+        .sidebar { transition: all 0.3s ease; }
+        .stat-card:hover { border-color: rgba(249, 115, 22, 0.3); }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 glass-panel border-r border-white/5 fixed inset-y-0 left-0 z-50 hidden lg:flex flex-col p-6">
+        <div class="mb-12">
+            <span class="text-2xl font-black">Bold<span class="text-orange-500">.ng</span></span>
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Merchant Suite</p>
+        </div>
+        
+        <nav class="space-y-2 flex-grow">
+            <a href="#" class="flex items-center gap-3 p-4 rounded-2xl brand-gradient text-white font-bold">
+                <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+            </a>
+            <a href="#" class="flex items-center gap-3 p-4 rounded-2xl text-slate-400 hover:bg-white/5 font-bold transition-all">
+                <i data-lucide="package" class="w-5 h-5"></i> Inventory
+            </a>
+            <a href="#" class="flex items-center gap-3 p-4 rounded-2xl text-slate-400 hover:bg-white/5 font-bold transition-all">
+                <i data-lucide="shopping-cart" class="w-5 h-5"></i> Orders
+                <span class="ml-auto bg-orange-500 text-white text-[10px] px-2 py-0.5 rounded-full">3</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 p-4 rounded-2xl text-slate-400 hover:bg-white/5 font-bold transition-all">
+                <i data-lucide="credit-card" class="w-5 h-5"></i> Payouts
+            </a>
+            <a href="#" class="flex items-center gap-3 p-4 rounded-2xl text-slate-400 hover:bg-white/5 font-bold transition-all">
+                <i data-lucide="settings" class="w-5 h-5"></i> Shop Settings
+            </a>
+        </nav>
+
+        <div class="pt-6 border-t border-white/5">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-slate-800 border border-white/10 overflow-hidden">
+                    <img src="https://ui-avatars.com/api/?name=Tech+Store&background=f97316&color=fff" alt="">
+                </div>
+                <div>
+                    <p class="text-sm font-bold">Gadget Hub</p>
+                    <p class="text-[10px] text-green-500 font-bold uppercase">Verified Store</p>
+                </div>
+            </div>
+            <a href="marketplace.html" class="flex items-center justify-center gap-2 p-3 text-xs font-black bg-white/5 rounded-xl hover:bg-white/10 transition-all">
+                <i data-lucide="log-out" class="w-4 h-4 text-red-500"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="lg:ml-64 flex-grow p-6 md:p-10">
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            <div>
+                <h1 class="text-3xl font-black">Welcome back, Gadget Hub!</h1>
+                <p class="text-slate-500">Here's what happening with your store today.</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="glass-panel p-3 rounded-2xl hover:border-white/20"><i data-lucide="bell"></i></button>
+                <button class="brand-gradient px-6 py-3 rounded-2xl font-black flex items-center gap-2 shadow-lg">
+                    <i data-lucide="plus"></i> Add Product
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="glass-panel p-8 rounded-[32px] stat-card border border-white/5 transition-all">
+                <p class="text-slate-500 text-xs font-bold uppercase mb-2">Total Sales</p>
+                <p class="text-3xl font-black">₦2,450,000</p>
+                <p class="text-green-500 text-[10px] font-bold mt-2">↑ 12% from last month</p>
+            </div>
+            <div class="glass-panel p-8 rounded-[32px] stat-card border border-white/5 transition-all">
+                <p class="text-slate-500 text-xs font-bold uppercase mb-2">Active Orders</p>
+                <p class="text-3xl font-black">18</p>
+                <p class="text-orange-500 text-[10px] font-bold mt-2">5 pending delivery</p>
+            </div>
+            <div class="glass-panel p-8 rounded-[32px] stat-card border border-white/5 transition-all">
+                <p class="text-slate-500 text-xs font-bold uppercase mb-2">Store Visitors</p>
+                <p class="text-3xl font-black">1,204</p>
+                <p class="text-green-500 text-[10px] font-bold mt-2">↑ 4% this week</p>
+            </div>
+            <div class="glass-panel p-8 rounded-[32px] stat-card border border-white/5 transition-all">
+                <p class="text-slate-500 text-xs font-bold uppercase mb-2">Balance</p>
+                <p class="text-3xl font-black text-orange-500">₦842,000</p>
+                <p class="text-slate-500 text-[10px] font-bold mt-2">Next payout: tomorrow</p>
+            </div>
+        </div>
+
+        <!-- Tables & Activity -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 glass-panel rounded-[40px] p-8 overflow-hidden">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-xl font-black">Recent Orders</h2>
+                    <button class="text-orange-500 font-bold text-sm hover:underline">View All</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-slate-500 text-xs font-bold uppercase border-b border-white/5">
+                                <th class="pb-4">Order ID</th>
+                                <th class="pb-4">Product</th>
+                                <th class="pb-4">Customer</th>
+                                <th class="pb-4">Amount</th>
+                                <th class="pb-4">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium">
+                            <tr class="border-b border-white/5">
+                                <td class="py-6 text-slate-400">#BLD-9842</td>
+                                <td class="py-6">iPhone 15 Pro Max</td>
+                                <td class="py-6">John Doe</td>
+                                <td class="py-6 font-bold">₦1,420,000</td>
+                                <td class="py-6"><span class="bg-blue-500/10 text-blue-500 px-3 py-1 rounded-full text-[10px] font-bold">Processing</span></td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="py-6 text-slate-400">#BLD-9831</td>
+                                <td class="py-6">Logitech G Pro</td>
+                                <td class="py-6">Sarah Smith</td>
+                                <td class="py-6 font-bold">₦120,000</td>
+                                <td class="py-6"><span class="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-[10px] font-bold">Delivered</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-[40px] p-8">
+                <h2 class="text-xl font-black mb-8">Quick Actions</h2>
+                <div class="space-y-4">
+                    <button class="w-full bg-white/5 p-4 rounded-2xl flex items-center gap-4 hover:bg-white/10 transition-all group">
+                        <div class="w-10 h-10 bg-orange-500/10 text-orange-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="plus" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-sm">New Inventory</p>
+                            <p class="text-[10px] text-slate-500 font-medium">Add products to your shop</p>
+                        </div>
+                    </button>
+                    <button class="w-full bg-white/5 p-4 rounded-2xl flex items-center gap-4 hover:bg-white/10 transition-all group">
+                        <div class="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="megaphone" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-sm">Create Campaign</p>
+                            <p class="text-[10px] text-slate-500 font-medium">Run a sale or promotion</p>
+                        </div>
+                    </button>
+                    <button class="w-full bg-white/5 p-4 rounded-2xl flex items-center gap-4 hover:bg-white/10 transition-all group">
+                        <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-sm">Export Reports</p>
+                            <p class="text-[10px] text-slate-500 font-medium">Download sales data CSV</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Scroll Control -->
+        <footer class="mt-20 py-8 border-t border-white/5 text-center">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-600 hover:text-slate-400 text-xs font-bold flex items-center justify-center gap-2 mx-auto">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i> BACK TO TOP
+            </button>
+        </footer>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bold.ng | Cart Summary</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #000B18; 
+            color: white; 
+            min-height: 100vh; 
+        }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+        }
+        .orange-gradient { background: linear-gradient(135deg, #FF6600 0%, #E65C00 100%); }
+    </style>
+</head>
+<body class="flex flex-col">
+
+    <!-- Header -->
+    <nav class="h-20 glass-card px-6 flex justify-between items-center sticky top-0 z-50">
+        <a href="index.html" class="flex items-center gap-4">
+            <div class="w-10 h-10 orange-gradient rounded-xl flex items-center justify-center font-black text-white italic">B</div>
+            <span class="text-2xl font-black tracking-tighter uppercase italic">Bold<span class="text-[#FF6600]">.ng</span></span>
+        </a>
+        <a href="marketplace.html" class="text-xs font-bold uppercase tracking-widest text-white/40 hover:text-[#FF6600]">← Continue Shopping</a>
+    </nav>
+
+    <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+        <h1 class="text-5xl font-black uppercase italic tracking-tighter mb-12">Your <span class="text-[#FF6600]">Cart</span></h1>
+
+        <div id="cart-content" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <!-- Items Section -->
+            <div class="lg:col-span-2 space-y-4" id="cart-items-list">
+                <!-- Items from Marketplace will appear here -->
+            </div>
+
+            <!-- Summary Section -->
+            <div class="lg:col-span-1">
+                <div class="glass-card rounded-[2rem] p-8 sticky top-28">
+                    <h2 class="text-xl font-black uppercase italic mb-6">Summary</h2>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex justify-between text-white/40 font-bold uppercase text-[10px]">
+                            <span>Items Count</span>
+                            <span id="summary-count" class="text-white">0</span>
+                        </div>
+                        
+                        <div class="flex justify-between text-white/40 font-bold uppercase text-[10px]">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal" class="text-white">₦0</span>
+                        </div>
+
+                        <div class="pt-4 border-t border-white/10 flex justify-between items-end">
+                            <span class="text-[#FF6600] font-black uppercase text-xs">Total</span>
+                            <span id="summary-total" class="text-3xl font-black italic">₦0</span>
+                        </div>
+                    </div>
+
+                    <button onclick="proceedToPayment()" class="w-full orange-gradient h-14 rounded-xl font-black uppercase italic tracking-widest hover:scale-[1.02] active:scale-95 transition-all">
+                        Checkout Now
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-20">
+            <i class="fas fa-shopping-basket text-6xl text-white/10 mb-6"></i>
+            <p class="text-white/40 uppercase font-bold tracking-widest">Your cart is empty</p>
+            <a href="marketplace.html" class="inline-block mt-6 text-[#FF6600] font-black italic">Go to Showroom →</a>
+        </div>
+    </main>
+
+    <script>
+        const CART_KEY = 'bold_cart';
+        // Storage key specifically for the final amount to be paid
+        const PAYMENT_AMOUNT_KEY = 'bold_payment_total';
+
+        function loadCart() {
+            const rawData = localStorage.getItem(CART_KEY);
+            const cart = JSON.parse(rawData || '[]');
+            const listContainer = document.getElementById('cart-items-list');
+            const emptyState = document.getElementById('empty-state');
+            const cartContent = document.getElementById('cart-content');
+
+            if (cart.length === 0) {
+                cartContent.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            let subtotal = 0;
+            listContainer.innerHTML = cart.map((item, index) => {
+                subtotal += Number(item.price);
+                return `
+                    <div class="glass-card rounded-2xl p-4 flex items-center gap-5">
+                        <img src="${item.image}" class="w-20 h-20 rounded-xl object-cover" onerror="this.src='https://via.placeholder.com/80?text=Bold.ng'">
+                        <div class="flex-1">
+                            <h3 class="font-bold uppercase italic text-sm">${item.name}</h3>
+                            <p class="text-[#FF6600] font-black">₦${Number(item.price).toLocaleString()}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-white/20 hover:text-red-500 p-2 transition-colors">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('summary-count').innerText = cart.length;
+            document.getElementById('summary-subtotal').innerText = `₦${subtotal.toLocaleString()}`;
+            document.getElementById('summary-total').innerText = `₦${subtotal.toLocaleString()}`;
+            
+            // Save current total in case user refreshes
+            localStorage.setItem(PAYMENT_AMOUNT_KEY, subtotal);
+        }
+
+        window.removeFromCart = (index) => {
+            let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            cart.splice(index, 1);
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            loadCart(); 
+        };
+
+        window.proceedToPayment = () => {
+            const rawData = localStorage.getItem(CART_KEY);
+            const cart = JSON.parse(rawData || '[]');
+            
+            if (cart.length === 0) return;
+
+            // Calculate total one last time for safety
+            const finalTotal = cart.reduce((sum, item) => sum + Number(item.price), 0);
+            
+            // Save to a specific key that your checkout_payment.html will read
+            localStorage.setItem(PAYMENT_AMOUNT_KEY, finalTotal);
+            
+            // Redirect to the payment page
+            window.location.href = 'checkout_payment.html';
+        };
+
+        // Initialize on load
+        loadCart();
+    </script>
+</body>
+</html>

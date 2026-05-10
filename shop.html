@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant Portal | Bold.ng Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #f8fafc; min-height: 100vh; }
+        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .brand-gradient { background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%); }
+        .input-group { background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.2s; }
+        .input-group:focus-within { border-color: #f97316; background: rgba(30, 41, 59, 0.7); }
+        .step-pill.active { background: #f97316; color: white; }
+        .hidden-section { display: none; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .animate-slide { animation: slideIn 0.4s ease-out forwards; }
+    </style>
+</head>
+<body class="flex flex-col">
+
+    <!-- MERCHANT HEADER -->
+    <header class="h-20 glass-panel sticky top-0 z-50 px-8 flex justify-between items-center border-b border-white/5">
+        <div class="flex items-center gap-10">
+            <!-- LOGO FIXED: Points directly to index.html -->
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-all group">
+                <div class="w-10 h-10 brand-gradient rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <i data-lucide="shopping-bag" class="text-white w-6 h-6"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tighter">Bold<span class="text-orange-500">.ng</span></span>
+            </a>
+            
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-400">
+                <!-- DASHBOARD FIXED: Points to index.html -->
+                <a href="index.html" class="hover:text-white transition-colors">Dashboard</a>
+                
+                <!-- ACTIVE PAGE -->
+                <a href="sell.html" class="text-orange-500 border-b-2 border-orange-500 pb-1">Add Product</a>
+                
+                <!-- PLACEHOLDERS: Added "javascript:void(0)" to prevent the # in URL -->
+                <a href="javascript:void(0)" onclick="alert('Orders section coming soon!')" class="hover:text-white transition-colors">Orders</a>
+                <a href="javascript:void(0)" onclick="alert('Analytics section coming soon!')" class="hover:text-white transition-colors">Analytics</a>
+            </nav>
+        </div>
+
+        <div class="flex items-center gap-5">
+            <div class="hidden sm:block text-right">
+                <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Merchant Mode</p>
+                <p class="text-sm font-bold text-white">Oluwaseun Electronics</p>
+            </div>
+            <button class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Seun" alt="Avatar">
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto w-full px-6 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Form Section -->
+            <div class="lg:col-span-8">
+                <div class="flex items-center gap-4 mb-10 overflow-x-auto pb-2">
+                    <div id="p-1" class="step-pill active px-5 py-2 rounded-full text-xs font-bold flex items-center gap-2 whitespace-nowrap">
+                        <span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">1</span> Product Details
+                    </div>
+                    <div class="h-[1px] w-8 bg-slate-800 shrink-0"></div>
+                    <div id="p-2" class="step-pill px-5 py-2 rounded-full text-xs font-bold text-slate-500 bg-slate-900 border border-slate-800 flex items-center gap-2 whitespace-nowrap">
+                        <span class="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center">2</span> Media & Pricing
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-[32px] p-8 md:p-12 relative overflow-hidden">
+                    <!-- Step 1 Content -->
+                    <section id="step1" class="animate-slide space-y-8">
+                        <div>
+                            <h2 class="text-3xl font-extrabold mb-2">New Listing</h2>
+                            <p class="text-slate-400">Fill in the details to list your item on the main store.</p>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="input-group rounded-2xl p-4">
+                                <label class="block text-[10px] font-black text-orange-500 uppercase mb-1">Product Title</label>
+                                <input type="text" id="titleInput" placeholder="e.g. Sony PlayStation 5 Console" class="bg-transparent w-full text-white outline-none font-medium">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="input-group rounded-2xl p-4">
+                                    <label class="block text-[10px] font-black text-orange-500 uppercase mb-1">Category</label>
+                                    <select id="catInput" class="bg-transparent w-full text-white outline-none cursor-pointer font-semibold">
+                                        <option value="" disabled selected class="bg-slate-900">Choose...</option>
+                                        <option value="Electronics" class="bg-slate-900">Electronics</option>
+                                        <option value="Fashion" class="bg-slate-900">Fashion</option>
+                                        <option value="Home" class="bg-slate-900">Home & Kitchen</option>
+                                    </select>
+                                </div>
+                                <div class="input-group rounded-2xl p-4">
+                                    <label class="block text-[10px] font-black text-orange-500 uppercase mb-1">Brand</label>
+                                    <input type="text" id="brandInput" placeholder="e.g. Sony" class="bg-transparent w-full text-white outline-none">
+                                </div>
+                            </div>
+
+                            <div class="input-group rounded-2xl p-4">
+                                <label class="block text-[10px] font-black text-orange-500 uppercase mb-1">Description</label>
+                                <textarea id="descInput" rows="4" placeholder="Describe the item condition, specs..." class="bg-transparent w-full text-white outline-none resize-none"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end pt-4">
+                            <button onclick="nav(2)" class="brand-gradient px-10 py-4 rounded-2xl font-bold shadow-lg flex items-center gap-2 hover:scale-105 transition-transform">
+                                Next Step <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Step 2 Content -->
+                    <section id="step2" class="hidden-section animate-slide space-y-8">
+                        <div>
+                            <h2 class="text-3xl font-extrabold mb-2">Price & Photos</h2>
+                            <p class="text-slate-400">Set your price and upload clear images.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-4">
+                                <label class="block text-xs font-bold text-slate-500 uppercase">Price (₦)</label>
+                                <div class="input-group rounded-2xl p-6">
+                                    <input type="number" id="priceInput" placeholder="0.00" class="bg-transparent w-full text-3xl font-bold text-white outline-none">
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <label class="block text-xs font-bold text-slate-500 uppercase">Stock</label>
+                                <div class="input-group rounded-2xl p-6">
+                                    <input type="number" id="stockInput" value="1" class="bg-transparent w-full text-3xl font-bold text-white outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <label class="block text-xs font-bold text-slate-500 uppercase">Product Image</label>
+                            <div id="dropZone" class="border-2 border-dashed border-slate-700 rounded-[32px] p-12 text-center cursor-pointer hover:border-orange-500 transition-colors group">
+                                <input type="file" id="fileInput" class="hidden" accept="image/*">
+                                <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                                    <i data-lucide="camera" class="w-8 h-8 text-orange-500"></i>
+                                </div>
+                                <h4 class="font-bold text-slate-300">Click to upload photo</h4>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between pt-4">
+                            <button onclick="nav(1)" class="px-8 py-4 rounded-2xl font-bold text-slate-500 hover:text-white transition-colors">Go Back</button>
+                            <button id="finalBtn" onclick="finalize()" class="brand-gradient px-12 py-4 rounded-2xl font-black shadow-xl flex items-center gap-2 hover:brightness-110">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                                Publish Listing
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Side Preview -->
+            <div class="lg:col-span-4">
+                <div class="rounded-[40px] overflow-hidden shadow-2xl sticky top-28 bg-slate-900/50 border border-white/5">
+                    <div class="relative aspect-[4/5] bg-slate-950 flex items-center justify-center">
+                        <img id="prevImg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500" class="w-full h-full object-cover opacity-20 grayscale transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8 space-y-4 relative -mt-20">
+                        <div class="glass-panel p-6 rounded-3xl">
+                            <p id="prevBrand" class="text-[10px] font-black text-orange-500 uppercase tracking-widest mb-1">BRAND</p>
+                            <h3 id="prevTitle" class="text-xl font-bold text-white mb-4">Item Preview</h3>
+                            <div class="flex justify-between items-end">
+                                <span id="prevPrice" class="text-3xl font-black text-white">₦0</span>
+                                <span id="prevCat" class="text-[10px] font-bold bg-white/10 px-3 py-1 rounded-full text-slate-400">Category</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SUCCESS MODAL -->
+    <div id="finishOverlay" class="fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-6">
+        <div class="max-w-md w-full glass-panel rounded-[40px] p-12 text-center animate-slide">
+            <div class="w-20 h-20 brand-gradient rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                <i data-lucide="check" class="w-10 h-10 text-white"></i>
+            </div>
+            <h2 class="text-3xl font-black mb-4">Listing Successful!</h2>
+            <p class="text-slate-400 mb-8">Your product is now visible to thousands of buyers on Bold.ng.</p>
+            <button onclick="location.href='index.html'" class="brand-gradient w-full py-5 rounded-2xl font-black text-white shadow-xl hover:scale-[1.02] transition-transform">View Shop</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Step Navigation
+        function nav(step) {
+            ['step1', 'step2'].forEach(s => document.getElementById(s).classList.add('hidden-section'));
+            document.querySelectorAll('.step-pill').forEach(p => p.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.remove('hidden-section');
+            document.getElementById(`p-${step}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Live Preview Logic
+        const formatter = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 });
+        
+        document.getElementById('titleInput').addEventListener('input', (e) => document.getElementById('prevTitle').innerText = e.target.value || "Item Preview");
+        document.getElementById('brandInput').addEventListener('input', (e) => document.getElementById('prevBrand').innerText = (e.target.value || "Brand").toUpperCase());
+        document.getElementById('catInput').addEventListener('change', (e) => document.getElementById('prevCat').innerText = e.target.value);
+        document.getElementById('priceInput').addEventListener('input', (e) => document.getElementById('prevPrice').innerText = formatter.format(e.target.value || 0));
+
+        // Image Upload Logic
+        document.getElementById('dropZone').addEventListener('click', () => document.getElementById('fileInput').click());
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const img = document.getElementById('prevImg');
+                    img.src = ev.target.result;
+                    img.classList.remove('grayscale', 'opacity-20');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Finalize Logic
+        function finalize() {
+            const btn = document.getElementById('finalBtn');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = `<i data-lucide="loader-2" class="animate-spin w-5 h-5"></i> Publishing...`;
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                document.getElementById('finishOverlay').classList.remove('hidden');
+                btn.innerHTML = originalContent;
+                lucide.createIcons();
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Bold.ng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: white; }
+        .glass-panel { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .brand-gradient { background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%); }
+        .role-btn.active { background: #f97316; color: white; border-color: #f97316; }
+        
+        input { 
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+        input:focus { border-color: #f97316 !important; outline: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <nav class="p-8">
+        <a href="index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-semibold">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i> Back to Shop
+        </a>
+    </nav>
+
+    <div class="flex-grow flex items-center justify-center p-6">
+        <div class="glass-panel w-full max-w-md p-10 rounded-[40px] shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 brand-gradient rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+                    <i data-lucide="user" class="w-8 h-8"></i>
+                </div>
+                <h1 class="text-3xl font-black mb-2">Welcome Back</h1>
+                <p id="login-subtext" class="text-slate-400">Log in to manage your account</p>
+            </div>
+
+            <!-- Role Selector -->
+            <div class="flex gap-3 mb-8 p-1 bg-white/5 rounded-2xl border border-white/5">
+                <button type="button" onclick="setLoginRole('merchant')" id="login-role_merchant" class="role-btn active flex-1 py-3 rounded-xl font-bold transition-all text-sm flex items-center justify-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i> Merchant
+                </button>
+                <button type="button" onclick="setLoginRole('vendor')" id="login-role_vendor" class="role-btn flex-1 py-3 rounded-xl font-bold transition-all text-sm flex items-center justify-center gap-2">
+                    <i data-lucide="store" class="w-4 h-4"></i> Vendor
+                </button>
+            </div>
+
+            <form id="login-form" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 ml-2 uppercase tracking-wider">Email Address</label>
+                    <input required type="email" placeholder="name@company.com" class="w-full rounded-2xl p-4 outline-none transition-all">
+                </div>
+                
+                <div class="space-y-1">
+                    <div class="flex justify-between items-center px-2">
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Password</label>
+                        <a href="#" class="text-[10px] text-orange-500 font-bold hover:underline">Forgot?</a>
+                    </div>
+                    <input required type="password" placeholder="••••••••" class="w-full rounded-2xl p-4 outline-none transition-all">
+                </div>
+
+                <button type="submit" id="login-btn" class="brand-gradient w-full py-4 rounded-2xl font-black shadow-lg hover:scale-[1.02] active:scale-95 transition-all mt-6">
+                    <span id="login-btn-text">Login as Merchant</span>
+                </button>
+            </form>
+
+            <p class="text-center mt-8 text-slate-400 text-sm">
+                New to Bold? <a href="signup.html" class="text-orange-500 font-bold hover:underline">Create Account</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        let currentLoginRole = 'merchant';
+
+        function setLoginRole(role) {
+            currentLoginRole = role;
+            const merchantBtn = document.getElementById('login-role_merchant');
+            const vendorBtn = document.getElementById('login-role_vendor');
+            const subtext = document.getElementById('login-subtext');
+            const btnText = document.getElementById('login-btn-text');
+
+            if (role === 'merchant') {
+                merchantBtn.classList.add('active');
+                vendorBtn.classList.remove('active');
+                subtext.innerText = "Log in to manage your bold purchases";
+                btnText.innerText = "Login as Merchant";
+            } else {
+                vendorBtn.classList.add('active');
+                merchantBtn.classList.remove('active');
+                subtext.innerText = "Log in to manage your store & sales";
+                btnText.innerText = "Login as Vendor";
+            }
+        }
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('login-btn');
+            const text = document.getElementById('login-btn-text');
+            
+            const originalText = text.innerText;
+            text.innerText = "Authenticating...";
+            btn.disabled = true;
+
+            // Logic to redirect based on role
+            setTimeout(() => {
+                if (currentLoginRole === 'vendor') {
+                    window.location.href = 'vendor_dashboard.html';
+                } else {
+                    window.location.href = 'merchant_dashboard.html';
+                }
+            }, 1200);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bold.ng | Platform Views</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & Babel CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .font-black { font-weight: 900; }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- SHARED COMPONENTS ---
+        const BoldButton = ({ children, variant = "primary", onClick, className = "" }) => {
+            const styles = {
+                primary: `bg-[#F97316] hover:bg-[#EA580C] text-white`,
+                secondary: `bg-[#020617] hover:bg-slate-900 text-white`,
+                outline: `border-2 border-[#020617] text-[#020617] hover:bg-[#020617] hover:text-white`
+            };
+            return (
+                <button 
+                    onClick={onClick}
+                    className={`px-6 py-3 rounded-sm font-black uppercase tracking-tighter transition-all active:scale-95 flex items-center justify-center gap-2 ${styles[variant]} ${className}`}
+                >
+                    {children}
+                </button>
+            );
+        };
+
+        // --- MERCHANT VIEW ---
+        const MerchantProfile = () => (
+            <div className="animate-in fade-in duration-500">
+                <nav className="bg-[#020617] py-4 px-6 sticky top-0 z-50">
+                    <div className="max-w-7xl mx-auto flex justify-between items-center">
+                        <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-[#F97316] flex items-center justify-center font-black italic text-white">B</div>
+                            <span className="text-white font-black tracking-tighter text-xl uppercase">Merchant Center</span>
+                        </div>
+                        <div className="flex items-center gap-4 text-white text-xs font-bold uppercase tracking-widest">
+                            Admin Mode
+                        </div>
+                    </div>
+                </nav>
+
+                <main className="max-w-7xl mx-auto p-6 md:p-10">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 bg-[#020617] p-8 text-white rounded-sm">
+                        <div className="flex items-center gap-6">
+                            <div className="w-24 h-24 bg-white rounded-sm flex items-center justify-center border-4 border-[#F97316]">
+                                <span className="text-[#020617] text-5xl font-black italic">B.</span>
+                            </div>
+                            <div>
+                                <h1 className="text-3xl font-black uppercase tracking-tighter">Akin & Sons Enterprise</h1>
+                                <p className="text-slate-400 font-bold text-sm tracking-widest uppercase italic">Merchant ID: BLD-8829-NG</p>
+                            </div>
+                        </div>
+                        <BoldButton variant="primary">Edit Public Vendor Profile</BoldButton>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-[#020617]">
+                        <div className="bg-white border-2 p-6">
+                            <h3 className="font-black uppercase mb-4 text-sm border-b pb-2">Business Security</h3>
+                            <div className="text-center py-4">
+                                <div className="text-5xl font-black">98%</div>
+                                <p className="text-[10px] font-bold text-slate-400 uppercase mt-2 italic">Verified Platinum Status</p>
+                            </div>
+                        </div>
+                        <div className="lg:col-span-2 bg-white border-2 p-6">
+                            <h3 className="font-black uppercase mb-4 text-sm border-b pb-2">Weekly Performance</h3>
+                            <div className="h-32 flex items-end justify-between gap-2">
+                                {[40, 70, 45, 90, 65, 80, 100].map((h, i) => (
+                                    <div key={i} className="flex-1 bg-[#F97316]" style={{ height: `${h}%` }}></div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        );
+
+        // --- VENDOR VIEW ---
+        const VendorProfile = () => (
+            <div className="animate-in fade-in duration-500 bg-white min-h-screen">
+                <header className="h-48 bg-[#020617] relative flex items-center justify-center overflow-hidden">
+                    <h1 className="text-white/10 text-8xl font-black italic tracking-tighter select-none uppercase">Storefront</h1>
+                </header>
+
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="relative -mt-16 flex flex-col md:flex-row items-end justify-between gap-6 pb-10 border-b-2 border-slate-100">
+                        <div className="flex items-end gap-6">
+                            <div className="w-32 h-32 bg-[#020617] border-4 border-[#F97316] flex items-center justify-center">
+                                <span className="text-white text-5xl font-black italic">B.</span>
+                            </div>
+                            <div className="mb-2">
+                                <h2 className="text-4xl font-black text-[#020617] uppercase tracking-tighter">Akin's Fashion</h2>
+                                <p className="text-xs font-black text-slate-400 uppercase tracking-widest mt-1 italic">Lagos, Nigeria • 4.9 Rating</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-2 mb-2">
+                            <BoldButton variant="outline" className="py-2 px-4 text-xs">Share</BoldButton>
+                            <BoldButton variant="primary" className="py-2 px-4 text-xs">Follow Store</BoldButton>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
+                        {[1, 2, 3].map(i => (
+                            <div key={i} className="group">
+                                <div className="aspect-[3/4] bg-slate-100 border-2 border-transparent group-hover:border-[#F97316] transition-all mb-4"></div>
+                                <h4 className="font-black uppercase text-sm">Bold Collection Item 0{i}</h4>
+                                <p className="font-black text-[#F97316] mt-1">₦45,000</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+
+        // --- MAIN APP ---
+        function App() {
+            const [view, setView] = useState('merchant');
+
+            return (
+                <div>
+                    {/* View Toggler (Only for Previewing) */}
+                    <div className="fixed bottom-6 right-6 z-[100] flex bg-[#020617] p-1 rounded-full shadow-2xl border-2 border-[#F97316]">
+                        <button 
+                            onClick={() => setView('merchant')}
+                            className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${view === 'merchant' ? 'bg-[#F97316] text-white' : 'text-white/50'}`}
+                        >
+                            Merchant
+                        </button>
+                        <button 
+                            onClick={() => setView('vendor')}
+                            className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${view === 'vendor' ? 'bg-[#F97316] text-white' : 'text-white/50'}`}
+                        >
+                            Vendor
+                        </button>
+                    </div>
+
+                    {view === 'merchant' ? <MerchantProfile /> : <VendorProfile />}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
