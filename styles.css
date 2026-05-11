@@ -1,0 +1,87 @@
+/* 1. BRAND FONT & COLORS */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --bold-midnight: #020617;
+    --bold-blue-deep: #001C30;
+    --bold-orange: #FF5F00;
+    --bold-white: #FFFFFF;
+    --glass-bg: rgba(15, 23, 42, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* 2. CORE BODY STYLING */
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background-color: var(--bold-midnight); 
+    color: #f8fafc; 
+    min-height: 100vh;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* 3. GLASS PANELS (For Sections, Cards, and Containers) */
+.glass-panel { 
+    background: var(--glass-bg); 
+    backdrop-filter: blur(16px); 
+    border: 1px solid var(--glass-border); 
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* 4. THE LOGO BOX (B in Orange) */
+.bold-logo-box {
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
+    color: var(--bold-white);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 800;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+}
+
+/* 5. PROFESSIONAL INPUTS (For Search and Forms) */
+.input-group { 
+    background: rgba(30, 41, 59, 0.4); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    transition: all 0.2s; 
+    width: 100%;
+}
+
+.input-group:focus { 
+    outline: none;
+    border-color: #f97316; 
+    background: rgba(30, 41, 59, 0.7); 
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+}
+
+/* 6. BUTTONS (The "Action" Orange) */
+.btn-bold {
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-bold:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+}
+
+/* 7. ANIMATIONS */
+@keyframes slideIn { 
+    from { opacity: 0; transform: translateX(20px); } 
+    to { opacity: 1; transform: translateX(0); } 
+}
+
+.animate-slide { 
+    animation: slideIn 0.4s ease-out forwards; 
+}

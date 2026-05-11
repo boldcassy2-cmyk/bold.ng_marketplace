@@ -6,27 +6,7 @@
     <title>Sign Up | Bold.ng</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: white; min-height: 100vh; display: flex; flex-direction: column; }
-        .glass-panel { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .brand-gradient { background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%); }
-        .success-overlay { position: fixed; inset: 0; background: #020617; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 100; text-align: center; }
-        @keyframes pop { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        .animate-pop { animation: pop 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; }
-        
-        input, select, textarea { 
-            background: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: white !important;
-        }
-        input:focus { border-color: #f97316 !important; outline: none; }
-        .role-btn.active { background: #f97316; color: white; border-color: #f97316; }
-        
-        /* Modal for Terms */
-        #terms-modal { display: none; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="py-6">
     <!-- Success Screen -->
