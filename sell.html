@@ -2,151 +2,150 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bold.ng | Cart Summary</title>
-    
+    <title>Professional Seller Portal | Bold.ng</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #000B18; 
-            color: white; 
-            min-height: 100vh; 
+        .glass-input {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 16px;
+            padding: 16px;
+            width: 100%;
+            outline: none;
+            transition: 0.3s;
         }
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-        }
-        .orange-gradient { background: linear-gradient(135deg, #FF6600 0%, #E65C00 100%); }
+        .glass-input:focus { border-color: #f57c00 !important; background: rgba(255,255,255,0.07) !important; }
+        .dynamic-section { display: none; animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .upload-box { border: 2px dashed #333; transition: 0.3s; cursor: pointer; }
+        .upload-box:hover { border-color: #f57c00; background: #f57c0005; }
     </style>
 </head>
-<body class="flex flex-col">
+<body class="bg-[#0a0a0b] text-white p-4 md:p-10">
 
-    <!-- Header -->
-    <nav class="h-20 glass-card px-6 flex justify-between items-center sticky top-0 z-50">
-        <a href="index.html" class="flex items-center gap-4">
-            <div class="w-10 h-10 orange-gradient rounded-xl flex items-center justify-center font-black text-white italic">B</div>
-            <span class="text-2xl font-black tracking-tighter uppercase italic">Bold<span class="text-[#FF6600]">.ng</span></span>
-        </a>
-        <a href="marketplace.html" class="text-xs font-bold uppercase tracking-widest text-white/40 hover:text-[#FF6600]">← Continue Shopping</a>
-    </nav>
+    <main class="max-w-5xl mx-auto">
+        <header class="flex justify-between items-center mb-12">
+            <div>
+                <h1 class="text-4xl font-black italic">SELL ON <span class="text-[#f57c00]">BOLD</span></h1>
+                <p class="text-gray-500 font-bold text-xs uppercase tracking-widest mt-2">Verified Merchant Listing Portal</p>
+            </div>
+            <button onclick="window.history.back()" class="bg-white/5 px-6 py-2 rounded-full text-[10px] font-bold border border-white/10">CANCEL</button>
+        </header>
 
-    <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
-        <h1 class="text-5xl font-black uppercase italic tracking-tighter mb-12">Your <span class="text-[#FF6600]">Cart</span></h1>
+        <div class="grid lg:grid-cols-3 gap-10">
+            
+            <div class="space-y-8">
+                <section>
+                    <label class="text-[10px] font-black text-gray-500 mb-4 block tracking-[0.2em]">MEDIA ASSETS</label>
+                    <div class="upload-box rounded-[32px] p-10 text-center" onclick="document.getElementById('fileIn').click()">
+                        <span class="text-3xl block mb-2">📸</span>
+                        <p class="text-sm font-bold text-gray-400">Drag & Drop or Click</p>
+                        <input type="file" id="fileIn" hidden multiple>
+                    </div>
+                </section>
 
-        <div id="cart-content" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            <!-- Items Section -->
-            <div class="lg:col-span-2 space-y-4" id="cart-items-list">
-                <!-- Items from Marketplace will appear here -->
+                <section>
+                    <label class="text-[10px] font-black text-gray-500 mb-4 block tracking-[0.2em]">LISTING PLAN</label>
+                    <div class="space-y-3">
+                        <label class="block p-4 rounded-2xl border border-white/10 cursor-pointer has-[:checked]:border-[#f57c00] has-[:checked]:bg-[#f57c00]/5">
+                            <input type="radio" name="plan" checked class="hidden">
+                            <p class="font-bold text-sm">Free Listing</p>
+                            <p class="text-[9px] text-gray-500">Standard visibility</p>
+                        </label>
+                        <label class="block p-4 rounded-2xl border border-white/10 cursor-pointer has-[:checked]:border-[#f57c00] has-[:checked]:bg-[#f57c00]/5">
+                            <input type="radio" name="plan" class="hidden">
+                            <p class="font-bold text-sm text-[#f57c00]">Premium Boost</p>
+                            <p class="text-[9px] text-gray-500">Top of category for 7 days</p>
+                        </label>
+                    </div>
+                </section>
             </div>
 
-            <!-- Summary Section -->
-            <div class="lg:col-span-1">
-                <div class="glass-card rounded-[2rem] p-8 sticky top-28">
-                    <h2 class="text-xl font-black uppercase italic mb-6">Summary</h2>
-                    <div class="space-y-4 mb-8">
-                        <div class="flex justify-between text-white/40 font-bold uppercase text-[10px]">
-                            <span>Items Count</span>
-                            <span id="summary-count" class="text-white">0</span>
-                        </div>
-                        
-                        <div class="flex justify-between text-white/40 font-bold uppercase text-[10px]">
-                            <span>Subtotal</span>
-                            <span id="summary-subtotal" class="text-white">₦0</span>
-                        </div>
+            <div class="lg:col-span-2 space-y-6">
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="text-xs font-bold text-gray-500 mb-2 block">Item Title</label>
+                        <input type="text" placeholder="Be specific (e.g. 2024 iPhone 15 Pro Max 256GB)" class="glass-input">
+                    </div>
+                    
+                    <div class="col-span-2">
+                        <label class="text-xs font-bold text-gray-500 mb-2 block">Primary Category</label>
+                        <select onchange="toggleCategory(this.value)" class="glass-input">
+                            <option value="">Select Category</option>
+                            <option value="vehicle">Vehicles (Cars, Buses, Heavy Duty)</option>
+                            <option value="electronics">Electronics & Computers</option>
+                            <option value="phones">Phones & Tablets</option>
+                            <option value="fashion">Fashion (Men, Women, Kids)</option>
+                            <option value="handwork">Handwork & Services</option>
+                            <option value="property">Properties (Real Estate)</option>
+                            <option value="jobs">Jobs & Employment</option>
+                            <option value="furniture">Furniture & Decor</option>
+                            <option value="health">Health & Beauty Services</option>
+                            <option value="agriculture">Agriculture & Food</option>
+                        </select>
+                    </div>
+                </div>
 
-                        <div class="pt-4 border-t border-white/10 flex justify-between items-end">
-                            <span class="text-[#FF6600] font-black uppercase text-xs">Total</span>
-                            <span id="summary-total" class="text-3xl font-black italic">₦0</span>
+                <div class="bg-white/5 p-8 rounded-[40px] border border-white/10">
+                    
+                    <div id="sec-vehicle" class="dynamic-section space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <select class="glass-input"><option>Car</option><option>Bus</option><option>Luxury</option><option>Caterpillar/Heavy Duty</option></select>
+                            <input type="text" placeholder="Year" class="glass-input">
+                            <input type="text" placeholder="Color" class="glass-input">
+                            <select class="glass-input"><option>Brand New</option><option>Tokunbo</option><option>Used</option></select>
                         </div>
                     </div>
 
-                    <button onclick="proceedToPayment()" class="w-full orange-gradient h-14 rounded-xl font-black uppercase italic tracking-widest hover:scale-[1.02] active:scale-95 transition-all">
-                        Checkout Now
+                    <div id="sec-phones" class="dynamic-section space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="Storage (GB/TB)" class="glass-input">
+                            <input type="text" placeholder="Color" class="glass-input">
+                            <input type="text" placeholder="Battery Health %" class="glass-input">
+                            <select class="glass-input"><option>New</option><option>Used (Mint)</option><option>Used (Cracked)</option></select>
+                        </div>
+                    </div>
+
+                    <div id="sec-fashion" class="dynamic-section space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <select class="glass-input"><option>Men's Wear</option><option>Women's Wear</option><option>Babies & Children</option></select>
+                            <select class="glass-input"><option>Clothes</option><option>Shoes</option><option>Accessories</option></select>
+                            <input type="text" placeholder="Size (XL, 42, etc)" class="glass-input">
+                        </div>
+                    </div>
+
+                    <div id="sec-handwork" class="dynamic-section space-y-4">
+                        <input type="text" placeholder="Type of Handwork (e.g. Plumbing, Tailoring)" class="glass-input">
+                        <select class="glass-input"><option>On-site Service</option><option>Remote</option></select>
+                    </div>
+
+                    <div class="mt-6 space-y-4">
+                        <textarea placeholder="Detailed Description (Tell the buyer everything...)" class="glass-input h-32"></textarea>
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="number" placeholder="Price (₦)" class="glass-input font-bold text-[#f57c00]">
+                            <select class="glass-input"><option>Fixed Price</option><option>Negotiable</option></select>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-[#f57c00] text-black font-black py-5 rounded-2xl mt-8 hover:scale-[1.02] transition shadow-lg shadow-[#f57c00]/20">
+                        CONFIRM & POST AD
                     </button>
                 </div>
             </div>
         </div>
-
-        <!-- Empty State -->
-        <div id="empty-state" class="hidden text-center py-20">
-            <i class="fas fa-shopping-basket text-6xl text-white/10 mb-6"></i>
-            <p class="text-white/40 uppercase font-bold tracking-widest">Your cart is empty</p>
-            <a href="marketplace.html" class="inline-block mt-6 text-[#FF6600] font-black italic">Go to Showroom →</a>
-        </div>
     </main>
 
     <script>
-        const CART_KEY = 'bold_cart';
-        // Storage key specifically for the final amount to be paid
-        const PAYMENT_AMOUNT_KEY = 'bold_payment_total';
-
-        function loadCart() {
-            const rawData = localStorage.getItem(CART_KEY);
-            const cart = JSON.parse(rawData || '[]');
-            const listContainer = document.getElementById('cart-items-list');
-            const emptyState = document.getElementById('empty-state');
-            const cartContent = document.getElementById('cart-content');
-
-            if (cart.length === 0) {
-                cartContent.classList.add('hidden');
-                emptyState.classList.remove('hidden');
-                return;
-            }
-
-            let subtotal = 0;
-            listContainer.innerHTML = cart.map((item, index) => {
-                subtotal += Number(item.price);
-                return `
-                    <div class="glass-card rounded-2xl p-4 flex items-center gap-5">
-                        <img src="${item.image}" class="w-20 h-20 rounded-xl object-cover" onerror="this.src='https://via.placeholder.com/80?text=Bold.ng'">
-                        <div class="flex-1">
-                            <h3 class="font-bold uppercase italic text-sm">${item.name}</h3>
-                            <p class="text-[#FF6600] font-black">₦${Number(item.price).toLocaleString()}</p>
-                        </div>
-                        <button onclick="removeFromCart(${index})" class="text-white/20 hover:text-red-500 p-2 transition-colors">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-                `;
-            }).join('');
-
-            document.getElementById('summary-count').innerText = cart.length;
-            document.getElementById('summary-subtotal').innerText = `₦${subtotal.toLocaleString()}`;
-            document.getElementById('summary-total').innerText = `₦${subtotal.toLocaleString()}`;
+        function toggleCategory(val) {
+            // Hide all sections
+            document.querySelectorAll('.dynamic-section').forEach(s => s.style.display = 'none');
             
-            // Save current total in case user refreshes
-            localStorage.setItem(PAYMENT_AMOUNT_KEY, subtotal);
+            // Show selected section
+            const target = document.getElementById('sec-' + val);
+            if(target) target.style.display = 'block';
         }
-
-        window.removeFromCart = (index) => {
-            let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-            cart.splice(index, 1);
-            localStorage.setItem(CART_KEY, JSON.stringify(cart));
-            loadCart(); 
-        };
-
-        window.proceedToPayment = () => {
-            const rawData = localStorage.getItem(CART_KEY);
-            const cart = JSON.parse(rawData || '[]');
-            
-            if (cart.length === 0) return;
-
-            // Calculate total one last time for safety
-            const finalTotal = cart.reduce((sum, item) => sum + Number(item.price), 0);
-            
-            // Save to a specific key that your checkout_payment.html will read
-            localStorage.setItem(PAYMENT_AMOUNT_KEY, finalTotal);
-            
-            // Redirect to the payment page
-            window.location.href = 'checkout_payment.html';
-        };
-
-        // Initialize on load
-        loadCart();
     </script>
 </body>
 </html>

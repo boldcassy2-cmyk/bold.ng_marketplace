@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Particulars | Bold.ng</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0a0a0b] text-white">
+    <nav class="p-8"><a href="marketplace.html" class="opacity-50 hover:opacity-100">← Back to Global Market</a></nav>
+
+    <main class="container mx-auto px-8 py-10">
+        <div id="productDetail" class="grid md:grid-cols-2 gap-16 items-start">
+            </div>
+
+        <section class="mt-32">
+            <h2 class="text-2xl font-bold mb-10 border-l-4 border-[#f57c00] pl-4">Recommended for You</h2>
+            <div id="recommended" class="grid grid-cols-1 md:grid-cols-4 gap-6"></div>
+        </section>
+    </main>
+
+    <script>
+        const products = JSON.parse(localStorage.getItem('boldProducts')) || [];
+        const pid = new URLSearchParams(window.location.search).get('id');
+        const item = products.find(p => p.id === pid);
+
+        if(item) {
+            document.getElementById('productDetail').innerHTML = `
+                <div class="premium-card p-4 rounded-3xl">
+                    <img src="${item.image}" class="w-full rounded-2xl h-[500px] object-cover">
+                </div>
+                <div>
+                    <div class="flex gap-2 mb-4">
+                        <span class="bg-[#f57c00] px-3 py-1 rounded text-xs font-bold">BOLD CERTIFIED</span>
+                        <span class="bg-blue-600 px-3 py-1 rounded text-xs font-bold">DOCUMENT VERIFIED</span>
+                    </div>
+                    <h1 class="text-6xl font-black">${item.name}</h1>
+                    <p class="text-4xl text-[#f57c00] font-black my-8">₦${Number(item.price).toLocaleString()}</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-10">
+                        <div class="bg-white/5 p-4 rounded-xl">
+                            <p class="text-gray-500 text-xs">Category</p>
+                            <p class="font-bold">${item.category}</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-xl">
+                            <p class="text-gray-500 text-xs">Technical Report</p>
+                            <p class="font-bold text-green-500 text-sm">Pass (Download PDF)</p>
+                        </div>
+                    </div>
+
+                    <button onclick="addToCart()" class="w-full bg-[#f57c00] py-6 rounded-2xl font-black text-xl hover:shadow-[0_0_30px_rgba(245,124,0,0.4)] transition">
+                        ADD TO BOLD CART
+                    </button>
+                </div>
+            `;
+        }
+
+        function addToCart() {
+            let cart = JSON.parse(localStorage.getItem('boldCart')) || [];
+            if(!cart.some(i => i.id === item.id)) {
+                cart.push(item);
+                localStorage.setItem('boldCart', JSON.stringify(cart));
+                alert("Verified Asset Added!");
+            }
+        }
+
+        // Simple Recommendation Engine
+        const recs = products.filter(p => p.id !== pid).slice(0, 4);
+        document.getElementById('recommended').innerHTML = recs.map(p => `
+            <div class="premium-card p-4 rounded-xl cursor-pointer" onclick="window.location.href='product_details.html?id=${p.id}'">
+                <img src="${p.image}" class="h-32 w-full object-cover rounded-lg">
+                <h4 class="mt-2 font-bold">${p.name}</h4>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>

@@ -2,183 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bold.ng | Marketplace Showroom</title>
-    
-    <!-- Speed Optimization: Resource Hints -->
-    <link rel="preconnect" href="https://www.gstatic.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
- 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Global Marketplace | Bold.ng</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col">
+<body class="bg-[#0a0a0b] text-white font-sans">
 
-    
-
-    <!-- Navigation -->
-
- 
-    <nav class="h-20 glass-card px-6 flex justify-between items-center sticky top-0 z-50">
-        <a href="index.html" class="flex items-center gap-4">
-            <div class="w-10 h-10 orange-gradient rounded-xl flex items-center justify-center font-black text-white italic">B</div>
-            <span class="text-2xl font-black tracking-tighter uppercase italic">Bold<span class="text-[#FF6600]">.ng</span></span>
-        </a>
-        <div class="flex items-center gap-8">
-            <a href="cart.html" class="text-sm font-bold uppercase tracking-widest text-[#FF6600]">Showroom</a>
-            <a href="vendors_profile.html" class="text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">Profile</a>
-            <a href="cart.html" class="relative p-2 hover:bg-white/5 rounded-full transition-all group">
-                <i class="fas fa-shopping-bag text-xl group-hover:text-[#FF6600]"></i>
-                <span id="cart-count" class="absolute -top-1 -right-1 bg-[#FF6600] text-[10px] font-black px-1.5 py-0.5 rounded-full border-2 border-[#000B18] show">cart</span>
+    <nav class="glass-header sticky top-0 z-[1000] p-6 flex justify-between items-center px-[5%]">
+        <div class="flex items-center gap-4">
+            <div class="bg-[#f57c00] text-white font-black p-2 rounded">B</div>
+            <span class="text-xl font-bold tracking-tighter">bold.ng</span>
+        </div>
+        <div class="flex-1 max-w-xl mx-10">
+            <input type="text" id="globalSearch" onkeyup="searchItems()" placeholder="Search billions of items (Caterpillars, Fashion, Tickets...)" 
+                   class="w-full bg-white/5 border border-white/10 p-3 rounded-full px-6 focus:border-[#f57c00] outline-none">
+        </div>
+        <div class="flex items-center gap-6">
+            <a href="cart.html" class="relative">
+                🛒 <span id="cartCount" class="absolute -top-2 -right-2 bg-[#f57c00] text-[10px] px-2 rounded-full">0</span>
             </a>
+            <a href="dashboard.html" class="text-sm opacity-70 hover:opacity-100">Merchant Hub</a>
         </div>
     </nav>
 
-    <!-- Marketplace View -->
-    <main class="flex-1 max-w-7xl mx-auto w-full px-6 py-12">
-        <header class="mb-12">
-            <h1 class="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-2">The <span class="text-[#FF6600]">Showroom</span></h1>
-            <div class="flex items-center gap-3">
-                <div id="sync-status-icon" class="loader scale-50"></div>
-                <span id="sync-text" class="text-white/30 font-bold uppercase tracking-widest text-[10px]">Updating Live Feed...</span>
-            </div>
-        </header>
+    <main class="container mx-auto p-8">
+        <section class="premium-card p-10 rounded-3xl mb-12 border-dashed border-2 border-[#f57c00]/30">
+            <h2 class="text-3xl font-black mb-6 text-center text-[#f57c00]">LIST YOUR ASSET</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <input type="text" id="pName" placeholder="Product Name" class="bg-black border border-white/10 p-4 rounded-xl">
+                <input type="number" id="pPrice" placeholder="Price (₦)" class="bg-black border border-white/10 p-4 rounded-xl">
+                
+                <select id="pCategory" onchange="toggleExtraFields()" class="bg-black border border-white/10 p-4 rounded-xl">
+                    <option value="General">General Category</option>
+                    <option value="Machinery">Heavy Machinery (Caterpillar/Crane)</option>
+                    <option value="Travel">Aviation/Tickets</option>
+                    <option value="Fashion">Fashion & Apparel</option>
+                </select>
 
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Loading Skeletons -->
-            <div class="glass-card rounded-[2.5rem] p-5 h-80 skeleton opacity-50"></div>
-            <div class="glass-card rounded-[2.5rem] p-5 h-80 skeleton opacity-50"></div>
-            <div class="glass-card rounded-[2.5rem] p-5 h-80 skeleton opacity-50"></div>
-            <div class="glass-card rounded-[2.5rem] p-5 h-80 skeleton opacity-50"></div>
-        </div>
+                <div id="extraFields" class="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
+                    <input type="text" id="pSpec1" placeholder="Year of Manufacture / Size" class="bg-black border border-white/10 p-4 rounded-xl">
+                    <input type="text" id="pSpec2" placeholder="Operating Hours / Material" class="bg-black border border-white/10 p-4 rounded-xl">
+                </div>
+
+                <input type="text" id="pImg" placeholder="High-Res Image URL" class="md:col-span-2 bg-black border border-white/10 p-4 rounded-xl">
+                <button onclick="handleUpload()" class="bg-[#f57c00] font-black py-4 rounded-xl hover:scale-[1.02] transition">PUBLISH WORLDWIDE</button>
+            </div>
+        </section>
+
+        <div id="marketGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
     </main>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        // Added Storage Imports for the upload engine
-        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyD35odIjfILahBo2JEGWlCVChmfjHq6Rng",
-            authDomain: "boldng-web1.firebaseapp.com",
-            projectId: "boldng-web1",
-            storageBucket: "boldng-web1.firebasestorage.app",
-            messagingSenderId: "451061811783",
-            appId: "1:451061811783:web:b5d2870e86b7cdc517bf62"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const storage = getStorage(app);
-
-        /**
-         * CLOUD UPLOAD ENGINE
-         * Handles direct file uploads to Firebase Storage
-         */
-        export async function uploadToCloud(file, folder = 'listings', onProgress) {
-            return new Promise((resolve, reject) => {
-                if (!file) return reject("No file provided");
-                
-                const storageRef = ref(storage, `${folder}/${Date.now()}_${file.name}`);
-                const uploadTask = uploadBytesResumable(storageRef, file);
-
-                uploadTask.on('state_changed', 
-                    (snapshot) => {
-                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        if (onProgress) onProgress(Math.round(progress));
-                    }, 
-                    (error) => reject(error), 
-                    () => {
-                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                            resolve(downloadURL);
-                        });
-                    }
-                );
-            });
+    <script>
+        function toggleExtraFields() {
+            const cat = document.getElementById('pCategory').value;
+            const extra = document.getElementById('extraFields');
+            extra.classList.toggle('hidden', cat === 'General');
         }
 
-        // SPEED HACK: Immediate Cache Hydration
-        const cached = JSON.parse(localStorage.getItem('bold_showroom_cache') || '[]');
-        if (cached.length > 0) {
-            renderProducts(cached);
+        let products = JSON.parse(localStorage.getItem('boldProducts')) || [];
+
+        function handleUpload() {
+            const name = document.getElementById('pName').value;
+            const price = document.getElementById('pPrice').value;
+            const cat = document.getElementById('pCategory').value;
+            const img = document.getElementById('pImg').value || 'https://via.placeholder.com/600';
+
+            if(!name || !price) return alert("Missing particulars!");
+
+            const newProduct = {
+                id: Date.now().toString(),
+                name, price, category: cat, image: img,
+                specs: [document.getElementById('pSpec1').value, document.getElementById('pSpec2').value]
+            };
+
+            products.unshift(newProduct);
+            localStorage.setItem('boldProducts', JSON.stringify(products));
+            location.reload();
         }
 
-        let cart = JSON.parse(localStorage.getItem('bold_cart')) || [];
-
-        // Firebase Real-time Sync
-        signInAnonymously(auth).then(() => {
-            const q = query(collection(db, "listings"), orderBy("createdAt", "desc"), limit(24));
-            
-            onSnapshot(q, (snapshot) => {
-                const products = [];
-                snapshot.forEach(doc => products.push({ id: doc.id, ...doc.data() }));
-                
-                localStorage.setItem('bold_showroom_cache', JSON.stringify(products));
-                renderProducts(products);
-                
-                const syncIcon = document.getElementById('sync-status-icon');
-                if (syncIcon) syncIcon.outerHTML = '<div class="w-2 h-2 rounded-full bg-emerald-500"></div>';
-                const syncText = document.getElementById('sync-text');
-                if (syncText) syncText.innerText = 'Live Feed Active';
-            });
-        });
-
-        function renderProducts(items) {
-            const grid = document.getElementById('product-grid');
-            if (!grid) return;
-
-            if (items.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-20 text-center opacity-20 font-black uppercase italic tracking-widest">No listings available</div>`;
-                return;
-            }
-
-            grid.innerHTML = items.map(p => `
-                <div class="glass-card rounded-[2.5rem] p-5 flex flex-col group">
-                    <div class="aspect-square bg-white/5 rounded-[2rem] mb-6 overflow-hidden relative">
-                        <img src="${p.image}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        ${p.tier === 'premium' ? 
-                            `<span class="absolute top-4 right-4 bg-[#FF6600] text-[8px] font-black px-3 py-1 rounded-full uppercase italic shadow-lg">Premium</span>` : 
-                            ''
-                        }
+        function render(data = products) {
+            const grid = document.getElementById('marketGrid');
+            grid.innerHTML = data.map(p => `
+                <div class="premium-card p-4 rounded-2xl cursor-pointer group" onclick="window.location.href='product_details.html?id=${p.id}'">
+                    <div class="overflow-hidden rounded-xl mb-4 h-56">
+                        <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                     </div>
-                    <div class="px-2">
-                        <p class="text-[9px] font-black uppercase tracking-widest text-white/30 mb-1">${p.category || 'General'}</p>
-                        <h3 class="text-xl font-bold uppercase italic mb-4 truncate">${p.name}</h3>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-black italic text-[#FF6600]">₦${Number(p.price).toLocaleString()}</span>
-                            <button onclick="addToCart('${p.id}', '${p.name}', ${p.price}, '${p.image}')" class="orange-gradient w-10 h-10 rounded-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform">
-                                <i class="fas fa-plus text-sm"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <span class="text-[10px] text-[#f57c00] font-bold uppercase tracking-widest">${p.category}</span>
+                    <h3 class="text-xl font-bold mt-1">${p.name}</h3>
+                    <p class="text-2xl font-black text-[#f57c00] mt-2">₦${Number(p.price).toLocaleString()}</p>
                 </div>
             `).join('');
+            updateCartCount();
         }
 
-        window.addToCart = (id, name, price, image) => {
-            cart.push({ id, name, price, image, cartId: Date.now() });
-            localStorage.setItem('bold_cart', JSON.stringify(cart));
-            updateCartBadge();
-            
-            const btn = event.currentTarget;
-            const originalIcon = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i>';
-            setTimeout(() => btn.innerHTML = originalIcon, 1000);
-        };
-
-        function updateCartBadge() {
-            const badge = document.getElementById('cart-count');
-            if (!badge) return;
-            badge.innerText = cart.length;
-            badge.style.display = cart.length > 0 ? 'block' : 'none';
+        function searchItems() {
+            const query = document.getElementById('globalSearch').value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            render(filtered);
         }
 
-        updateCartBadge();
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('boldCart')) || [];
+            document.getElementById('cartCount').innerText = cart.length;
+        }
+
+        render();
     </script>
 </body>
 </html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Settings | Bold Managed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bold-blue: #2563eb;
+            --bold-midnight: #0a0a0b;
+        }
+        body { background-color: var(--bold-midnight); color: white; font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px;
+            width: 100%;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--bold-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+        .verified-badge {
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+    </style>
+</head>
+<body class="p-6 md:p-12">
+    <div class="max-w-2xl mx-auto">
+        <!-- Back Navigation -->
+        <button onclick="history.back()" class="flex items-center gap-2 text-gray-500 hover:text-white transition mb-10 group">
+            <span class="group-hover:-translate-x-1 transition-transform">←</span>
+            <span class="text-xs font-black uppercase tracking-widest">Back to Portal</span>
+        </button>
+
+        <!-- Security Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-3xl font-black tracking-tighter">BANKING & SETTLEMENT</h1>
+                <p class="text-gray-500 text-sm mt-1">Manage where your managed earnings are deposited.</p>
+            </div>
+            <div class="verified-badge h-12 w-12 rounded-2xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Encryption Notice -->
+        <div class="bg-blue-600/10 border border-blue-500/20 p-4 rounded-2xl mb-8 flex items-center gap-4">
+            <div class="text-blue-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <p class="text-[11px] text-blue-300 font-medium">
+                Your banking data is encrypted using AES-256 standards. Bold.ng staff cannot view your full account details or BVN.
+            </p>
+        </div>
+
+        <!-- Settlement Form -->
+        <div class="glass-card p-8 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 block">Bank Name</label>
+                    <select class="input-field appearance-none">
+                        <option>Access Bank PLC</option>
+                        <option>GTBank</option>
+                        <option>Zenith Bank</option>
+                        <option>Kuda Bank</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 block">Account Number</label>
+                    <input type="text" class="input-field" placeholder="0123456789" value="**** 9012">
+                </div>
+            </div>
+
+            <div>
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 block">Verification Type (BVN / TIN)</label>
+                <input type="text" class="input-field" placeholder="22XXXXXXXXX" value="**********">
+                <p class="text-[9px] text-gray-600 mt-2">BVN is required for individual vendors; TIN for registered companies.</p>
+            </div>
+
+            <div class="pt-4">
+                <button onclick="saveBankSettings()" class="w-full bg-white text-black font-black py-4 rounded-2xl hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-xl shadow-white/5">
+                    UPDATE SETTLEMENT DETAILS
+                </button>
+            </div>
+        </div>
+
+        <!-- Help Link -->
+        <p class="text-center text-xs text-gray-600 mt-8">
+            Having trouble? Contact <a href="#" class="text-blue-500 font-bold underline">Bold Compliance Support</a>
+        </p>
+    </div>
+
+    <script>
+        function saveBankSettings() {
+            const btn = event.target;
+            btn.innerText = "VERIFYING WITH NIBSS...";
+            btn.style.opacity = "0.7";
+            
+            setTimeout(() => {
+                btn.innerText = "DETAILS UPDATED SUCCESSFULLY";
+                btn.classList.replace('bg-white', 'bg-green-500');
+                btn.classList.add('text-white');
+                alert("Security Check Passed: Your settlement bank has been updated.");
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

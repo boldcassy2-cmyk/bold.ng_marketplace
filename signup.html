@@ -2,182 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | Bold.ng</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Join Bold.ng | Select Your Path</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .form-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .input-field { background: rgba(0,0,0,0.3) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; }
+        .input-field:focus { border-color: #f57c00 !important; }
+        .tab-btn { border-bottom: 2px solid transparent; transition: 0.3s; color: #666; }
+        .tab-btn.active { border-color: #f57c00; color: #f57c00; font-weight: 900; }
+        .hidden-form { display: none; animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
-<body class="py-6">
-    <!-- Success Screen -->
-    <div id="success-screen" class="success-overlay">
-        <div class="animate-pop p-10">
-            <div class="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_40px_rgba(249,115,22,0.4)]">
-                <i data-lucide="party-popper" class="w-12 h-12 text-white"></i>
-            </div>
-            <h1 class="text-4xl font-black mb-2">Welcome to Bold!</h1>
-            <p id="success-msg" class="text-slate-400 mb-8">Your account was created successfully.</p>
-            <button onclick="window.location.href='marketplace.html'" class="brand-gradient px-12 py-4 rounded-2xl font-black text-lg">Go to Dashboard</button>
+<body class="bg-[#0a0a0b] text-white p-6">
+
+    <main class="max-w-3xl mx-auto py-10">
+        <div class="text-center mb-10">
+            <h1 class="text-5xl font-black italic tracking-tighter">JOIN <span class="text-[#f57c00]">BOLD</span></h1>
+            <p class="text-gray-500 mt-2 font-bold uppercase text-[10px] tracking-[0.4em]">Choose how you want to earn</p>
         </div>
-    </div>
 
-    <!-- Terms Modal -->
-    <div id="terms-modal" class="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-        <div class="glass-panel w-full max-w-2xl max-h-[80vh] overflow-y-auto p-8 rounded-3xl border border-white/20">
-            <h2 class="text-2xl font-black mb-6 text-orange-500">Vendor Terms & Conditions</h2>
-            <div class="space-y-4 text-slate-300 text-sm leading-relaxed">
-                <p><strong>1. Escrow Policy:</strong> By selling on Bold.ng, you agree that funds for completed sales are held in escrow. Payouts are initiated only 48 hours after the customer confirms receipt and satisfaction with the product.</p>
-                <p><strong>2. Product Authenticity:</strong> All tech products listed must be authentic. Selling counterfeit or stolen items will result in an immediate permanent ban and forfeiture of pending balances.</p>
-                <p><strong>3. Shipping Deadline:</strong> Vendors must ship items within 24 hours of order confirmation. Failure to provide tracking info within 48 hours allows the merchant to request an instant refund.</p>
-                <p><strong>4. Return Policy:</strong> If a product is defective, vendors are responsible for return shipping costs and providing a full refund or replacement.</p>
-                <p><strong>5. Bold Fees:</strong> A 5% platform fee is deducted from each successful transaction to cover maintenance, security, and payment processing.</p>
-            </div>
-            <button onclick="closeTerms()" class="mt-8 w-full py-4 bg-white/10 rounded-xl font-bold hover:bg-white/20 transition-all">Close and Continue</button>
+        <div class="flex justify-around mb-12 border-b border-white/5">
+            <button onclick="showForm('seller', this)" class="tab-btn active pb-4 px-4 text-xs font-black">1. INDEPENDENT SELLER</button>
+            <button onclick="showForm('managed', this)" class="tab-btn pb-4 px-4 text-xs font-black">2. MANAGED VENDOR</button>
+            <button onclick="showForm('affiliate', this)" class="tab-btn pb-4 px-4 text-xs font-black">3. AFFILIATE PARTNER</button>
         </div>
-    </div>
 
-    <nav class="p-8 max-w-4xl mx-auto w-full">
-        <a href="marketplace.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-semibold">
-            <i data-lucide="arrow-left" class="w-5 h-5"></i> Back to Shop
-        </a>
-    </nav>
-    
-    <div class="flex-grow flex items-center justify-center p-6">
-        <div class="glass-panel w-full max-w-xl p-8 md:p-12 rounded-[40px] shadow-2xl">
-            <div class="text-center mb-10">
-                <div class="w-16 h-16 brand-gradient rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
-                    <i data-lucide="user-plus" class="w-8 h-8"></i>
-                </div>
-                <h1 class="text-3xl font-black mb-2">Create Account</h1>
-                <p class="text-slate-400">Select your account type to begin</p>
-            </div>
-
-            <!-- Role Selector -->
-            <div class="flex gap-4 mb-8">
-                <button type="button" onclick="setRole('merchant')" id="role-merchant" class="role-btn active flex-1 py-3 border border-white/10 rounded-2xl font-bold transition-all flex items-center justify-center gap-2">
-                    <i data-lucide="shopping-bag" class="w-4 h-4"></i> Merchant
-                </button>
-                <button type="button" onclick="setRole('vendor')" id="role-vendor" class="role-btn flex-1 py-3 border border-white/10 rounded-2xl font-bold transition-all flex items-center justify-center gap-2">
-                    <i data-lucide="store" class="w-4 h-4"></i> Vendor
-                </button>
-            </div>
-
-            <form id="signup-form" class="space-y-4">
-                <!-- Common Fields -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input required type="text" name="fullname" placeholder="Full Name" class="w-full rounded-2xl p-4 outline-none transition-all">
-                    <input required type="email" name="email" placeholder="Email Address" class="w-full rounded-2xl p-4 outline-none transition-all">
-                </div>
-
-                <!-- Merchant Specific Fields -->
-                <div id="merchant-fields" class="space-y-4">
-                    <input type="text" name="businessName" placeholder="Business Name (Optional)" class="w-full rounded-2xl p-4 outline-none transition-all">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="tel" name="phone" placeholder="Phone Number" class="w-full rounded-2xl p-4 outline-none transition-all">
-                        <input type="tel" name="whatsapp" placeholder="WhatsApp Number" class="w-full rounded-2xl p-4 outline-none transition-all">
-                    </div>
-                    <input type="text" name="social" placeholder="Social Media Handle (@username)" class="w-full rounded-2xl p-4 outline-none transition-all">
-                </div>
-
-                <!-- Vendor Specific Fields -->
-                <div id="vendor-fields" class="space-y-4 hidden">
-                    <div class="p-4 bg-orange-500/10 border border-orange-500/20 rounded-2xl mb-4">
-                        <p class="text-xs text-orange-400 font-bold uppercase tracking-wider mb-1 flex items-center gap-2">
-                            <i data-lucide="shield-check" class="w-3 h-3"></i> Payout Information
-                        </p>
-                        <p class="text-[10px] text-slate-400">Required for the 48-hour post-delivery release.</p>
-                    </div>
-                    <input type="text" name="bankName" placeholder="Bank Name" class="w-full rounded-2xl p-4 outline-none transition-all">
-                    <input type="text" name="accountNumber" placeholder="Account Number" class="w-full rounded-2xl p-4 outline-none transition-all">
-                    <input type="text" name="accountName" placeholder="Account Name" class="w-full rounded-2xl p-4 outline-none transition-all">
-                    
-                    <div class="flex items-start gap-3 p-2">
-                        <input required type="checkbox" id="terms-check" class="mt-1 w-5 h-5 rounded border-white/10 text-orange-500 focus:ring-orange-500">
-                        <label for="terms-check" class="text-xs text-slate-400">
-                            I agree to the <button type="button" onclick="openTerms()" class="text-orange-500 underline font-bold">Terms and Conditions</button>, including the 48-hour escrow hold policy.
-                        </label>
-                    </div>
-                </div>
-
-                <input required type="password" name="password" placeholder="Create Password" class="w-full rounded-2xl p-4 outline-none transition-all">
-                
-                <button type="submit" id="submit-btn" class="brand-gradient w-full py-5 rounded-2xl font-black text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all mt-6">
-                    <span id="btn-text">Create Account</span>
-                </button>
-            </form>
+        <div class="form-card rounded-[40px] p-8 md:p-12">
             
-            <p class="text-center mt-8 text-slate-400 text-sm">Member already? <a href="login.html" class="text-orange-500 font-bold hover:underline">Log In</a></p>
-        </div>
-    </div>
+            <form id="form-seller" class="space-y-6">
+                <p class="text-xs text-[#f57c00] font-bold mb-6">Note: Your business details will be visible to all buyers.</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Full Name" class="input-field p-4 rounded-2xl outline-none w-full" required>
+                    <input type="email" placeholder="Email Address" class="input-field p-4 rounded-2xl outline-none w-full" required>
+                    <input type="tel" placeholder="Phone Number" class="input-field p-4 rounded-2xl outline-none w-full">
+                    <input type="tel" placeholder="WhatsApp Number" class="input-field p-4 rounded-2xl outline-none w-full">
+                </div>
+                <select class="input-field p-4 rounded-2xl outline-none w-full">
+                    <option>Select State (All 36 Nigeria States)</option>
+                    <option>Lagos</option><option>Abuja</option><option>Kano</option>
+                </select>
+                <input type="text" placeholder="Business Name" class="input-field p-4 rounded-2xl outline-none w-full">
+                <textarea placeholder="Business Description (Optional)" class="input-field p-4 rounded-2xl outline-none w-full h-24"></textarea>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="password" placeholder="Password" class="input-field p-4 rounded-2xl outline-none w-full">
+                    <input type="password" placeholder="Verify Password" class="input-field p-4 rounded-2xl outline-none w-full">
+                </div>
+                <button type="submit" class="w-full bg-[#f57c00] text-black font-black py-5 rounded-2xl">REGISTER AS SELLER</button>
+            </form>
 
-    <footer class="mt-auto py-8 text-center border-t border-white/5">
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-600 hover:text-slate-400 text-xs font-bold flex items-center justify-center gap-2 mx-auto uppercase tracking-widest">
-            <i data-lucide="arrow-up" class="w-4 h-4"></i> Scroll to top
-        </button>
-    </footer>
+            <form id="form-managed" class="hidden-form space-y-6">
+                <p class="text-xs text-blue-400 font-bold mb-6">Note: Bold.ng will manage your business. Details are private to Admins.</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Full Name" class="input-field p-4 rounded-2xl outline-none w-full">
+                    <input type="tel" placeholder="Phone Number" class="input-field p-4 rounded-2xl outline-none w-full">
+                    <input type="tel" placeholder="WhatsApp Number" class="input-field p-4 rounded-2xl outline-none w-full">
+                    <input type="email" placeholder="Email Address" class="input-field p-4 rounded-2xl outline-none w-full">
+                </div>
+                <input type="text" placeholder="Full Business Address" class="input-field p-4 rounded-2xl outline-none w-full">
+                <div class="bg-white/5 p-6 rounded-3xl border border-white/5 space-y-4">
+                    <p class="text-[10px] font-bold text-gray-500 uppercase">Bank Details (For Direct Payouts)</p>
+                    <input type="text" placeholder="Bank Name" class="input-field p-4 rounded-2xl outline-none w-full">
+                    <input type="text" placeholder="Account Number" class="input-field p-4 rounded-2xl outline-none w-full">
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="password" placeholder="Password" class="input-field p-4 rounded-2xl outline-none w-full">
+                    <input type="password" placeholder="Verify Password" class="input-field p-4 rounded-2xl outline-none w-full">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white font-black py-5 rounded-2xl">REGISTER AS VENDOR</button>
+            </form>
+
+            <form id="form-affiliate" class="hidden-form space-y-6 text-center">
+                <div class="py-10">
+                    <p class="text-xl font-bold mb-2">Sell & Earn Commission</p>
+                    <p class="text-sm text-gray-500 mb-8">Details visible to Admin dashboard only.</p>
+                    <div class="space-y-4 max-w-md mx-auto">
+                        <input type="text" placeholder="Full Name" class="input-field p-4 rounded-2xl outline-none w-full">
+                        <input type="tel" placeholder="Phone Number" class="input-field p-4 rounded-2xl outline-none w-full">
+                        <input type="email" placeholder="Email Address" class="input-field p-4 rounded-2xl outline-none w-full">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-green-600 text-white font-black py-5 rounded-2xl">JOIN AS AFFILIATE</button>
+            </form>
+
+            <div class="mt-10 pt-10 border-t border-white/5 text-center">
+                <label class="flex items-center justify-center gap-3 mb-6 cursor-pointer">
+                    <input type="checkbox" class="w-5 h-5 accent-[#f57c00]">
+                    <span class="text-sm text-gray-500 italic">I am not a robot</span>
+                </label>
+                <p class="text-sm text-gray-500">Already have an account? <a href="login.html" class="text-[#f57c00] font-bold">Login</a></p>
+            </div>
+        </div>
+    </main>
 
     <script>
-        lucide.createIcons();
-        let currentRole = 'merchant';
+        function showForm(type, btn) {
+            // Reset Tabs
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-        function setRole(role) {
-            currentRole = role;
-            const merchantBtn = document.getElementById('role-merchant');
-            const vendorBtn = document.getElementById('role-vendor');
-            const merchantFields = document.getElementById('merchant-fields');
-            const vendorFields = document.getElementById('vendor-fields');
-            const submitText = document.getElementById('btn-text');
+            // Reset Forms
+            document.getElementById('form-seller').style.display = 'none';
+            document.getElementById('form-managed').style.display = 'none';
+            document.getElementById('form-affiliate').style.display = 'none';
 
-            if(role === 'merchant') {
-                merchantBtn.classList.add('active');
-                vendorBtn.classList.remove('active');
-                merchantFields.classList.remove('hidden');
-                vendorFields.classList.add('hidden');
-                submitText.innerText = "Get Started as Merchant";
-                
-                // Toggle required
-                document.querySelectorAll('#vendor-fields input').forEach(el => el.required = false);
-            } else {
-                vendorBtn.classList.add('active');
-                merchantBtn.classList.remove('active');
-                vendorFields.classList.remove('hidden');
-                merchantFields.classList.add('hidden');
-                submitText.innerText = "Apply as Vendor";
-                
-                // Toggle required
-                document.querySelectorAll('#vendor-fields input').forEach(el => el.required = true);
-            }
+            // Show Selected
+            document.getElementById('form-' + type).style.display = 'block';
         }
-
-        function openTerms() {
-            document.getElementById('terms-modal').style.display = 'flex';
-        }
-
-        function closeTerms() {
-            document.getElementById('terms-modal').style.display = 'none';
-        }
-
-        document.getElementById('signup-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            const text = document.getElementById('btn-text');
-            const successMsg = document.getElementById('success-msg');
-            
-            text.innerText = "Processing...";
-            btn.disabled = true;
-
-            if (currentRole === 'vendor') {
-                successMsg.innerText = "Your vendor application has been received. Our team will review your banking details and activate your dashboard shortly.";
-            } else {
-                successMsg.innerText = "Welcome to the premium tech circle. Your merchant account is ready.";
-            }
-
-            // Simulate server delay
-            setTimeout(() => {
-                document.getElementById('success-screen').style.display = 'flex';
-                lucide.createIcons();
-            }, 1500);
-        });
     </script>
 </body>
 </html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Managed Vendor Portal | Bold.ng</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bold-blue: #2563eb;
+            --bold-midnight: #0a0a0b;
+        }
+        body { background-color: var(--bold-midnight); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+        }
+        .status-pill { padding: 4px 12px; border-radius: 100px; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+        .sidebar-link:hover { background: rgba(37, 99, 235, 0.1); color: var(--bold-blue); }
+        .sidebar-active { background: rgba(37, 99, 235, 0.15); color: var(--bold-blue); border-left: 4px solid var(--bold-blue); }
+        
+        /* Toast Notification Animation */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--bold-blue);
+            color: #fff;
+            text-align: center;
+            border-radius: 12px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            right: 30px;
+            bottom: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <div id="toast">Action Triggered</div>
+
+    <!-- SIDEBAR -->
+    <aside class="w-72 border-r border-white/5 flex flex-col p-8 space-y-10 bg-[#070708]">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 text-white font-black w-10 h-10 flex items-center justify-center rounded-xl shadow-lg shadow-blue-600/20">B</div>
+            <div class="leading-tight">
+                <p class="font-black text-lg tracking-tighter">BOLD<span class="text-blue-500">MANAGED</span></p>
+                <p class="text-[9px] text-gray-500 font-bold uppercase tracking-widest">Vendor Account</p>
+            </div>
+        </div>
+
+       <!-- Navigation Update -->
+<nav class="flex-1 space-y-2">
+    <a href="merchant_portal.html" class="sidebar-active flex items-center gap-4 p-4 rounded-2xl text-sm font-bold transition">🏠 Portal Home</a>
+    <a href="inventory.html" class="sidebar-link flex items-center gap-4 p-4 rounded-2xl text-sm font-bold transition">📦 Stock Inventory</a>
+    <a href="payouts.html" class="sidebar-link flex items-center gap-4 p-4 rounded-2xl text-sm font-bold transition">💰 Payout History</a>
+    <a href="logistics.html" class="sidebar-link flex items-center gap-4 p-4 rounded-2xl text-sm font-bold transition">🚚 Logistics Tracking</a>
+    <a href="bank_settings.html" class="sidebar-link flex items-center gap-4 p-4 rounded-2xl text-sm font-bold transition">⚙️ Bank Settings</a>
+</nav>
+
+        <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
+            <p class="text-[9px] text-gray-500 font-black mb-2 uppercase">Verified Settlement Bank</p>
+            <p class="text-xs font-bold">Access Bank PLC</p>
+            <p class="text-[10px] text-blue-500 font-mono mt-1">**** 9012</p>
+        </div>
+
+        <!-- Header Button Update -->
+<button onclick="window.location.href='inventory.html'" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-6 py-3 rounded-xl transition">REQUEST STOCK UPDATE</button>
+
+<!-- Invoice Button Update (This usually triggers a download) -->
+<button onclick="alert('Generating Invoice PDF... Check your Downloads folder.')" class="w-full py-4 rounded-2xl border border-white/10 text-[10px] font-black hover:bg-white hover:text-black transition uppercase mt-4">Download Tax Invoice</button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-10 overflow-y-auto">
+        
+        <header class="flex justify-between items-end mb-12">
+            <div>
+                <h1 class="text-4xl font-black tracking-tight">Financial Summary</h1>
+                <p class="text-gray-500 mt-2">Bold.ng is currently managing 24 items in your inventory.</p>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="requestStockUpdate()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-6 py-3 rounded-xl transition">REQUEST STOCK UPDATE</button>
+            </div>
+        </header>
+
+        <!-- Money Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="glass-card p-8 border-l-4 border-blue-600">
+                <p class="text-[10px] text-gray-500 font-black uppercase mb-4 tracking-widest">Pending Payout</p>
+                <p class="text-4xl font-black">₦480,000</p>
+                <p class="text-[10px] text-green-500 mt-4 font-bold">Settling in 24 hours</p>
+            </div>
+            <div class="glass-card p-8">
+                <p class="text-[10px] text-gray-500 font-black uppercase mb-4 tracking-widest">Total Revenue</p>
+                <p class="text-4xl font-black">₦2.8M</p>
+                <p class="text-[10px] text-gray-500 mt-4 font-bold">Since March 2026</p>
+            </div>
+            <div class="glass-card p-8">
+                <p class="text-[10px] text-gray-500 font-black uppercase mb-4 tracking-widest">Items Sold</p>
+                <p class="text-4xl font-black">156</p>
+                <div class="flex items-center gap-2 mt-4">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase">Managed by Bold Logistics</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            
+            <!-- Inventory Table -->
+            <div class="lg:col-span-2">
+                <h2 class="text-xl font-black mb-6 uppercase tracking-tighter">Live Inventory Tracking</h2>
+                <div class="glass-card overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-white/5">
+                            <tr>
+                                <th class="p-5 text-[10px] font-black text-gray-500 uppercase">Product</th>
+                                <th class="p-5 text-[10px] font-black text-gray-500 uppercase">Stock</th>
+                                <th class="p-5 text-[10px] font-black text-gray-500 uppercase">Status</th>
+                                <th class="p-5 text-[10px] font-black text-gray-500 uppercase">Earnings</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <tr class="hover:bg-white/[0.02] transition">
+                                <td class="p-5 font-bold text-sm">HP EliteBook 840 G8</td>
+                                <td class="p-5 text-sm">12 units</td>
+                                <td class="p-5"><span class="status-pill bg-blue-500/10 text-blue-500">Processing</span></td>
+                                <td class="p-5 font-black text-sm">₦5,400,000</td>
+                            </tr>
+                            <tr class="hover:bg-white/[0.02] transition">
+                                <td class="p-5 font-bold text-sm">Samsung Galaxy S23</td>
+                                <td class="p-5 text-sm">05 units</td>
+                                <td class="p-5"><span class="status-pill bg-green-500/10 text-green-500">In Warehouse</span></td>
+                                <td class="p-5 font-black text-sm">₦2,100,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Private Business Details -->
+            <aside>
+                <h2 class="text-xl font-black mb-6 uppercase tracking-tighter">Account Privacy</h2>
+                <div class="glass-card p-6 space-y-6">
+                    <div class="bg-blue-600/10 p-4 rounded-2xl border border-blue-600/20">
+                        <p class="text-xs font-bold text-blue-400">Merchant Privacy Shield</p>
+                        <p class="text-[10px] text-gray-400 mt-2 leading-relaxed">
+                            Your full address, phone number, and bank details are hidden from the public. Only Bold.ng Admins can access this data for logistics and payments.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-4">
+                        <div>
+                            <p class="text-[9px] text-gray-500 font-black uppercase">Registered Address</p>
+                            <p class="text-xs mt-1">12 Business Way, Victoria Island, Lagos</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] text-gray-500 font-black uppercase">Admin Contact</p>
+                            <p class="text-xs mt-1">+234 800-BOLD-HELP</p>
+                        </div>
+                    </div>
+
+                    <button onclick="downloadInvoice()" class="w-full py-4 rounded-2xl border border-white/10 text-[10px] font-black hover:bg-white hover:text-black transition uppercase mt-4">Download Tax Invoice</button>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <script>
+        // Notification System
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        // Sidebar Navigation Logic
+        function handleNav(element, sectionName) {
+            // Remove active class from all links
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('sidebar-active');
+                link.classList.add('sidebar-link');
+            });
+            // Add active class to clicked link
+            element.classList.add('sidebar-active');
+            element.classList.remove('sidebar-link');
+            
+            showToast("Loading " + sectionName + "...");
+        }
+
+        // Action: Request Stock Update
+        function requestStockUpdate() {
+            const sku = prompt("Please enter the Product SKU or Name to restock:");
+            if(sku) {
+                showToast("Request logged for " + sku);
+            }
+        }
+
+        // Action: Download Invoice
+        function downloadInvoice() {
+            showToast("Preparing PDF statement...");
+            setTimeout(() => {
+                showToast("Invoice sent to registered email!");
+            }, 1500);
+        }
+    </script>
+</body>
+</html> 

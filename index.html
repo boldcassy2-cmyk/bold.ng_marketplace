@@ -2,189 +2,192 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOLD.NG | Storefront</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Archivo+Black&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bold.ng - The Gold Standard of Trusted Marketplaces in Africa. Buy and Sell with absolute confidence.">
+    <title>Bold.ng | Africa's Most Trusted Marketplace</title>
     <link rel="stylesheet" href="styles.css">
-    
-<header class="bg-slate-900 text-white p-4">
-    <nav class="max-w-6xl mx-auto flex justify-between items-center">
-        <!-- Logo -->
-        <div class="text-xl font-bold text-orange-500">Bold.ng</div>
+    <style>
+        /* Transparent Ad Space Styling */
+        .ad-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 40px 0;
+            background: linear-gradient(to right, transparent, rgba(245, 124, 0, 0.05), transparent);
+        }
 
-        <!-- Navigation Links -->
-        <ul class="flex gap-6">
-            <li><a href="index.html" class="hover:text-orange-500">Home</a></li>
-            <li><a href="shop.html" class="hover:text-orange-500">Shop</a></li>
-            <li><a href="login.html" class="hover:text-orange-500">Sign In</a></li>
-            <li><a href="signup.html" class="bg-orange-600 px-4 py-2 rounded-lg">Join</a></li>
-        </ul>
-    </nav>
-</header>
+        .ad-track {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            animation: slideScroll 30s linear infinite;
+        }
 
+        .premium-ad-card {
+            width: 350px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(245, 124, 0, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+        }
+
+        .premium-ad-card:hover {
+            border-color: var(--bold-orange);
+            background: rgba(245, 124, 0, 0.08);
+            transform: scale(1.05);
+        }
+
+        .ad-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--bold-orange);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        @keyframes slideScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Stop animation on hover so customers can click */
+        .ad-container:hover .ad-track {
+            animation-play-state: paused;
+        }
+
+        /* Simple Modal for Login Direction */
+        #loginModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
-<body class="pb-32">
+<body>
 
-   
-    <!-- HEADER -->
-    <header class="sticky top-0 z-[1000] bg-[#020617]/90 backdrop-blur-md border-b-2 border-[#FF5F00] px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-[#FF5F00] rounded-xl flex items-center justify-center text-white font-black text-2xl shadow-[3px_3px_0px_#fff]">B</div>
-                <h1 class="text-white text-2xl font-brand italic tracking-tighter">BOLD<span class="text-[#FF5F00]">.NG</span></h1>
+    <!-- SMART LOGIN MODAL -->
+    <div id="loginModal">
+        <div style="background: var(--bold-midnight); padding: 40px; border-radius: 30px; border: 1px solid var(--bold-orange); text-align: center; max-width: 400px; width: 90%;">
+            <h3 style="color: white; margin-bottom: 20px;">Login to your Portal</h3>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <button class="btn-bold" onclick="window.location.href='seller_dashboard.html'">Independent Seller</button>
+                <button class="btn-bold" style="background: #2563eb;" onclick="window.location.href='merchant_portal.html'">Managed Merchant</button>
+                <button class="btn-bold" style="background: #16a34a;" onclick="window.location.href='affiliate_hub.html'">Affiliate Partner</button>
             </div>
+            <p onclick="document.getElementById('loginModal').style.display='none'" style="color: #64748b; margin-top: 20px; cursor: pointer; font-size: 0.8rem;">CLOSE</p>
+        </div>
+    </div>
 
- 
-
-            
-
-
-  
-
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="hero-banner px-6">
-        <div class="hero-pattern"></div>
-        <div class="max-w-5xl mx-auto w-full relative z-10">
-            <div class="max-w-2xl">
-                <span class="inline-block bg-[#FF5F00] text-black font-black text-xs px-3 py-1 uppercase tracking-widest mb-4">Premium Ecosystem</span>
-                <h3 class="text-6xl md:text-8xl font-brand leading-none mb-6">THE <br><span class="text-[#FF5F00]">Boutique.</span></h3>
-                <p class="text-slate-300 text-lg md:text-xl mb-10 font-medium border-l-4 border-[#FF5F00] pl-6 max-w-lg">
-                    Discover elite samples curated from our main marketplace. Click any item to step inside our full showroom.
-                </p>
-                
-                <div class="flex flex-wrap gap-4">
-                    <a href="marketplace.html" class="btn-orange px-8 py-4 font-black uppercase text-lg italic flex items-center gap-2">
-                        Enter Marketplace <i data-lucide="arrow-right"></i>
-                    </a>
+    <nav class="main-nav" style="position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(20px);">
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div onclick="history.back()" style="cursor: pointer; color: var(--bold-orange); font-size: 1.5rem;">←</div>
+                <div class="logo-area" onclick="window.location.href='index.html'" style="cursor:pointer; display: flex; align-items: center;">
+                    <div class="bold-logo-box">B</div>
+                    <span style="font-weight: 800; font-size: 1.5rem; margin-left: 12px; color: var(--bold-white);">old.ng</span>
                 </div>
+            </div>
+            
+            <div class="nav-links" style="display: flex; align-items: center; gap: 25px;">
+                <a href="marketplace.html" style="color: var(--bold-white); text-decoration: none; font-weight: 500;">Marketplace</a>
+                <a href="sell.html" style="color: var(--bold-white); text-decoration: none; font-weight: 500;">Become a Seller</a>
+                <!-- Updated Login to trigger selection -->
+                <a href="javascript:void(0)" onclick="document.getElementById('loginModal').style.display='flex'" class="btn-bold" style="text-decoration: none; padding: 10px 24px;">Login</a>
             </div>
         </div>
-        
-        <div class="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 w-1/3 h-[60%] bg-white/5 rounded-3xl border border-white/10 p-4">
-             <div class="relative w-full h-full rounded-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1614165933394-96e832948b19?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" alt="Featured">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
-                    <p class="font-brand text-2xl uppercase">Luxury Redefined.</p>
-                </div>
-             </div>
+    </nav>
+
+    <section class="hero" style="padding: 100px 5%; text-align: center; background: radial-gradient(circle at top, var(--bold-blue-deep), var(--bold-midnight));">
+        <h1 class="animate-slide" style="font-size: 3.5rem; font-weight: 800; margin-bottom: 20px;">
+            The Future of <span style="color: var(--bold-orange);">Trusted</span> Trading in Africa
+        </h1>
+        <p class="animate-slide" style="font-size: 1.2rem; color: #94a3b8; max-width: 700px; margin: 0 auto 40px;">
+            Elimating the fear of scams. Bold.ng provides "Bold Certified" inspections and secure escrow payments for every single trade.
+        </p>
+        <div class="hero-btns animate-slide">
+            <button class="btn-bold" onclick="window.location.href='marketplace.html'" style="font-size: 1.1rem; padding: 15px 40px;">Start Shopping</button>
+            <!-- Fixed Join button to go to the selection signup page -->
+            <button style="background: transparent; border: 1px solid var(--bold-orange); color: var(--bold-white); padding: 15px 40px; border-radius: 8px; margin-left: 15px; cursor: pointer;" onclick="window.location.href='signup.html'">Join as Merchant</button>
         </div>
     </section>
 
-    <!-- MAIN PRODUCT ADVERT FEED (The Window Shop) -->
-    <main class="max-w-7xl mx-auto px-6 py-20">
-        <div class="flex justify-between items-end mb-12 border-b-4 border-[#FF5F00] pb-4">
-            <div>
-                <h3 class="font-brand text-4xl mb-2">CURATED SAMPLES</h3>
-                <p class="text-slate-400 font-bold text-xs uppercase tracking-[0.2em]">Click to see full marketplace details</p>
-            </div>
-            <a href="marketplace.html" class="text-[#FF5F00] font-black uppercase text-sm flex items-center gap-2 mb-2">
-                View All Assets <i data-lucide="move-right" class="w-5 h-5"></i>
-            </a>
+    <!-- NEW: MOTIONAL TRANSPARENT AD SPACE -->
+    <section class="ad-container">
+        <div style="padding: 0 5%; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <div style="width: 10px; height: 10px; background: var(--bold-orange); border-radius: 50%;"></div>
+            <h2 style="font-size: 1rem; color: var(--bold-white); letter-spacing: 2px;">PREMIUM BOLD LISTINGS</h2>
         </div>
+        
+        <div class="ad-track" id="premiumTrack">
+            <!-- Items are duplicated in JS to create infinite loop -->
+        </div>
+    </section>
 
-        <!-- FIREBASE INJECTED GRID -->
-        <div id="index-product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <!-- Shimmer/Loading States -->
-            <div class="h-96 bg-white/5 rounded-xl animate-pulse"></div>
-            <div class="h-96 bg-white/5 rounded-xl animate-pulse"></div>
-            <div class="h-96 bg-white/5 rounded-xl animate-pulse"></div>
-        </div>
-    </main>
-     <!-- FOOTER SECTION -->
-    <footer class="py-12 px-6 border-t border-slate-800 mt-12 bg-slate-900/50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-sm">
-            <div class="flex items-center gap-2">
-                <div class="w-6 h-6 orange-gradient rounded flex items-center justify-center font-bold text-white text-[10px]">B</div>
-                <span class="font-bold text-slate-300">Bold.ng</span>
+    <section style="padding: 60px 5%;">
+        <h2 style="text-align: center; margin-bottom: 40px;">The Bold Standard</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="glass-panel animate-slide">
+                <div style="font-size: 2.5rem; margin-bottom: 15px;">🛡️</div>
+                <h3 style="color: var(--bold-orange);">Bold Certified</h3>
+                <p>Every smartphone and laptop is physically inspected. No BIOS locks, no hidden faults, no surprises.</p>
             </div>
-            <div class="flex gap-8">
-                <a href="#" class="hover:text-white transition-colors">Terms</a>
-                <a href="#" class="hover:text-white transition-colors">Privacy</a>
-                <a href="#" class="hover:text-white transition-colors">Help Center</a>
-                <a href="#" class="hover:text-white transition-colors">Contact</a>
+            <div class="glass-panel animate-slide" style="border-top: 2px solid var(--bold-orange);">
+                <div style="font-size: 2.5rem; margin-bottom: 15px;">🤝</div>
+                <h3 style="color: var(--bold-orange);">Escrow Protection</h3>
+                <p>We hold your payment securely. Sellers only get paid once you confirm the item is exactly as described.</p>
             </div>
-            <p>&copy; 2024 Bold Nigeria Limited</p>
+            <div class="glass-panel animate-slide">
+                <div style="font-size: 2.5rem; margin-bottom: 15px;">🚀</div>
+                <h3 style="color: var(--bold-orange);">Verified Merchants</h3>
+                <p>Only vetted entrepreneurs can sell on Bold.ng. We prioritize quality over quantity for a premium experience.</p>
+            </div>
         </div>
+    </section>
+
+    <footer style="background: var(--bold-midnight); padding: 60px 5%; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+        <div style="margin-bottom: 20px;">
+            <div class="bold-logo-box">B</div>
+        </div>
+        <p style="color: #64748b;">&copy; 2026 Bold.ng Marketplace. Built for Africa, Trusted by the World.</p>
     </footer>
 
-    <!-- NAVIGATION DOCK -->
-    <nav class="nav-dock">
-        <a href="index.html" class="nav-item active flex flex-col items-center">
-            <i data-lucide="home" class="w-6 h-6"></i>
-            <span class="text-[10px] font-black uppercase mt-1">Home</span>
-        </a>
+    <script>
+        // Data for Premium Ads
+        const premiumItems = [
+            { name: "iPhone 15 Pro", price: "₦1,200,000", img: "https://images.unsplash.com/photo-1696446701796-da61225697cc?w=200" },
+            { name: "MacBook Air M2", price: "₦950,000", img: "https://images.unsplash.com/photo-1611186871348-b1ec696e523b?w=200" },
+            { name: "Samsung S24 Ultra", price: "₦1,100,000", img: "https://images.unsplash.com/photo-1707223516587-424a73211bd4?w=200" },
+            { name: "Dell XPS 13", price: "₦850,000", img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=200" }
+        ];
 
-   
-
+        const track = document.getElementById('premiumTrack');
         
-        <div class="nav-item">
-            <a href="sell.html" class="bg-[#FF5F00] text-white p-4 -mt-10 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#fff] block">
-                <i data-lucide="plus" class="w-6 h-6"></i>
-            </a>
-        </div>
-        <a href="messages.html" class="nav-item flex flex-col items-center">
-            <i data-lucide="message-circle" class="w-6 h-6"></i>
-            <span class="text-[10px] font-black uppercase mt-1">Chat</span>
-        </a>
-        <a href="vendors_profile.html" class="nav-item flex flex-col items-center">
-            <i data-lucide="user" class="w-6 h-6"></i>
-            <span class="text-[10px] font-black uppercase mt-1">Account</span>
-        </a>
-    </nav>
- 
-    
-    
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, query, limit, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        // Create the slider content (Duplicated for seamless loop)
+        const content = [...premiumItems, ...premiumItems].map(item => `
+            <div class="premium-ad-card">
+                <span class="ad-badge">PREMIUM</span>
+                <img src="${item.img}" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover;">
+                <div>
+                    <h4 style="margin: 0; color: white;">${item.name}</h4>
+                    <p style="margin: 5px 0 0 0; color: var(--bold-orange); font-weight: bold;">${item.price}</p>
+                </div>
+            </div>
+        `).join('');
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyD35odIjfILahBo2JEGWlCVChmfjHq6Rng",
-            authDomain: "boldng-web1.firebaseapp.com",
-            projectId: "boldng-web1",
-            storageBucket: "boldng-web1.firebasestorage.app",
-            messagingSenderId: "451061811783",
-            appId: "1:451061811783:web:b5d2870e86b7cdc517bf62"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        // Connect and Listen for products
-        signInAnonymously(auth).then(() => {
-            const grid = document.getElementById('index-product-grid');
-            
-            // Listen to the listings collection
-            // In a real scenario, you'd use orderBy('createdAt', 'desc') but per instructions 
-            // we use a simple collection call for reliability in the preview
-            onSnapshot(collection(db, "listings"), (snapshot) => {
-                if (snapshot.empty) {
-                    grid.innerHTML = `<p class="col-span-full text-center text-slate-500 font-bold uppercase py-20">The window is currently empty. Check back soon.</p>`;
-                    return;
-                }
-
-                const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                
-                // Only show top 6 items as "Samples" for the index
-                const samples = docs.slice(0, 6);
-
-                lucide.createIcons();
-            }, (error) => {
-                console.error("Error fetching samples:", error);
-                grid.innerHTML = `<p class="col-span-full text-center text-red-500 font-bold uppercase py-20">Failed to load samples. Please try again later.</p>`;
-            });
-        });
+        track.innerHTML = content;
     </script>
-
-            
-
 </body>
-</html>   
+</html>

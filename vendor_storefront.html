@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Machinery Ltd | Bold.ng Verified Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-color: var(--bold-midnight); color: var(--bold-white);">
+
+    <nav class="main-nav">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div onclick="history.back()" style="cursor: pointer; color: var(--bold-orange); font-size: 1.5rem;">←</div>
+            <div class="bold-logo-box">B</div>
+            <span style="font-weight: 800;">Vendor Storefront</span>
+        </div>
+    </nav>
+
+    <header style="background: linear-gradient(to bottom, #001C30, #020617); padding: 60px 5%; text-align: center; border-bottom: 1px solid var(--glass-border);">
+        <div style="width: 120px; height: 120px; background: #1e293b; border-radius: 50%; margin: 0 auto 20px; border: 3px solid var(--bold-orange); display: flex; align-items: center; justify-content: center; font-size: 3rem;">🏭</div>
+        <h1 style="margin: 0;">Global Machinery Ltd</h1>
+        <div style="margin: 10px 0; display: flex; justify-content: center; gap: 15px; align-items: center;">
+            <span style="background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">✓ Bold Certified Vendor</span>
+            <span style="color: #fbbf24;">⭐ 4.9 (218 Reviews)</span>
+        </div>
+        <p style="color: #94a3b8; max-width: 600px; margin: 15px auto;">Specializing in heavy-duty caterpillars, logistics equipment, and industrial generators since 2018. Based in Lagos, shipping worldwide.</p>
+        
+        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 25px;">
+            <button class="btn-bold" style="padding: 12px 30px;">Follow Store</button>
+            <button style="background: transparent; border: 1px solid white; color: white; padding: 12px 30px; border-radius: 8px; cursor: pointer;">Contact Seller</button>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 40px 5%;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h3>Available Products (12)</h3>
+            <select class="input-group" style="width: 200px; background: rgba(255,255,255,0.05);">
+                <option>Newest First</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+            </select>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+            
+            <div class="glass-panel animate-slide" style="cursor: pointer;" onclick="window.location.href='product_details.html'">
+                <div style="height: 180px; background: #1e293b; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">🚜</div>
+                <h4 style="margin: 0;">Caterpillar Excavator 320D</h4>
+                <p style="color: var(--bold-orange); font-weight: 800; margin: 10px 0;">₦85,000,000</p>
+                <button class="btn-bold" style="width: 100%; padding: 10px; font-size: 0.8rem;">View Details</button>
+            </div>
+
+            <div class="glass-panel animate-slide" style="cursor: pointer;">
+                <div style="height: 180px; background: #1e293b; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">🚛</div>
+                <h4 style="margin: 0;">2024 Heavy Duty Tipper</h4>
+                <p style="color: var(--bold-orange); font-weight: 800; margin: 10px 0;">₦52,500,000</p>
+                <button class="btn-bold" style="width: 100%; padding: 10px; font-size: 0.8rem;">View Details</button>
+            </div>
+
+            <div class="glass-panel animate-slide" style="cursor: pointer;">
+                <div style="height: 180px; background: #1e293b; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">⚡</div>
+                <h4 style="margin: 0;">Industrial Diesel Generator</h4>
+                <p style="color: var(--bold-orange); font-weight: 800; margin: 10px 0;">₦8,200,000</p>
+                <button class="btn-bold" style="width: 100%; padding: 10px; font-size: 0.8rem;">View Details</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--glass-border); color: #64748b; font-size: 0.8rem;">
+        Member since March 2026 | Bold.ng Trust Verified Account
+    </footer>
+
+</body>
+</html>

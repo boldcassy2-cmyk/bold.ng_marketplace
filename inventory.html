@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory | Bold Managed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0a0a0b; color: white; font-family: 'Inter', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; }
+    </style>
+</head>
+<body class="p-10">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-10">
+            <h1 class="text-3xl font-black italic uppercase tracking-tighter">Stock Management</h1>
+            <button onclick="history.back()" class="text-xs font-bold text-gray-500 hover:text-white">← BACK TO PORTAL</button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="glass-card p-6 text-center">
+                <p class="text-[10px] text-gray-500 font-black uppercase">Total Units</p>
+                <p class="text-2xl font-bold">1,240</p>
+            </div>
+            <div class="glass-card p-6 text-center border-b-2 border-blue-600">
+                <p class="text-[10px] text-gray-500 font-black uppercase">In Warehouse</p>
+                <p class="text-2xl font-bold">890</p>
+            </div>
+            <div class="glass-card p-6 text-center">
+                <p class="text-[10px] text-gray-500 font-black uppercase">In Transit</p>
+                <p class="text-2xl font-bold">350</p>
+            </div>
+            <div class="glass-card p-6 text-center">
+                <p class="text-[10px] text-red-500 font-black uppercase">Low Stock</p>
+                <p class="text-2xl font-bold">2 Items</p>
+            </div>
+        </div>
+
+        <div class="glass-card overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-white/5 text-[10px] uppercase font-black text-gray-500">
+                    <tr>
+                        <th class="p-6">SKU</th>
+                        <th class="p-6">Product Name</th>
+                        <th class="p-6">Quantity</th>
+                        <th class="p-6">Warehouse Loc.</th>
+                        <th class="p-6">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm divide-y divide-white/5">
+                    <tr>
+                        <td class="p-6 font-mono text-blue-500">EL-HP-840</td>
+                        <td class="p-6 font-bold">HP EliteBook 840 G8</td>
+                        <td class="p-6">12 Units</td>
+                        <td class="p-6 text-gray-400">Lagos Hub - A1</td>
+                        <td class="p-6"><button class="text-blue-500 font-bold">Manage</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

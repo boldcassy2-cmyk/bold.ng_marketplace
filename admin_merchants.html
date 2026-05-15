@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Merchant Verification | Bold.ng</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensures the main container fills the screen exactly */
+        .admin-wrapper { height: calc(100vh - 80px); }
+        .custom-scroll::-webkit-scrollbar { width: 5px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#0a0a0b] text-white min-h-screen flex flex-col overflow-hidden">
+
+    <nav class="h-20 border-b border-white/10 flex items-center justify-between px-8 bg-black/80 backdrop-blur-md z-50">
+        <div onclick="window.location.href='index.html'" class="flex items-center gap-3 cursor-pointer">
+            <div class="bg-[#f57c00] text-black font-black p-2 rounded">B</div>
+            <span class="text-xl font-bold tracking-tighter">bold.ng</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <button onclick="window.history.back()" class="text-xs text-gray-400 hover:text-[#f57c00] transition">← GO BACK</button>
+            <div class="h-6 w-[1px] bg-white/10"></div>
+            <span class="text-[10px] font-black tracking-widest text-gray-500 uppercase">Merchant Control</span>
+        </div>
+    </nav>
+
+    <div class="flex flex-1 admin-wrapper">
+        
+        <aside class="w-72 border-r border-white/10 flex flex-col bg-black overflow-y-auto custom-scroll">
+            <nav class="p-8 space-y-8">
+                <div>
+                    <p class="text-[10px] text-gray-600 font-bold mb-4 tracking-widest">MANAGEMENT</p>
+                    <div class="space-y-1">
+                        <a href="admin.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Main Switchboard</a>
+                        <a href="admin_staff.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Staff Directory</a>
+                        <a href="admin_merchants.html" class="block p-3 rounded-xl bg-[#f57c00]/10 text-[#f57c00] font-bold text-sm">Merchant Verification</a>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-[10px] text-gray-600 font-bold mb-4 tracking-widest">DEPARTMENTS</p>
+                    <div class="space-y-1">
+                        <a href="inspection_tool.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Technical Inspection</a>
+                        <a href="admin_logistics.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Logistics & Hubs</a>
+                        <a href="admin_finance.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Finance & Escrow</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-10 overflow-y-auto custom-scroll">
+            <div class="max-w-5xl mx-auto">
+                
+                <div class="flex justify-between items-end mb-10">
+                    <div>
+                        <h2 class="text-4xl font-black">Merchant Verification</h2>
+                        <p class="text-gray-500 italic text-sm">Approving high-value sellers for Bold.ng</p>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10 text-right">
+                        <p class="text-[10px] text-gray-500">PENDING APPLICANTS</p>
+                        <p id="queueCount" class="text-xl font-black text-[#f57c00]">01</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4" id="merchantList">
+                    
+                    <div class="bg-white/5 border border-white/10 p-6 rounded-[32px] flex flex-col gap-6 group hover:border-[#f57c00]/40 transition-all">
+                        <div class="flex justify-between items-start">
+                            <div class="flex gap-4 items-center">
+                                <div class="w-14 h-14 bg-black rounded-2xl flex items-center justify-center border border-white/10 text-2xl">🚜</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Kano Heavy Equipment Ltd</h4>
+                                    <p class="text-[10px] text-gray-500 font-mono">RC-9928341 • LAGOS HUB</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="viewDocs('Kano Heavy Equipment')" class="bg-white/5 hover:bg-white/10 p-3 rounded-xl text-[10px] font-bold transition">VIEW DOCS</button>
+                                <button onclick="alert('Opening Editor...')" class="bg-white/5 hover:bg-blue-500/20 hover:text-blue-400 p-3 rounded-xl text-[10px] font-bold transition">EDIT</button>
+                                <button onclick="deleteMerchant(this)" class="bg-white/5 hover:bg-red-500/20 hover:text-red-500 p-3 rounded-xl text-[10px] font-bold transition">DELETE</button>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                            <p class="text-[10px] text-gray-500">Submitted: 15 May 2026</p>
+                            <button onclick="approveMerchant(this)" class="bg-[#f57c00] text-black px-10 py-3 rounded-2xl text-xs font-black uppercase hover:scale-105 transition">
+                                Approve Merchant
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // VIEW DOCS FUNCTION
+        function viewDocs(name) {
+            alert("Opening Secure Document Vault for: " + name + "\n\n1. CAC Certificate.pdf\n2. Tax ID (TIN).png\n3. Proof of Warehouse.jpg");
+        }
+
+        // APPROVE FUNCTION
+        function approveMerchant(btn) {
+            btn.innerText = "VERIFIED ✓";
+            btn.classList.replace('bg-[#f57c00]', 'bg-green-600');
+            btn.classList.add('text-white');
+            btn.disabled = true;
+            document.getElementById('queueCount').innerText = "00";
+        }
+
+        // DELETE FUNCTION
+        function deleteMerchant(btn) {
+            if(confirm("Are you sure? This will remove the applicant from Bold.ng database.")) {
+                btn.closest('.bg-white/5').style.display = 'none';
+                document.getElementById('queueCount').innerText = "00";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -3,253 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bold.ng | Admin Intelligence</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #050c1a; color: white; }
-        .stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .activity-row { border-bottom: 1px solid rgba(255,255,255,0.05); transition: all 0.2s; }
-        .activity-row:hover { background: rgba(255,140,0,0.05); }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: #ff8c00; border-radius: 10px; }
-    </style>
-</head>
-<body class="min-h-screen">
-
-    <!-- Top Navigation -->
-    <nav class="border-b border-white/10 bg-[#050c1a]/80 sticky top-0 z-50 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-orange-600 rounded flex items-center justify-center text-white font-black italic">B</div>
-                <h1 class="font-black uppercase tracking-tighter text-xl">Bold Admin <span class="text-orange-500">Monitor</span></h1>
-            </div>
-            <div class="flex items-center gap-4">
-                <div id="auth-status" class="flex items-center gap-2 px-4 py-2 bg-slate-500/10 text-slate-500 rounded-full border border-white/10">
-                    <span class="text-[10px] font-black uppercase tracking-widest">Connecting...</span>
-                </div>
-            </div>
+    <meta name="description" content="Bold.ng - The Gold Standard of Trusted Marketplaces in Africa. Buy and Sell with absolute confidence.">
+    <title>Bold.ng | Africa's Most Trusted Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+<body class="bg-[#0a0a0b] text-white">
+    <!-- Navigation -->
+   <nav class="main-nav">
+    <div class="logo-area" onclick="window.location.href='index.html'" style="cursor:pointer;">
+        <span class="bold-logo-box">B</span>
+        <span style="font-weight: 800; font-size: 1.5rem; margin-left: 10px;">old.ng</span>
+    </div>
+    <div class="nav-links">
+        <a href="marketplace.html">Shop</a>
+        <a href="login.html" class="btn-bold" style="padding: 8px 16px; text-decoration: none;">Login</a>
+    </div>
+</nav>
+    <!-- Hero Section -->
+    <header class="container mx-auto py-20 text-center">
+        <h1 class="text-6xl font-black mb-4">Africa's Most <span class="text-[#f57c00]">Trusted</span> Hub.</h1>
+        <p class="text-gray-400 text-xl mb-8">Verified electronics with 50-point technical inspection. No scams, just Bold quality.</p>
+        <div class="flex justify-center gap-4">
+            <a href="marketplace.html" class="bg-[#f57c00] text-white px-8 py-4 rounded-lg font-bold text-lg">Start Shopping</a>
+            <a href="shop.html" class="border border-white px-8 py-4 rounded-lg font-bold text-lg">View Services</a>
         </div>
-    </nav>
+    </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-10">
-        <!-- Key Performance Indicators -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <div class="stat-card p-6 rounded-3xl">
-                <div class="flex justify-between items-start mb-4">
-                    <i class="fas fa-wallet text-orange-500 text-xl"></i>
-                    <span class="text-[10px] font-bold text-slate-500 uppercase">Gross Revenue</span>
-                </div>
-                <h2 id="total-revenue" class="text-3xl font-black">₦0.00</h2>
-                <p class="text-xs text-slate-400 mt-2">Total successful sales</p>
-            </div>
-            
-            <div class="stat-card p-6 rounded-3xl">
-                <div class="flex justify-between items-start mb-4">
-                    <i class="fas fa-users text-blue-500 text-xl"></i>
-                    <span class="text-[10px] font-bold text-slate-500 uppercase">Total Visitors</span>
-                </div>
-                <h2 id="total-visits" class="text-3xl font-black">0</h2>
-                <p class="text-xs text-slate-400 mt-2">Unique site entries</p>
-            </div>
-
-            <div class="stat-card p-6 rounded-3xl">
-                <div class="flex justify-between items-start mb-4">
-                    <i class="fab fa-whatsapp text-emerald-500 text-xl"></i>
-                    <span class="text-[10px] font-bold text-slate-500 uppercase">Lead Inquiries</span>
-                </div>
-                <h2 id="total-leads" class="text-3xl font-black">0</h2>
-                <p class="text-xs text-slate-400 mt-2">WhatsApp & Call clicks</p>
-            </div>
-
-            <div class="stat-card p-6 rounded-3xl">
-                <div class="flex justify-between items-start mb-4">
-                    <i class="fas fa-box text-purple-500 text-xl"></i>
-                    <span class="text-[10px] font-bold text-slate-500 uppercase">Operations</span>
-                </div>
-                <h2 id="total-uploads" class="text-3xl font-black">0</h2>
-                <p class="text-xs text-slate-400 mt-2">Products created by vendors</p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Activity Stream -->
-            <div class="lg:col-span-2">
-                <div class="stat-card rounded-3xl p-8">
-                    <h3 class="text-lg font-black mb-6 uppercase tracking-tight flex items-center gap-2">
-                        <i class="fas fa-bolt text-orange-500"></i> Master Activity Stream
-                    </h3>
-                    <div id="master-feed" class="space-y-1 max-h-[600px] overflow-y-auto pr-4">
-                        <div class="py-20 text-center">
-                            <i class="fas fa-circle-notch animate-spin text-3xl text-slate-700"></i>
-                            <p class="text-slate-500 mt-4 font-bold uppercase text-xs">Awaiting Authentication...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side Intelligence -->
-            <div class="space-y-8">
-                <div class="stat-card rounded-3xl p-8">
-                    <h3 class="text-xs font-black uppercase text-slate-500 mb-6 tracking-widest">Inventory Health</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-slate-400">Total Uploaded</span>
-                            <span id="health-uploaded" class="font-bold text-white">0</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-slate-400">Cancelled by Vendor</span>
-                            <span id="health-cancelled" class="font-bold text-orange-400">0</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-slate-400">Permanently Deleted</span>
-                            <span id="health-deleted" class="font-bold text-red-500">0</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-orange-600 rounded-3xl p-8 text-white">
-                    <h3 class="font-black text-xl mb-2 italic underline">Admin Alert</h3>
-                    <p class="text-sm font-bold opacity-90 leading-relaxed">This terminal tracks real-time clicks on Contact buttons. Each click counts as a potential lead for Bold.ng vendors.</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getFirestore, collection, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-
-    const firebaseConfig = JSON.parse(__firebase_config);
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'bold-studio-v1';
-
-    // Helper to update the UI connection badge
-    const updateBadge = (status) => {
-        const badge = document.getElementById('auth-status');
-        if (status === 'connected') {
-            badge.className = "flex items-center gap-2 px-4 py-2 bg-emerald-500/10 text-emerald-500 rounded-full border border-emerald-500/20";
-            badge.innerHTML = `
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span class="text-[10px] font-black uppercase">Live Surveillance</span>
-            `;
-        } else if (status === 'error') {
-            badge.className = "flex items-center gap-2 px-4 py-2 bg-red-500/10 text-red-500 rounded-full border border-red-500/20";
-            badge.innerHTML = `<span class="text-[10px] font-black uppercase">Sync Blocked</span>`;
-        }
-    };
-
-    const startSurveillance = async (user) => {
-        if (!user) return;
-        
-        updateBadge('connected');
-
-        const activityQuery = query(
-            collection(db, 'artifacts', appId, 'public', 'data', 'activities'),
-            orderBy('timestamp', 'desc')
-        );
-
-        onSnapshot(activityQuery, (snapshot) => {
-            const feed = document.getElementById('master-feed');
-            feed.innerHTML = '';
-
-            let stats = {
-                revenue: 0,
-                visits: 0,
-                leads: 0,
-                uploads: 0,
-                cancelled: 0,
-                deleted: 0
-            };
-
-            snapshot.forEach((doc) => {
-                const act = doc.data();
-                
-                // Aggregate Stats
-                if (act.type === 'visit') stats.visits++;
-                if (act.type === 'upload') stats.uploads++;
-                if (act.type === 'sold') stats.revenue += (Number(act.amount) || 0);
-                if (act.type === 'whatsapp' || act.type === 'dial') stats.leads++;
-                if (act.type === 'cancelled') stats.cancelled++;
-                if (act.type === 'deleted') stats.deleted++;
-
-                // Build Feed Row
-                const row = document.createElement('div');
-                row.className = 'activity-row flex items-center justify-between py-4 px-2';
-                
-                let iconClass = "fas fa-info-circle text-slate-500";
-                let badgeColor = "bg-slate-500/10 text-slate-500";
-                
-                switch(act.type) {
-                    case 'sold': iconClass = "fas fa-shopping-bag text-emerald-500"; badgeColor = "bg-emerald-500/10 text-emerald-500"; break;
-                    case 'upload': iconClass = "fas fa-cloud-upload-alt text-blue-500"; badgeColor = "bg-blue-500/10 text-blue-500"; break;
-                    case 'whatsapp': iconClass = "fab fa-whatsapp text-emerald-400"; badgeColor = "bg-emerald-400/10 text-emerald-400"; break;
-                    case 'dial': iconClass = "fas fa-phone text-blue-400"; badgeColor = "bg-blue-400/10 text-blue-400"; break;
-                    case 'deleted': iconClass = "fas fa-trash text-red-500"; badgeColor = "bg-red-500/10 text-red-500"; break;
-                    case 'cancelled': iconClass = "fas fa-times-circle text-orange-500"; badgeColor = "bg-orange-500/10 text-orange-500"; break;
-                }
-
-                const time = act.timestamp?.toDate ? new Date(act.timestamp.toDate()).toLocaleTimeString() : 'Recent';
-
-                row.innerHTML = `
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center bg-white/5">
-                            <i class="${iconClass}"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold">${act.itemName || 'System User'} <span class="text-slate-500 font-normal">performed</span> ${act.type}</p>
-                            <p class="text-[10px] text-slate-600 font-black uppercase tracking-widest">${time}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3 text-right">
-                        ${act.amount ? `<span class="text-emerald-500 font-black text-xs">₦${Number(act.amount).toLocaleString()}</span>` : ''}
-                        <span class="px-3 py-1 rounded-full text-[8px] font-black uppercase ${badgeColor}">${act.type}</span>
-                    </div>
-                `;
-                feed.appendChild(row);
-            });
-
-            // Update UI Counters
-            document.getElementById('total-revenue').innerText = `₦${stats.revenue.toLocaleString()}`;
-            document.getElementById('total-visits').innerText = stats.visits.toLocaleString();
-            document.getElementById('total-leads').innerText = stats.leads.toLocaleString();
-            document.getElementById('total-uploads').innerText = stats.uploads.toLocaleString();
-            
-            document.getElementById('health-uploaded').innerText = stats.uploads;
-            document.getElementById('health-cancelled').innerText = stats.cancelled;
-            document.getElementById('health-deleted').innerText = stats.deleted;
-        }, (error) => {
-            console.error("Firestore Error:", error);
-            updateBadge('error');
-            const feed = document.getElementById('master-feed');
-            feed.innerHTML = `
-                <div class="py-20 text-center">
-                    <i class="fas fa-lock text-3xl text-red-500/50 mb-4"></i>
-                    <p class="text-red-400 font-bold uppercase text-xs">Access Denied</p>
-                    <p class="text-slate-500 text-[10px] mt-2">Verify storage rules or connection.</p>
-                </div>
-            `;
-        });
-    };
-
-    // Correct Auth-First Flow
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            startSurveillance(user);
-        } else {
-            signInAnonymously(auth).catch(err => {
-                console.error("Auth Failed", err);
-                updateBadge('error');
-            });
-        }
-    });
-</script>
+    <script>
+        // Universal Cart Counter
+        const updateCount = () => {
+            const cart = JSON.parse(localStorage.getItem('boldCart')) || [];
+            document.getElementById('cartCount').innerText = cart.length;
+        };
+        updateCount();
+    </script>
 </body>
 </html>

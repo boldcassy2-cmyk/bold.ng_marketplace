@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Independent Seller Signup | Bold.ng</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0a0a0b] text-white p-6">
+    <div class="max-w-xl mx-auto py-12">
+        <h2 class="text-3xl font-black mb-2 text-[#f57c00]">INDEPENDENT SELLER</h2>
+        <p class="text-gray-500 text-xs mb-8">Public Business Profile • Self-Managed</p>
+
+        <form onsubmit="event.preventDefault(); window.location.href='seller_dashboard.html'" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" placeholder="Full Name" class="bg-white/5 border border-white/10 p-4 rounded-2xl w-full outline-none focus:border-[#f57c00]">
+                <input type="tel" placeholder="Phone Number" class="bg-white/5 border border-white/10 p-4 rounded-2xl w-full outline-none">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <input type="tel" placeholder="WhatsApp Number" class="bg-white/5 border border-white/10 p-4 rounded-2xl w-full outline-none">
+                <input type="email" placeholder="Email Address" class="bg-white/5 border border-white/10 p-4 rounded-2xl w-full outline-none">
+            </div>
+            <select class="bg-white/5 border border-white/10 p-4 rounded-2xl w-full outline-none">
+                <option>Select State (Nigeria)</option>
+                <option>Lagos</option><option>Abuja</option><option>Kano</option>
+            </select>
+            <input type="text" placeholder="Business Name" class="bg-white/5 border border-white/10 p-4 rounded-2xl w-full outline-none">
+            <textarea placeholder="Business Description (Optional)" class="bg-white/5 border border-white/10 p-4 rounded-2xl w-full h-24"></textarea>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <input type="password" placeholder="Password" class="bg-white/5 border border-white/10 p-4 rounded-2xl w-full outline-none">
+                <input type="password" placeholder="Verify Password" class="bg-white/5 border border-white/10 p-4 rounded-2xl w-full outline-none">
+            </div>
+            
+            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl">
+                <input type="checkbox" class="w-5 h-5 accent-green-500" required>
+                <span class="text-sm">I am not a robot</span>
+            </div>
+            
+            <button class="w-full bg-[#f57c00] text-black font-black py-5 rounded-2xl">REGISTER & GO TO DASHBOARD</button>
+        </form>
+    </div>
+</body>
+</html>

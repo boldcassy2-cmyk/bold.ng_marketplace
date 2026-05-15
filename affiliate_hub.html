@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Affiliate Hub | Bold.ng Earn</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stat-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #22c55e; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#0a0a0b] text-white min-h-screen flex flex-col overflow-hidden">
+
+    <!-- Unified Affiliate Header -->
+    <nav class="h-20 border-b border-white/10 flex items-center justify-between px-8 bg-black/80 backdrop-blur-md z-50">
+        <div class="flex items-center gap-3">
+            <div class="bg-green-600 text-black font-black p-2 rounded">A</div>
+            <span class="text-xl font-bold tracking-tighter uppercase">Affiliate<span class="text-green-500">Hub</span></span>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="text-right">
+                <p class="text-[9px] text-gray-500 font-bold uppercase">Ready to Withdraw</p>
+                <p class="text-green-500 font-black text-sm">₦45,500.00</p>
+            </div>
+            <button onclick="window.location.href='index.html'" class="text-xs text-gray-400 hover:text-white transition">EXIT</button>
+        </div>
+    </nav>
+
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 border-r border-white/10 p-6 space-y-8 bg-black">
+            <div>
+                <p class="text-[10px] text-gray-600 font-black mb-4 tracking-widest">DASHBOARD</p>
+                <nav class="space-y-2">
+                    <a href="#" class="block p-3 rounded-xl bg-green-600/10 text-green-500 font-bold text-sm">Overview</a>
+                    <a href="#" class="block p-3 rounded-xl hover:bg-white/5 text-sm">My Sales History</a>
+                    <a href="#" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Payout Settings</a>
+                </nav>
+            </div>
+            <div>
+                <p class="text-[10px] text-gray-600 font-black mb-4 tracking-widest">TOOLS</p>
+                <nav class="space-y-2">
+                    <a href="#" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Link Generator</a>
+                    <a href="#" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Marketing Assets</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="flex-1 overflow-y-auto p-10 custom-scroll">
+            <div class="max-w-5xl mx-auto">
+                
+                <!-- Welcome & Key Stats -->
+                <div class="mb-12">
+                    <h2 class="text-3xl font-black mb-6">Welcome back, Partner.</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="stat-card p-6 rounded-[32px]">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mb-2">Total Earnings</p>
+                            <p class="text-3xl font-black">₦128,400</p>
+                        </div>
+                        <div class="stat-card p-6 rounded-[32px]">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase mb-2">Clicks Generated</p>
+                            <p class="text-3xl font-black text-blue-400">1,240</p>
+                        </div>
+                        <div class="stat-card p-6 rounded-[32px] border-green-500/30 bg-green-500/5">
+                            <p class="text-[10px] text-green-500 font-bold uppercase mb-2">Current Conversion</p>
+                            <p class="text-3xl font-black text-green-500">4.2%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link Generator Tool -->
+                <section class="bg-white/5 border border-white/10 p-8 rounded-[40px] mb-12">
+                    <h3 class="font-bold mb-4">Quick Referral Link</h3>
+                    <div class="flex gap-4">
+                        <input type="text" readonly value="https://bold.ng/ref/user774" class="flex-1 bg-black p-4 rounded-2xl border border-white/10 text-sm font-mono text-gray-400">
+                        <button onclick="copyLink()" class="bg-green-600 text-black px-8 rounded-2xl font-black text-xs hover:scale-105 transition">COPY LINK</button>
+                    </div>
+                </section>
+
+                <!-- Hot Products to Promote -->
+                <section>
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-xl uppercase tracking-tighter">Hot Deals <span class="text-gray-500 text-sm font-normal ml-2">(High Commission)</span></h3>
+                        <a href="#" class="text-xs text-green-500 font-bold">View All Products →</a>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Product Item -->
+                        <div class="bg-white/5 border border-white/10 p-4 rounded-3xl flex gap-4 items-center group">
+                            <div class="w-24 h-24 bg-black rounded-2xl overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200" class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition">
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-sm">iPhone 15 Pro Max</h4>
+                                <p class="text-[10px] text-gray-500 uppercase">Comm: <span class="text-green-500 font-bold">₦15,000 per sale</span></p>
+                                <button class="mt-3 text-[9px] bg-white/10 px-4 py-2 rounded-lg font-black hover:bg-green-600 hover:text-black transition">GET SALES LINK</button>
+                            </div>
+                        </div>
+
+                        <!-- Product Item -->
+                        <div class="bg-white/5 border border-white/10 p-4 rounded-3xl flex gap-4 items-center group">
+                            <div class="w-24 h-24 bg-black rounded-2xl overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1492144534655-ad79c964c9d7?w=200" class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition">
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-sm">Luxury Sedan 2024</h4>
+                                <p class="text-[10px] text-gray-500 uppercase">Comm: <span class="text-green-500 font-bold">₦150,000 per sale</span></p>
+                                <button class="mt-3 text-[9px] bg-white/10 px-4 py-2 rounded-lg font-black hover:bg-green-600 hover:text-black transition">GET SALES LINK</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function copyLink() {
+            alert("Referral link copied to clipboard! Share it to start earning.");
+        }
+    </script>
+</body>
+</html>

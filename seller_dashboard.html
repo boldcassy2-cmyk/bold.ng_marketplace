@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller Dashboard | Bold.ng</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        .nav-item:hover { background: rgba(245, 124, 0, 0.1); color: #f57c00; }
+        .active-nav { background: #f57c00; color: black !important; font-weight: 900; }
+    </style>
+</head>
+<body class="bg-[#0a0a0b] text-white min-h-screen">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        
+        <!-- SIDEBAR -->
+        <aside class="w-full md:w-64 bg-black border-r border-white/5 p-6 flex flex-col">
+            <div class="mb-10">
+                <h1 class="text-2xl font-black italic">BOLD<span class="text-[#f57c00]">.NG</span></h1>
+                <p class="text-[9px] text-gray-500 uppercase tracking-widest font-bold">Seller Control Panel</p>
+            </div>
+
+            <nav class="flex-1 space-y-2">
+                <a href="#" class="nav-item active-nav flex items-center gap-3 p-4 rounded-2xl text-sm transition">
+                    <span>📊</span> Overview
+                </a>
+                <a href="sell.html" class="nav-item flex items-center gap-3 p-4 rounded-2xl text-sm transition text-gray-400">
+                    <span>➕</span> Post New Ad
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 p-4 rounded-2xl text-sm transition text-gray-400">
+                    <span>📦</span> My Products
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 p-4 rounded-2xl text-sm transition text-gray-400">
+                    <span>💬</span> Messages
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 p-4 rounded-2xl text-sm transition text-gray-400">
+                    <span>⚙️</span> Shop Settings
+                </a>
+            </nav>
+
+            <div class="mt-auto pt-6 border-t border-white/5">
+                <button onclick="window.location.href='index.html'" class="text-xs text-gray-500 hover:text-red-500 font-bold">LOGOUT</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+            
+            <!-- Top Bar -->
+            <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                <div>
+                    <h2 class="text-3xl font-black">Shop Dashboard</h2>
+                    <p class="text-gray-500 text-sm">Managing: <span class="text-white font-bold">Electronics Hub Lagos</span></p>
+                </div>
+                <button onclick="window.location.href='sell.html'" class="bg-[#f57c00] text-black font-black px-8 py-4 rounded-2xl text-sm hover:scale-105 transition shadow-lg shadow-[#f57c00]/20">
+                    + LIST NEW PRODUCT
+                </button>
+            </header>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+                <div class="glass-card p-6 rounded-[32px]">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-1">Live Ads</p>
+                    <p class="text-3xl font-black">12</p>
+                </div>
+                <div class="glass-card p-6 rounded-[32px]">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-1">Total Views</p>
+                    <p class="text-3xl font-black">1.4k</p>
+                </div>
+                <div class="glass-card p-6 rounded-[32px]">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-1">Customer Leads</p>
+                    <p class="text-3xl font-black text-[#f57c00]">28</p>
+                </div>
+                <div class="glass-card p-6 rounded-[32px]">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-1">Shop Rating</p>
+                    <p class="text-3xl font-black">4.8<span class="text-xs text-gray-500 ml-1">/5</span></p>
+                </div>
+            </div>
+
+            <!-- Active Listings Table -->
+            <section class="glass-card rounded-[40px] overflow-hidden border border-white/5">
+                <div class="p-8 border-b border-white/5 flex justify-between items-center">
+                    <h3 class="font-black uppercase tracking-widest text-xs">Active Listings</h3>
+                    <select class="bg-transparent text-xs text-gray-500 font-bold border-none outline-none">
+                        <option>Recently Added</option>
+                        <option>Highest Price</option>
+                    </select>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-[10px] text-gray-500 font-black uppercase border-b border-white/5">
+                                <th class="p-6">Product</th>
+                                <th class="p-6">Status</th>
+                                <th class="p-6">Price</th>
+                                <th class="p-6">Views</th>
+                                <th class="p-6 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="border-b border-white/5 hover:bg-white/[0.02] transition">
+                                <td class="p-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-white/10 rounded-lg"></div>
+                                        <span class="font-bold">iPhone 15 Pro Max (Used)</span>
+                                    </div>
+                                </td>
+                                <td class="p-6"><span class="bg-green-500/10 text-green-500 px-3 py-1 rounded-full text-[10px] font-bold">ACTIVE</span></td>
+                                <td class="p-6 font-bold text-[#f57c00]">₦1,150,000</td>
+                                <td class="p-6 text-gray-400">421</td>
+                                <td class="p-6 text-right">
+                                    <button class="text-gray-500 hover:text-white mr-3">Edit</button>
+                                    <button class="text-red-500/50 hover:text-red-500">Delete</button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-white/5 hover:bg-white/[0.02] transition">
+                                <td class="p-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-white/10 rounded-lg"></div>
+                                        <span class="font-bold">2018 Toyota Corolla (Tokunbo)</span>
+                                    </div>
+                                </td>
+                                <td class="p-6"><span class="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-[10px] font-bold">PENDING INSPECTION</span></td>
+                                <td class="p-6 font-bold text-[#f57c00]">₦8,500,000</td>
+                                <td class="p-6 text-gray-400">102</td>
+                                <td class="p-6 text-right">
+                                    <button class="text-gray-500 hover:text-white mr-3">Edit</button>
+                                    <button class="text-red-500/50 hover:text-red-500">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

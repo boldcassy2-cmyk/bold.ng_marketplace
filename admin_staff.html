@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Directory | Bold.ng Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0a0a0b] text-white p-10">
+    <header class="flex justify-between items-center mb-10">
+        <h1 class="text-3xl font-black">STAFF <span class="text-[#f57c00]">DIRECTORY</span></h1>
+        <button onclick="window.location.href='admin.html'" class="text-xs border border-white/10 px-4 py-2 rounded-xl">Back to Switchboard</button>
+    </header>
+
+    <section class="bg-white/5 p-8 rounded-[30px] border border-white/10 mb-10">
+        <h3 class="text-lg font-bold mb-6">Onboard New Staff Member</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <input type="text" id="staffName" placeholder="Full Name" class="bg-black border border-white/10 p-3 rounded-xl">
+            <input type="text" id="staffID" placeholder="Staff ID (e.g. BNG-001)" class="bg-black border border-white/10 p-3 rounded-xl">
+            <select id="staffDept" class="bg-black border border-white/10 p-3 rounded-xl text-gray-400">
+                <option value="">Select Department</option>
+                <option value="Inspection">Inspection</option>
+                <option value="Logistics">Logistics</option>
+                <option value="Finance">Finance</option>
+            </select>
+            <button onclick="addStaff()" class="bg-[#f57c00] text-black font-black rounded-xl">Register Staff</button>
+        </div>
+    </section>
+
+    <section class="bg-white/5 rounded-[30px] overflow-hidden border border-white/5">
+        <table class="w-full text-left">
+            <thead class="bg-white/5 text-[10px] uppercase text-gray-500 tracking-widest">
+                <tr>
+                    <th class="p-6">Name</th>
+                    <th class="p-6">ID Number</th>
+                    <th class="p-6">Department</th>
+                    <th class="p-6">Status</th>
+                </tr>
+            </thead>
+            <tbody id="staffTable">
+                <tr class="border-t border-white/5">
+                    <td class="p-6 text-sm">John Doe</td>
+                    <td class="p-6 font-mono text-xs">BNG-LOG-042</td>
+                    <td class="p-6"><span class="text-purple-400 text-xs font-bold">Logistics</span></td>
+                    <td class="p-6"><span class="bg-green-500/20 text-green-500 px-2 py-1 rounded text-[10px] font-bold">ACTIVE</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        function addStaff() {
+            const name = document.getElementById('staffName').value;
+            const id = document.getElementById('staffID').value;
+            const dept = document.getElementById('staffDept').value;
+
+            if(!name || !id || !dept) return alert("Please fill all staff details");
+
+            const table = document.getElementById('staffTable');
+            const newRow = `
+                <tr class="border-t border-white/5 bg-[#f57c00]/5">
+                    <td class="p-6 text-sm font-bold">${name}</td>
+                    <td class="p-6 font-mono text-xs">${id}</td>
+                    <td class="p-6 text-xs font-bold text-gray-400">${dept}</td>
+                    <td class="p-6"><span class="bg-green-500/20 text-green-500 px-2 py-1 rounded text-[10px] font-bold">ACTIVE</span></td>
+                </tr>
+            `;
+            table.insertAdjacentHTML('afterbegin', newRow);
+            
+            // Clear inputs
+            document.getElementById('staffName').value = '';
+            document.getElementById('staffID').value = '';
+        }
+    </script>
+</body>
+</html> 
