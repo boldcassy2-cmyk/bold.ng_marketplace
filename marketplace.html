@@ -2,111 +2,159 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Global Marketplace | Bold.ng</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Marketplace | Bold.ng</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#0a0a0b] text-white font-sans">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --midnight: #0a0e1a; --orange-bold: #ff6b00; --white-clean: #ffffff; }
+        body { background-color: var(--midnight); color: var(--white-clean); font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
+        
+        /* Premium Animated Border */
+        .premium-border { border: 1px solid rgba(255, 107, 0, 0.3); position: relative; overflow: hidden; }
+        .premium-border::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, var(--orange-bold), transparent 30%);
+            animation: rotate 4s linear infinite; z-index: -1; opacity: 0.4;
+        }
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
 
-    <nav class="glass-header sticky top-0 z-[1000] p-6 flex justify-between items-center px-[5%]">
-        <div class="flex items-center gap-4">
-            <div class="bg-[#f57c00] text-white font-black p-2 rounded">B</div>
-            <span class="text-xl font-bold tracking-tighter">bold.ng</span>
-        </div>
-        <div class="flex-1 max-w-xl mx-10">
-            <input type="text" id="globalSearch" onkeyup="searchItems()" placeholder="Search billions of items (Caterpillars, Fashion, Tickets...)" 
-                   class="w-full bg-white/5 border border-white/10 p-3 rounded-full px-6 focus:border-[#f57c00] outline-none">
-        </div>
-        <div class="flex items-center gap-6">
-            <a href="cart.html" class="relative">
-                🛒 <span id="cartCount" class="absolute -top-2 -right-2 bg-[#f57c00] text-[10px] px-2 rounded-full">0</span>
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.3s; }
+        .glass-card:hover { border-color: var(--orange-bold); transform: translateY(-5px); }
+        
+        /* Detail Panel Slide */
+        #detail-panel { transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        #detail-panel.active { transform: translateX(0); }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- NAV BAR -->
+    <nav class="fixed top-0 w-full z-50 bg-[#0a0e1a]/90 backdrop-blur-md border-b border-white/5 px-8 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- LOGO LINK TO INDEX -->
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-[#ff6b00] rounded-lg flex items-center justify-center font-bold text-white italic group-hover:scale-110 transition">B</div>
+                <h1 class="text-xl font-bold tracking-tighter uppercase">Bold<span class="text-[#ff6b00]">.ng</span></h1>
             </a>
-            <a href="dashboard.html" class="text-sm opacity-70 hover:opacity-100">Merchant Hub</a>
+            
+            <div class="hidden lg:flex gap-10 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                <a href="marketplace.html" class="text-white border-b-2 border-[#ff6b00] pb-1">Marketplace</a>
+                <a href="sellers.html" class="hover:text-[#ff6b00] transition">Premium Sellers</a>
+                <a href="compliance.html" class="hover:text-[#ff6b00] transition text-orange-400">Escrow Vault</a>
+                <a href="tracking.html" class="hover:text-[#ff6b00] transition">Logistics</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="location.href='login.html'" class="text-[10px] font-bold uppercase text-white hover:text-[#ff6b00]">Login</button>
+                <button onclick="location.href='post-ad.html'" class="bg-[#ff6b00] text-white px-6 py-2 rounded-md text-[10px] font-bold uppercase shadow-lg shadow-orange-600/20">Post Advert</button>
+            </div>
         </div>
     </nav>
 
-    <main class="container mx-auto p-8">
-        <section class="premium-card p-10 rounded-3xl mb-12 border-dashed border-2 border-[#f57c00]/30">
-            <h2 class="text-3xl font-black mb-6 text-center text-[#f57c00]">LIST YOUR ASSET</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <input type="text" id="pName" placeholder="Product Name" class="bg-black border border-white/10 p-4 rounded-xl">
-                <input type="number" id="pPrice" placeholder="Price (₦)" class="bg-black border border-white/10 p-4 rounded-xl">
-                
-                <select id="pCategory" onchange="toggleExtraFields()" class="bg-black border border-white/10 p-4 rounded-xl">
-                    <option value="General">General Category</option>
-                    <option value="Machinery">Heavy Machinery (Caterpillar/Crane)</option>
-                    <option value="Travel">Aviation/Tickets</option>
-                    <option value="Fashion">Fashion & Apparel</option>
-                </select>
-
-                <div id="extraFields" class="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
-                    <input type="text" id="pSpec1" placeholder="Year of Manufacture / Size" class="bg-black border border-white/10 p-4 rounded-xl">
-                    <input type="text" id="pSpec2" placeholder="Operating Hours / Material" class="bg-black border border-white/10 p-4 rounded-xl">
-                </div>
-
-                <input type="text" id="pImg" placeholder="High-Res Image URL" class="md:col-span-2 bg-black border border-white/10 p-4 rounded-xl">
-                <button onclick="handleUpload()" class="bg-[#f57c00] font-black py-4 rounded-xl hover:scale-[1.02] transition">PUBLISH WORLDWIDE</button>
+    <!-- MAIN MARKETPLACE -->
+    <main class="mt-28 px-6 pb-24 max-w-7xl mx-auto">
+        
+        <!-- DYNAMIC BANNER -->
+        <section class="mb-16 relative rounded-3xl overflow-hidden bg-gradient-to-r from-black to-[#ff6b001a] h-[300px] border border-white/5 flex items-center">
+            <div class="p-10 z-10">
+                <span class="bg-[#ff6b00] text-white text-[8px] font-black px-2 py-1 rounded mb-4 inline-block uppercase">Featured Elite</span>
+                <h2 class="text-4xl font-bold italic uppercase leading-none mb-4">Upgrade to <br>Premium Trust</h2>
+                <button onclick="scrollToGrid()" class="bg-white text-black px-6 py-2 rounded font-bold text-[10px] uppercase hover:bg-[#ff6b00] hover:text-white transition">Shop Now</button>
             </div>
         </section>
 
-        <div id="marketGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+        <div id="market-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- PRODUCT ITEM 1 -->
+            <div class="glass-card rounded-2xl overflow-hidden group">
+                <div class="h-48 relative">
+                    <img src="https://images.unsplash.com/photo-1517336712468-0611182b6755" class="w-full h-full object-cover">
+                    <div class="absolute top-2 left-2 bg-[#ff6b00] text-[8px] font-bold px-2 py-1 rounded uppercase">Premium</div>
+                </div>
+                <div class="p-5">
+                    <h4 class="font-bold text-sm mb-1">MacBook Pro M2</h4>
+                    <p class="text-[#ff6b00] font-bold text-lg mb-4">₦950,000</p>
+                    <button onclick="openProduct('MacBook Pro M2', '950,000', '98% Battery Health, 16GB RAM. Verified by Bold.ng Tech Squad.')" class="w-full py-3 bg-white/5 border border-white/10 text-white rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-[#ff6b00] transition">View Details</button>
+                </div>
+            </div>
+
+            <!-- PRODUCT ITEM 2 -->
+            <div class="glass-card rounded-2xl overflow-hidden group">
+                <div class="h-48 relative">
+                    <img src="https://images.unsplash.com/photo-1555673323-548517e71811" class="w-full h-full object-cover">
+                    <div class="absolute top-2 left-2 bg-blue-600 text-[8px] font-bold px-2 py-1 rounded uppercase">Inspected</div>
+                </div>
+                <div class="p-5">
+                    <h4 class="font-bold text-sm mb-1">Mercedes GLK 350</h4>
+                    <p class="text-[#ff6b00] font-bold text-lg mb-4">₦14,500,000</p>
+                    <button onclick="openProduct('Mercedes GLK 350', '14,500,000', 'Direct Tokunbo, Full Duty Paid. Inspection report attached.')" class="w-full py-3 bg-white/5 border border-white/10 text-white rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-[#ff6b00] transition">View Details</button>
+                </div>
+            </div>
+        </div>
     </main>
 
+    <!-- SLIDE-IN DETAIL PANEL -->
+    <div id="detail-panel" class="fixed top-0 right-0 w-full md:w-[450px] h-full bg-[#0a0e1a] z-[100] border-l border-white/10 shadow-2xl p-8 overflow-y-auto no-scrollbar">
+        <button onclick="closeProduct()" class="text-gray-500 hover:text-white text-[10px] font-bold uppercase mb-8 tracking-widest">← Back to Grid</button>
+        
+        <div id="product-content">
+            <!-- Dynamically filled by JS -->
+        </div>
+
+        <div class="mt-10 space-y-4">
+            <button onclick="startEscrow()" class="w-full py-4 bg-[#ff6b00] text-white rounded-xl font-bold uppercase text-xs tracking-widest orange-glow">Buy via Bold Escrow</button>
+            <button onclick="contactSeller()" class="w-full py-4 border border-white/10 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-white/5">Chat with Seller</button>
+        </div>
+    </div>
+
     <script>
-        function toggleExtraFields() {
-            const cat = document.getElementById('pCategory').value;
-            const extra = document.getElementById('extraFields');
-            extra.classList.toggle('hidden', cat === 'General');
+        function scrollToGrid() {
+            document.getElementById('market-grid').scrollIntoView({ behavior: 'smooth' });
         }
 
-        let products = JSON.parse(localStorage.getItem('boldProducts')) || [];
-
-        function handleUpload() {
-            const name = document.getElementById('pName').value;
-            const price = document.getElementById('pPrice').value;
-            const cat = document.getElementById('pCategory').value;
-            const img = document.getElementById('pImg').value || 'https://via.placeholder.com/600';
-
-            if(!name || !price) return alert("Missing particulars!");
-
-            const newProduct = {
-                id: Date.now().toString(),
-                name, price, category: cat, image: img,
-                specs: [document.getElementById('pSpec1').value, document.getElementById('pSpec2').value]
-            };
-
-            products.unshift(newProduct);
-            localStorage.setItem('boldProducts', JSON.stringify(products));
-            location.reload();
-        }
-
-        function render(data = products) {
-            const grid = document.getElementById('marketGrid');
-            grid.innerHTML = data.map(p => `
-                <div class="premium-card p-4 rounded-2xl cursor-pointer group" onclick="window.location.href='product_details.html?id=${p.id}'">
-                    <div class="overflow-hidden rounded-xl mb-4 h-56">
-                        <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    </div>
-                    <span class="text-[10px] text-[#f57c00] font-bold uppercase tracking-widest">${p.category}</span>
-                    <h3 class="text-xl font-bold mt-1">${p.name}</h3>
-                    <p class="text-2xl font-black text-[#f57c00] mt-2">₦${Number(p.price).toLocaleString()}</p>
+        function openProduct(name, price, desc) {
+            const panel = document.getElementById('detail-panel');
+            const content = document.getElementById('product-content');
+            
+            content.innerHTML = `
+                <div class="rounded-2xl overflow-hidden mb-6 bg-white/5 h-64">
+                     <div class="w-full h-full flex items-center justify-center text-gray-700 font-bold uppercase italic">Gallery Image</div>
                 </div>
-            `).join('');
-            updateCartCount();
+                <h2 class="text-3xl font-bold mb-2 uppercase italic tracking-tighter">${name}</h2>
+                <p class="text-2xl font-bold text-[#ff6b00] mb-6">₦${price}</p>
+                
+                <div class="bg-white/5 p-4 rounded-xl border border-white/5 mb-6">
+                    <p class="text-[10px] font-black text-gray-500 uppercase mb-2 tracking-widest">Inspection Summary</p>
+                    <p class="text-sm text-gray-300 leading-relaxed">${desc}</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 p-4 rounded-xl text-center">
+                        <p class="text-[8px] text-gray-500 uppercase">Seller Trust</p>
+                        <p class="text-xs font-bold text-green-500">Verified</p>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl text-center">
+                        <p class="text-[8px] text-gray-500 uppercase">Item ID</p>
+                        <p class="text-xs font-bold">B-77291</p>
+                    </div>
+                </div>
+            `;
+            panel.classList.add('active');
         }
 
-        function searchItems() {
-            const query = document.getElementById('globalSearch').value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
-            render(filtered);
+        function closeProduct() {
+            document.getElementById('detail-panel').classList.remove('active');
         }
 
-        function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('boldCart')) || [];
-            document.getElementById('cartCount').innerText = cart.length;
+        function startEscrow() {
+            alert("SECURE REDIRECT: Moving to Bold.ng Escrow Payment Vault...");
         }
 
-        render();
+        function contactSeller() {
+            alert("CHAT: Opening secure tunnel to merchant...");
+        }
     </script>
 </body>
 </html>
