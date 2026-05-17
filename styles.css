@@ -1,110 +1,232 @@
-/* 1. BRAND FONT & COLORS */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-
+/* --- GLOBAL DESIGN TOKENS & SYSTEM ARCHITECTURE --- */
 :root {
-    --bold-midnight: #020617;
-    --bold-blue-deep: #001C30;
-    --bold-orange: #FF5F00;
-    --bold-white: #FFFFFF;
-    --glass-bg: rgba(15, 23, 42, 0.8);
+    --bold-midnight: #0a0e1a;
+    --bold-blue-deep: #0f172a;
+    --bold-orange: #ff6b00;
+    --bold-white: #ffffff;
+    --glass: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.08);
+    --premium-glow: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 2. CORE BODY STYLING */
-body { 
-    font-family: 'Plus Jakarta Sans', sans-serif; 
-    background-color: var(--bold-midnight); 
-    color: #f8fafc; 
-    min-height: 100vh;
+/* --- SYSTEM RESET & CORE LAYOUTS --- */
+* {
     margin: 0;
-    line-height: 1.6;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 3. GLASS PANELS (For Sections, Cards, and Containers) */
-.glass-panel { 
-    background: var(--glass-bg); 
-    backdrop-filter: blur(16px); 
-    border: 1px solid var(--glass-border); 
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-/* 4. THE LOGO BOX (B in Orange) */
-.bold-logo-box {
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
+body {
+    background-color: var(--bold-midnight);
     color: var(--bold-white);
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: 800;
-    display: inline-block;
-    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* 5. PROFESSIONAL INPUTS (For Search and Forms) */
-.input-group { 
-    background: rgba(30, 41, 59, 0.4); 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
+/* --- FLOATING BACKGROUND ILLUMINATION --- */
+.accent-glow-spot {
+    position: absolute;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* --- REUSABLE COMPONENT GLASS PANELS --- */
+.glass-panel {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 32px;
+    transition: all 0.3s var(--premium-glow);
+    z-index: 2;
+}
+
+.glass-panel:hover {
+    border-color: rgba(255, 107, 0, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+/* --- PREMIUM INTERACTIVE ACTION BUTTONS --- */
+.btn-bold-primary {
+    background: var(--bold-orange);
     color: white;
-    padding: 12px;
-    border-radius: 8px;
-    transition: all 0.2s; 
-    width: 100%;
-}
-
-.input-group:focus { 
-    outline: none;
-    border-color: #f97316; 
-    background: rgba(30, 41, 59, 0.7); 
-    box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
-}
-
-/* 6. BUTTONS (The "Action" Orange) */
-.btn-bold {
-    background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
+    padding: 14px 32px;
+    border-radius: 14px;
     font-weight: 700;
+    border: none;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s var(--premium-glow);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.2);
+    text-decoration: none;
 }
 
-.btn-bold:hover {
-    transform: scale(1.03);
+.btn-bold-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
     filter: brightness(1.1);
 }
 
-/* 7. ANIMATIONS */
-@keyframes slideIn { 
-    from { opacity: 0; transform: translateX(20px); } 
-    to { opacity: 1; transform: translateX(0); } 
-}
-
-.animate-slide { 
-    animation: slideIn 0.4s ease-out forwards; 
-}
-.recommendation-card {
-    background: var(--glass-bg);
+.btn-bold-outline {
+    background: transparent;
     border: 1px solid var(--glass-border);
-    transition: 0.3s;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 14px;
+    font-weight: 700;
     cursor: pointer;
-    overflow: hidden;
+    transition: all 0.3s var(--premium-glow);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
-.recommendation-card:hover {
+.btn-bold-outline:hover {
+    background: var(--glass);
     border-color: var(--bold-orange);
-    transform: translateY(-5px);
 }
 
-.cart-counter {
+/* --- RESPONSIVE UNIFORM STICKY HEADER --- */
+.main-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(10, 14, 26, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 16px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--bold-white);
+    transition: transform 0.2s var(--premium-glow);
+}
+
+.logo-area:hover {
+    transform: scale(1.02);
+}
+
+.bold-logo-box {
     background: var(--bold-orange);
     color: white;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 50%;
-    position: absolute;
-    top: -5px;
-    right: -10px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-style: italic;
+    border-radius: 8px;
+    font-size: 1.25rem;
+}
+
+.logo-text {
+    font-weight: 800;
+    font-size: 1.4rem;
+    margin-left: 12px;
+    letter-spacing: -1px;
+}
+
+.logo-text span {
+    color: var(--bold-orange);
+}
+
+/* Navigation Link Clusters */
+.nav-links-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links-wrapper a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: color 0.2s var(--premium-glow);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links-wrapper a:hover, .nav-links-wrapper a.active {
+    color: var(--bold-orange);
+}
+
+/* Native UI Back/Forward History Controls */
+.nav-action-cluster {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-arrow-btn {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: #64748b;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.nav-arrow-btn:hover {
+    color: var(--bold-white);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
+}
+
+.house-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    transition: color 0.2s;
+}
+.house-menu-btn:hover {
+    color: var(--bold-orange);
+}
+
+/* --- MOBILE TARGET MENU NAVIGATION SLIDEOVER --- */
+.mobile-menu-trigger {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--bold-white);
+    cursor: pointer;
+    padding: 4px;
+}
+
+@media (max-width: 991px) {
+    .nav-links-wrapper {
+        display: none; /* Controlled via mobile drawer overlays on touch devices */
+    }
+    .mobile-menu-trigger {
+        display: block;
+    }
 }

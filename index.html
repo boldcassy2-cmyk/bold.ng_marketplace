@@ -7,163 +7,51 @@
     <title>Bold.ng | Africa's Most Trusted Marketplace</title>
     <!-- Importing a professional tech font -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Framework Engine for fluid structural utilities -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Linking our Central CSS Design Blueprint Sheet -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --bold-midnight: #0a0e1a;
-            --bold-blue-deep: #0f172a;
-            --bold-orange: #ff6b00;
-            --bold-white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
+        /* Contextual custom styles tailored specific to index landing flow elements */
+        .hero-section {
+            padding: 140px 5% 100px;
+            background: radial-gradient(circle at 80% 20%, rgba(255,107,0,0.04), transparent 50%),
+                        radial-gradient(circle at 20% 80%, rgba(255,107,0,0.03), transparent 50%);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--bold-midnight);
-            color: var(--bold-white);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- NAVIGATION --- */
-        .main-nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(10, 14, 26, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 15px 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo-area { display: flex; align-items: center; cursor: pointer; transition: transform 0.3s; }
-        .logo-area:hover { transform: scale(1.02); }
-
-        .bold-logo-box {
-            background: var(--bold-orange);
-            color: white;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-style: italic;
-            border-radius: 8px;
-            font-size: 1.2rem;
-        }
-
-        .nav-links { display: flex; align-items: center; gap: 30px; }
-        .nav-links a { 
-            color: #94a3b8; 
-            text-decoration: none; 
-            font-size: 0.9rem; 
-            font-weight: 600; 
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .nav-links a:hover { color: var(--bold-orange); }
-
-        /* --- BUTTONS --- */
-        .btn-bold {
-            background: var(--bold-orange);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.2);
-        }
-        .btn-bold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
-            filter: brightness(1.1);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-outline:hover { background: var(--glass); border-color: var(--bold-orange); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            padding: 120px 5% 80px;
-            text-align: center;
-            background: radial-gradient(circle at top right, rgba(255,107,0,0.05), transparent),
-                        radial-gradient(circle at bottom left, rgba(255,107,0,0.05), transparent);
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            letter-spacing: -2px;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: #94a3b8;
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        /* --- PREMIUM AD SLIDER --- */
         .ad-container {
             width: 100%;
             overflow: hidden;
             padding: 40px 0;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.01);
             border-top: 1px solid var(--glass-border);
             border-bottom: 1px solid var(--glass-border);
         }
-
         .ad-track {
             display: flex;
-            gap: 25px;
+            gap: 24px;
             width: max-content;
-            animation: slideScroll 40s linear infinite;
+            animation: slideScroll 45s linear infinite;
         }
-
         .premium-ad-card {
             width: 320px;
             background: var(--glass);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
-            padding: 15px;
+            padding: 16px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
             position: relative;
             cursor: pointer;
-            transition: 0.4s;
+            transition: all 0.3s var(--premium-glow);
         }
-
         .premium-ad-card:hover {
             border-color: var(--bold-orange);
             background: rgba(255, 107, 0, 0.05);
-            transform: scale(1.02);
+            transform: translateY(-2px);
         }
-
         .ad-badge {
             position: absolute;
             top: -10px;
@@ -174,149 +62,133 @@
             padding: 4px 12px;
             border-radius: 20px;
             font-weight: 800;
+            letter-spacing: 0.5px;
         }
-
         @keyframes slideScroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-
-        /* --- FEATURES SECTION --- */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 80px 5%;
-        }
-
-        .glass-panel {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 40px;
-            border-radius: 32px;
-            transition: 0.3s;
-        }
-        .glass-panel:hover {
-            border-color: rgba(255, 107, 0, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .glass-panel h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--bold-white);
-        }
-
-        .glass-panel p { color: #64748b; font-size: 0.95rem; }
-
-        /* --- LOGIN MODAL --- */
-        #loginModal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-content {
-            background: var(--bold-midnight);
-            padding: 50px;
-            border-radius: 40px;
-            border: 1px solid var(--bold-orange);
-            text-align: center;
-            max-width: 450px;
-            width: 90%;
-            box-shadow: 0 0 50px rgba(255, 107, 0, 0.1);
-        }
-
-        .modal-content h3 { font-size: 2rem; margin-bottom: 30px; }
-
-        .modal-options { display: flex; flex-direction: column; gap: 15px; }
-
-        /* --- RESPONSIVENESS --- */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.8rem; }
-        }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
 
-    <!-- SMART LOGIN MODAL -->
-    <div id="loginModal">
-        <div class="modal-content">
-            <h3>Login to Portal</h3>
-            <div class="modal-options">
-                <button class="btn-bold" onclick="window.location.href='seller_dashboard.html'">Independent Seller</button>
-                <button class="btn-bold" style="background: #2563eb; box-shadow: 0 4px 15px rgba(37,99,235,0.2);" onclick="window.location.href='merchant_portal.html'">Managed Merchant</button>
-                <button class="btn-bold" style="background: #16a34a; box-shadow: 0 4px 15px rgba(22,163,74,0.2);" onclick="window.location.href='affiliate_hub.html'">Affiliate Partner</button>
+    <!-- FLOATING BRAND BACKGROUND GLOW ACCENTS -->
+    <div class="accent-glow-spot" style="top: -5%; right: -5%;"></div>
+    <div class="accent-glow-spot" style="bottom: 15%; left: -10%;"></div>
+
+    <!-- MODAL PORTAL MATRIX OVERLAY -->
+    <div id="loginModal" style="display: none;" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-md p-8 md:p-12 text-center border-[#ff6b00]/40 shadow-[0_0_50px_rgba(255,107,0,0.15)] relative">
+            <h3 class="text-2xl md:text-3xl font-extrabold uppercase tracking-tight text-white mb-8">Login to Portal</h3>
+            
+            <div class="flex flex-col gap-4">
+                <button class="btn-bold-primary w-full text-xs" onclick="window.location.href='seller_dashboard.html'">Independent Seller</button>
+                <button class="btn-bold-primary w-full text-xs !bg-[#2563eb] !shadow-[0_4px_15px_rgba(37,99,235,0.2)]" onclick="window.location.href='merchant_portal.html'">Managed Merchant</button>
+                <button class="btn-bold-primary w-full text-xs !bg-[#16a34a] !shadow-[0_4px_15px_rgba(22,163,74,0.2)]" onclick="window.location.href='affiliate_hub.html'">Affiliate Partner</button>
             </div>
-            <p onclick="document.getElementById('loginModal').style.display='none'" style="color: #64748b; margin-top: 30px; cursor: pointer; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px;">CLOSE WINDOW</p>
+            
+            <button onclick="document.getElementById('loginModal').style.display='none'" class="mt-8 text-[10px] text-gray-500 hover:text-white font-bold tracking-widest uppercase transition-colors">
+                CLOSE WINDOW
+            </button>
         </div>
     </div>
 
+    <!-- MAIN UNIFORM APP HEADER BAR -->
     <nav class="main-nav">
-        <div class="logo-area" onclick="window.location.href='index.html'">
-            <div class="bold-logo-box">B</div>
-            <span style="font-weight: 800; font-size: 1.4rem; margin-left: 12px; letter-spacing: -1px;">old.ng</span>
+        <div class="nav-action-cluster">
+            <a href="index.html" class="logo-area">
+                <div class="bold-logo-box">B</div>
+                <span class="logo-text">Bold<span>.ng</span></span>
+            </a>
         </div>
         
-        <div class="nav-links">
+        <!-- Desktop Adaptive Controls -->
+        <div class="nav-links-wrapper">
             <a href="marketplace.html">Marketplace</a>
             <a href="signup.html">Become a Seller</a>
-            <button onclick="document.getElementById('loginModal').style.display='flex'" class="btn-bold">Login</button>
+            <button onclick="document.getElementById('loginModal').style.display='flex'" class="btn-bold-primary !py-2.5 !px-6 text-xs">Login</button>
         </div>
+
+        <!-- Touch Interface Menu Trigger Hamburger -->
+        <button class="mobile-menu-trigger lg:hidden" onclick="document.getElementById('mobileNavDrawer').classList.toggle('translate-x-0')" title="Open Navigation Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x1="20" y1="12" y2="12"/><line x1="4" x1="20" y1="6" y2="6"/><line x1="4" x1="20" y1="18" y2="18"/></svg>
+        </button>
     </nav>
 
-    <section class="hero">
-        <h1>The Future of <span style="color: var(--bold-orange);">Trusted</span><br>Trading in Africa</h1>
-        <p>Eliminating the fear of scams. Bold.ng provides "Bold Certified" inspections and secure escrow payments for every single trade.</p>
-        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn-bold" onclick="window.location.href='marketplace.html'" style="padding: 18px 45px;">Start Shopping</button>
-            <button class="btn-outline" onclick="window.location.href='signup.html'" style="padding: 18px 45px;">Join as Merchant</button>
+    <!-- TOUCHSCREEN RESPONSIVE SIDEBAR DRAWER OVERLAY -->
+    <div id="mobileNavDrawer" class="fixed top-0 right-0 h-full w-72 bg-[#0a0e1a] border-l border-white/5 z-[5000] p-6 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col justify-between">
+        <div class="space-y-8">
+            <div class="flex justify-between items-center pb-4 border-b border-white/5">
+                <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Navigation Navigation Menu</span>
+                <button class="text-gray-400 hover:text-white text-xl" onclick="document.getElementById('mobileNavDrawer').classList.add('translate-x-full')">✕</button>
+            </div>
+            <nav class="flex flex-col gap-5">
+                <a href="marketplace.html" class="text-sm font-bold text-gray-300 hover:text-[#ff6b00] uppercase tracking-wide">Marketplace</a>
+                <a href="signup.html" class="text-sm font-bold text-gray-300 hover:text-[#ff6b00] uppercase tracking-wide">Become a Seller</a>
+            </nav>
+        </div>
+        <div class="pt-6 border-t border-white/5">
+            <button onclick="document.getElementById('mobileNavDrawer').classList.add('translate-x-full'); document.getElementById('loginModal').style.display='flex'" class="btn-bold-primary w-full text-xs">Account Portal Access</button>
+        </div>
+    </div>
+
+    <!-- MAIN MARKETING HERO ENGINE -->
+    <section class="hero-section text-center relative z-10 flex-1 flex flex-col justify-center items-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 text-white uppercase">
+                The Future of <span class="text-[#ff6b00]">Trusted</span><br class="hidden sm:inline"> Trading in Africa
+            </h1>
+            <p class="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-10 font-medium">
+                Eliminating the fear of online marketplace scams. Bold.ng provides "Bold Certified" verification checks and protected escrow layers for every swap.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto">
+                <a href="marketplace.html" class="btn-bold-primary w-full sm:w-auto !py-4 !px-10 text-xs tracking-wider">Start Shopping</a>
+                <a href="signup.html" class="btn-bold-outline w-full sm:w-auto !py-4 !px-10 text-xs tracking-wider">Join as Merchant</a>
+            </div>
         </div>
     </section>
 
-    <!-- PREMIUM AD SPACE -->
-    <section class="ad-container">
-        <div style="padding: 0 5%; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;">
-            <div style="width: 8px; height: 8px; background: var(--bold-orange); border-radius: 50%; box-shadow: 0 0 10px var(--bold-orange);"></div>
-            <h2 style="font-size: 0.8rem; font-weight: 800; letter-spacing: 3px; color: #64748b; text-transform: uppercase;">Premium Bold Listings</h2>
+    <!-- AUTOMATED DYNAMIC ADS SLIDER CAROUSEL -->
+    <section class="ad-container relative z-10">
+        <div class="px-[5%] mb-6 flex items-center gap-3">
+            <div class="w-2 h-2 bg-[#ff6b00] rounded-full shadow-[0_0_10px_#ff6b00]"></div>
+            <h2 class="text-[10px] font-extrabold tracking-[0.25em] text-gray-500 uppercase">Premium Bold Listings</h2>
         </div>
         
+        <!-- Live Infinite Stream Engine Container -->
         <div class="ad-track" id="premiumTrack">
-            <!-- Dynamic Items -->
+            <!-- Programmatically rendered dynamically inside JS template -->
         </div>
     </section>
 
-    <section class="features-grid">
+    <!-- CORE VALUE ECOSYSTEM METRICS GRID -->
+    <section class="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 w-full">
         <div class="glass-panel">
-            <div style="font-size: 2rem; margin-bottom: 20px;">🛡️</div>
-            <h3>Bold Certified</h3>
-            <p>Every smartphone and laptop is physically inspected. No BIOS locks, no hidden faults, no surprises.</p>
+            <div class="text-3xl mb-5">🛡️</div>
+            <h3 class="font-bold text-xl text-white mb-3 uppercase tracking-wide">Bold Certified</h3>
+            <p class="text-xs md:text-sm text-gray-500 leading-relaxed">Every consumer device or laptop goes through verification inspectors. Zero bios logs, zero hidden hardware faults.</p>
         </div>
-        <div class="glass-panel" style="border-top: 1px solid var(--bold-orange);">
-            <div style="font-size: 2rem; margin-bottom: 20px;">🤝</div>
-            <h3>Escrow Protection</h3>
-            <p>We hold your payment securely. Sellers only get paid once you confirm the item is exactly as described.</p>
+        <div class="glass-panel !border-t-[#ff6b00]">
+            <div class="text-3xl mb-5">🤝</div>
+            <h3 class="font-bold text-xl text-white mb-3 uppercase tracking-wide">Escrow Layer Protection</h3>
+            <p class="text-xs md:text-sm text-gray-500 leading-relaxed">Funds remain fully protected in our node layer. The seller receives payouts only when you inspect and confirm delivery setup.</p>
         </div>
         <div class="glass-panel">
-            <div style="font-size: 2rem; margin-bottom: 20px;">🚀</div>
-            <h3>Verified Merchants</h3>
-            <p>Only vetted entrepreneurs can sell on Bold.ng. We prioritize quality over quantity for a premium experience.</p>
+            <div class="text-3xl mb-5">🚀</div>
+            <h3 class="font-bold text-xl text-white mb-3 uppercase tracking-wide">Vetted Merchant Hub</h3>
+            <p class="text-xs md:text-sm text-gray-500 leading-relaxed">Only authentic, registered business accounts can publish listings here. Absolute emphasis on premium transaction performance standards.</p>
         </div>
     </section>
 
-    <footer style="padding: 80px 5%; border-top: 1px solid var(--glass-border); text-align: center; background: #070a13;">
-        <div class="bold-logo-box" style="margin: 0 auto 30px;">B</div>
-        <p style="color: #475569; font-size: 0.85rem; max-width: 400px; margin: 0 auto;">&copy; 2026 Bold.ng Marketplace. Built for Africa, Trusted by the World.</p>
+    <!-- UNIFORM PLATFORM FOOTER SYSTEM -->
+    <footer style="background: #070a13;" class="py-12 px-6 border-t border-white/5 text-center mt-auto relative z-10">
+        <div class="bold-logo-box mx-auto mb-6">B</div>
+        <p class="text-[11px] text-gray-600 font-semibold tracking-wider uppercase">&copy; 2026 Bold.ng Marketplace. Built for Africa, Trusted by the World.</p>
     </footer>
 
+    <!-- RUNTIME LOGIC SCRIPTS ENGINES -->
     <script>
-        // Data for Premium Ads
+        // High-Quality Placeholder Mock Data Array for Verified Premium Items
         const premiumItems = [
             { name: "iPhone 15 Pro", price: "₦1,200,000", img: "https://images.unsplash.com/photo-1696446701796-da61225697cc?w=200" },
             { name: "MacBook Air M2", price: "₦950,000", img: "https://images.unsplash.com/photo-1611186871348-b1ec696e523b?w=200" },
@@ -326,14 +198,14 @@
 
         const track = document.getElementById('premiumTrack');
         
-        // Duplicating for infinite loop
+        // Triple loop interpolation script architecture for seamless css transform ribbon looping
         const content = [...premiumItems, ...premiumItems, ...premiumItems].map(item => `
             <div class="premium-ad-card" onclick="window.location.href='marketplace.html'">
                 <span class="ad-badge">PREMIUM</span>
-                <img src="${item.img}" style="width: 70px; height: 70px; border-radius: 16px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);">
+                <img src="${item.img}" class="w-[70px] h-[70px] rounded-2xl object-cover border border-white/10 shrink-0" alt="${item.name}">
                 <div>
-                    <h4 style="margin: 0; font-size: 0.9rem; color: white;">${item.name}</h4>
-                    <p style="margin: 3px 0 0 0; color: var(--bold-orange); font-size: 0.95rem; font-weight: 800;">${item.price}</p>
+                    <h4 class="m-0 text-sm font-bold text-white tracking-wide">${item.name}</h4>
+                    <p class="mt-1 mb-0 text-sm font-extrabold text-[#ff6b00]">${item.price}</p>
                 </div>
             </div>
         `).join('');

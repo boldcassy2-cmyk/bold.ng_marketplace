@@ -3,342 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bold.ng - The Gold Standard of Trusted Marketplaces in Africa. Buy and Sell with absolute confidence.">
-    <title>Bold.ng | Africa's Most Trusted Marketplace</title>
-    <!-- Importing a professional tech font -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Secure Access Gateway | Bold.ng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Central Style Connection -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --bold-midnight: #0a0e1a;
-            --bold-blue-deep: #0f172a;
-            --bold-orange: #ff6b00;
-            --bold-white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--bold-midnight);
-            color: var(--bold-white);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- NAVIGATION --- */
-        .main-nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(10, 14, 26, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 15px 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo-area { display: flex; align-items: center; cursor: pointer; transition: transform 0.3s; }
-        .logo-area:hover { transform: scale(1.02); }
-
-        .bold-logo-box {
-            background: var(--bold-orange);
-            color: white;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-style: italic;
-            border-radius: 8px;
-            font-size: 1.2rem;
-        }
-
-        .nav-links { display: flex; align-items: center; gap: 30px; }
-        .nav-links a { 
-            color: #94a3b8; 
-            text-decoration: none; 
-            font-size: 0.9rem; 
-            font-weight: 600; 
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .nav-links a:hover { color: var(--bold-orange); }
-
-        /* --- BUTTONS --- */
-        .btn-bold {
-            background: var(--bold-orange);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.2);
-        }
-        .btn-bold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
-            filter: brightness(1.1);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-outline:hover { background: var(--glass); border-color: var(--bold-orange); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            padding: 120px 5% 80px;
-            text-align: center;
-            background: radial-gradient(circle at top right, rgba(255,107,0,0.05), transparent),
-                        radial-gradient(circle at bottom left, rgba(255,107,0,0.05), transparent);
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            letter-spacing: -2px;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: #94a3b8;
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        /* --- PREMIUM AD SLIDER --- */
-        .ad-container {
-            width: 100%;
-            overflow: hidden;
-            padding: 40px 0;
-            background: rgba(255, 255, 255, 0.02);
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .ad-track {
-            display: flex;
-            gap: 25px;
-            width: max-content;
-            animation: slideScroll 40s linear infinite;
-        }
-
-        .premium-ad-card {
-            width: 320px;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            position: relative;
-            cursor: pointer;
-            transition: 0.4s;
-        }
-
-        .premium-ad-card:hover {
-            border-color: var(--bold-orange);
-            background: rgba(255, 107, 0, 0.05);
-            transform: scale(1.02);
-        }
-
-        .ad-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: var(--bold-orange);
-            color: white;
-            font-size: 0.65rem;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 800;
-        }
-
-        @keyframes slideScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* --- FEATURES SECTION --- */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 80px 5%;
-        }
-
-        .glass-panel {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 40px;
-            border-radius: 32px;
-            transition: 0.3s;
-        }
-        .glass-panel:hover {
-            border-color: rgba(255, 107, 0, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .glass-panel h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--bold-white);
-        }
-
-        .glass-panel p { color: #64748b; font-size: 0.95rem; }
-
-        /* --- LOGIN MODAL --- */
-        #loginModal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-content {
-            background: var(--bold-midnight);
-            padding: 50px;
-            border-radius: 40px;
-            border: 1px solid var(--bold-orange);
-            text-align: center;
-            max-width: 450px;
-            width: 90%;
-            box-shadow: 0 0 50px rgba(255, 107, 0, 0.1);
-        }
-
-        .modal-content h3 { font-size: 2rem; margin-bottom: 30px; }
-
-        .modal-options { display: flex; flex-direction: column; gap: 15px; }
-
-        /* --- RESPONSIVENESS --- */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.8rem; }
-        }
+        .toast { transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .toast.show { transform: translateY(0); opacity: 1; }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
-    <!-- SMART LOGIN MODAL -->
-    <div id="loginModal">
-        <div class="modal-content">
-            <h3>Login to Portal</h3>
-            <div class="modal-options">
-                <button class="btn-bold" onclick="window.location.href='seller_dashboard.html'">Independent Seller</button>
-                <button class="btn-bold" style="background: #2563eb; box-shadow: 0 4px 15px rgba(37,99,235,0.2);" onclick="window.location.href='merchant_portal.html'">Managed Merchant</button>
-                <button class="btn-bold" style="background: #16a34a; box-shadow: 0 4px 15px rgba(22,163,74,0.2);" onclick="window.location.href='affiliate_hub.html'">Affiliate Partner</button>
-            </div>
-            <p onclick="document.getElementById('loginModal').style.display='none'" style="color: #64748b; margin-top: 30px; cursor: pointer; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px;">CLOSE WINDOW</p>
-        </div>
-    </div>
+    <div class="accent-glow-spot" style="bottom: -10%; left: -10%;"></div>
 
+    <!-- UNIFORM NAVIGATION HEADER -->
     <nav class="main-nav">
-        <div class="logo-area" onclick="window.location.href='index.html'">
-            <div class="bold-logo-box">B</div>
-            <span style="font-weight: 800; font-size: 1.4rem; margin-left: 12px; letter-spacing: -1px;">old.ng</span>
+        <div class="nav-action-cluster">
+            <button class="nav-arrow-btn" onclick="history.back()">←</button>
+            <button class="nav-arrow-btn" onclick="history.forward()">→</button>
+            <a href="index.html" class="logo-area">
+                <div class="bold-logo-box">B</div>
+                <span class="logo-text">Bold<span>.ng</span></span>
+            </a>
         </div>
-        
-        <div class="nav-links">
+        <div class="nav-links-wrapper">
             <a href="marketplace.html">Marketplace</a>
-            <a href="signup.html">Become a Seller</a>
-            <button onclick="document.getElementById('loginModal').style.display='flex'" class="btn-bold">Login</button>
+            <a href="signup.html">Join</a>
+            <a href="index.html" class="house-menu-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </a>
         </div>
     </nav>
 
-    <section class="hero">
-        <h1>The Future of <span style="color: var(--bold-orange);">Trusted</span><br>Trading in Africa</h1>
-        <p>Eliminating the fear of scams. Bold.ng provides "Bold Certified" inspections and secure escrow payments for every single trade.</p>
-        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn-bold" onclick="window.location.href='marketplace.html'" style="padding: 18px 45px;">Start Shopping</button>
-            <button class="btn-outline" onclick="window.location.href='signup.html'" style="padding: 18px 45px;">Join as Merchant</button>
-        </div>
-    </section>
-
-    <!-- PREMIUM AD SPACE -->
-    <section class="ad-container">
-        <div style="padding: 0 5%; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;">
-            <div style="width: 8px; height: 8px; background: var(--bold-orange); border-radius: 50%; box-shadow: 0 0 10px var(--bold-orange);"></div>
-            <h2 style="font-size: 0.8rem; font-weight: 800; letter-spacing: 3px; color: #64748b; text-transform: uppercase;">Premium Bold Listings</h2>
-        </div>
-        
-        <div class="ad-track" id="premiumTrack">
-            <!-- Dynamic Items -->
-        </div>
-    </section>
-
-    <section class="features-grid">
-        <div class="glass-panel">
-            <div style="font-size: 2rem; margin-bottom: 20px;">🛡️</div>
-            <h3>Bold Certified</h3>
-            <p>Every smartphone and laptop is physically inspected. No BIOS locks, no hidden faults, no surprises.</p>
-        </div>
-        <div class="glass-panel" style="border-top: 1px solid var(--bold-orange);">
-            <div style="font-size: 2rem; margin-bottom: 20px;">🤝</div>
-            <h3>Escrow Protection</h3>
-            <p>We hold your payment securely. Sellers only get paid once you confirm the item is exactly as described.</p>
-        </div>
-        <div class="glass-panel">
-            <div style="font-size: 2rem; margin-bottom: 20px;">🚀</div>
-            <h3>Verified Merchants</h3>
-            <p>Only vetted entrepreneurs can sell on Bold.ng. We prioritize quality over quantity for a premium experience.</p>
-        </div>
-    </section>
-
-    <footer style="padding: 80px 5%; border-top: 1px solid var(--glass-border); text-align: center; background: #070a13;">
-        <div class="bold-logo-box" style="margin: 0 auto 30px;">B</div>
-        <p style="color: #475569; font-size: 0.85rem; max-width: 400px; margin: 0 auto;">&copy; 2026 Bold.ng Marketplace. Built for Africa, Trusted by the World.</p>
-    </footer>
-
-    <script>
-        // Data for Premium Ads
-        const premiumItems = [
-            { name: "iPhone 15 Pro", price: "₦1,200,000", img: "https://images.unsplash.com/photo-1696446701796-da61225697cc?w=200" },
-            { name: "MacBook Air M2", price: "₦950,000", img: "https://images.unsplash.com/photo-1611186871348-b1ec696e523b?w=200" },
-            { name: "Samsung S24 Ultra", price: "₦1,100,000", img: "https://images.unsplash.com/photo-1707223516587-424a73211bd4?w=200" },
-            { name: "Dell XPS 13", price: "₦850,000", img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=200" }
-        ];
-
-        const track = document.getElementById('premiumTrack');
-        
-        // Duplicating for infinite loop
-        const content = [...premiumItems, ...premiumItems, ...premiumItems].map(item => `
-            <div class="premium-ad-card" onclick="window.location.href='marketplace.html'">
-                <span class="ad-badge">PREMIUM</span>
-                <img src="${item.img}" style="width: 70px; height: 70px; border-radius: 16px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);">
-                <div>
-                    <h4 style="margin: 0; font-size: 0.9rem; color: white;">${item.name}</h4>
-                    <p style="margin: 3px 0 0 0; color: var(--bold-orange); font-size: 0.95rem; font-weight: 800;">${item.price}</p>
-                </div>
+    <!-- SECURE INTERFACE CARRIER PANEL -->
+    <main class="flex-1 flex items-center justify-center p-4 z-10">
+        <div class="w-full max-w-md glass-panel rounded-[24px] md:rounded-[32px] p-6 md:p-10 shadow-2xl">
+            
+            <div class="text-center mb-6">
+                <h2 class="text-xl md:text-2xl font-bold uppercase tracking-tight text-white">Welcome Back</h2>
+                <p class="text-xs text-gray-500 mt-1">Provide your verified account key values to proceed.</p>
             </div>
-        `).join('');
 
-        track.innerHTML = content;
-    </script>
+            <form id="loginForm" onsubmit="executeAuthenticationRoute(event)" class="space-y-5">
+                
+                <div>
+                    <label class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-2">Email Address</label>
+                    <input type="email" id="loginEmail" required class="field-input-base text-sm" placeholder="name@domain.com">
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">Password</label>
+                        <a href="forgot-password.html" class="text-[10px] font-bold uppercase tracking-wider text-[#ff6b00] hover:underline">Forgot?</a>
+                    </div>
+                    <!-- SECURE VISIBILITY ACCENT CONTAINER -->
+                    <div class="relative">
+                        <input type="password" id="loginPassword" required class="field-input-base text-sm pr-12" placeholder="••••••••">
+                        <button type="button" onclick="toggleLoginPassword()" id="toggleBtn" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white text-xs font-semibold focus:outline-none">SHOW</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full btn-bold-primary py-4 rounded-xl text-xs tracking-[0.2em]">
+                    Verify & Access Workspace
+                </button>
+
+            </form>
+
+            <div class="text-center mt-6 pt-5 border-t border-white/5">
+                <p class="text-xs text-gray-500">New operator? <a href="signup.html" class="text-[#ff6b00] font-bold uppercase tracking-wide ml-1 hover:underline">Create Account →</a></p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="background: #070a13;" class="py-4 px-5 border-t border-white/5 text-center z-10">
+        <p class="text-[10px] text-gray-600 font-medium tracking-wide">&copy; 2026 Bold.ng Marketplace.</p>
+    </footer>
 </body>
+<script>
+    function toggleLoginPassword() {
+        const passField = document.getElementById('loginPassword');
+        const toggleBtn = document.getElementById('toggleBtn');
+        if (passField.type === "password") {
+            passField.type = "text"; toggleBtn.innerText = "HIDE"; toggleBtn.style.color = "#ff6b00";
+        } else {
+            passField.type = "password"; toggleBtn.innerText = "SHOW"; toggleBtn.style.color = "#64748b";
+        }
+    }
+    function executeAuthenticationRoute(event) {
+        event.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        let target = 'seller_dashboard.html';
+        if (email.includes("merchant")) target = 'merchant_portal.html';
+        if (email.includes("affiliate")) target = 'affiliate_hub.html';
+        window.location.href = target;
+    }
+</script>
 </html>

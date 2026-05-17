@@ -2,75 +2,130 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bold.ng Admin - Core Staff Directory Registry">
     <title>Staff Directory | Bold.ng Admin</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Importing a professional tech font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Framework Engine for fluid structural utilities -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Linking our Central CSS Design Blueprint Sheet -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-[#0a0a0b] text-white p-10">
-    <header class="flex justify-between items-center mb-10">
-        <h1 class="text-3xl font-black">STAFF <span class="text-[#f57c00]">DIRECTORY</span></h1>
-        <button onclick="window.location.href='admin.html'" class="text-xs border border-white/10 px-4 py-2 rounded-xl">Back to Switchboard</button>
-    </header>
+<body class="bg-[#0a0e1a] text-white min-h-screen flex flex-col overflow-x-hidden">
 
-    <section class="bg-white/5 p-8 rounded-[30px] border border-white/10 mb-10">
-        <h3 class="text-lg font-bold mb-6">Onboard New Staff Member</h3>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <input type="text" id="staffName" placeholder="Full Name" class="bg-black border border-white/10 p-3 rounded-xl">
-            <input type="text" id="staffID" placeholder="Staff ID (e.g. BNG-001)" class="bg-black border border-white/10 p-3 rounded-xl">
-            <select id="staffDept" class="bg-black border border-white/10 p-3 rounded-xl text-gray-400">
-                <option value="">Select Department</option>
-                <option value="Inspection">Inspection</option>
-                <option value="Logistics">Logistics</option>
-                <option value="Finance">Finance</option>
-            </select>
-            <button onclick="addStaff()" class="bg-[#f57c00] text-black font-black rounded-xl">Register Staff</button>
+    <!-- GLOBAL BRAND BACKGROUND GLOW ACCENTS -->
+    <div class="accent-glow-spot" style="top: -10%; right: -5%;"></div>
+
+    <!-- MAIN UNIFORM APP HEADER BAR -->
+    <nav class="main-nav">
+        <div class="nav-action-cluster">
+            <a href="index.html" class="logo-area">
+                <div class="bold-logo-box">B</div>
+                <span class="logo-text">Bold<span>.ng</span></span>
+            </a>
         </div>
-    </section>
+        
+        <div class="flex items-center gap-4">
+            <button onclick="window.location.href='admin.html'" class="btn-bold-outline !py-2 !px-4 text-[10px] tracking-wider">
+                Switchboard
+            </button>
+        </div>
+    </nav>
 
-    <section class="bg-white/5 rounded-[30px] overflow-hidden border border-white/5">
-        <table class="w-full text-left">
-            <thead class="bg-white/5 text-[10px] uppercase text-gray-500 tracking-widest">
-                <tr>
-                    <th class="p-6">Name</th>
-                    <th class="p-6">ID Number</th>
-                    <th class="p-6">Department</th>
-                    <th class="p-6">Status</th>
-                </tr>
-            </thead>
-            <tbody id="staffTable">
-                <tr class="border-t border-white/5">
-                    <td class="p-6 text-sm">John Doe</td>
-                    <td class="p-6 font-mono text-xs">BNG-LOG-042</td>
-                    <td class="p-6"><span class="text-purple-400 text-xs font-bold">Logistics</span></td>
-                    <td class="p-6"><span class="bg-green-500/20 text-green-500 px-2 py-1 rounded text-[10px] font-bold">ACTIVE</span></td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+    <!-- CORE DIRECTORY WORKSPACE CONTENT -->
+    <main class="flex-1 max-w-6xl w-full mx-auto p-4 md:p-10 z-10">
+        
+        <!-- MODULE HEADER BLOCK -->
+        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10 pb-6 border-b border-white/5">
+            <div>
+                <h1 class="text-3xl font-extrabold uppercase tracking-tight text-white">
+                    Staff <span class="text-[#ff6b00]">Directory</span>
+                </h1>
+                <p class="text-gray-500 text-xs md:text-sm mt-1">Manage network operators, inspectors, and logistics controllers</p>
+            </div>
+            <span class="text-[9px] font-black tracking-widest text-gray-500 uppercase px-3 py-1.5 rounded-md bg-white/5 border border-white/10">
+                Personnel Admin
+            </span>
+        </header>
 
+        <!-- REGISTRATION MATRIX INPUT MODULE -->
+        <section class="glass-panel !p-6 md:p-8 mb-10">
+            <h3 class="text-base font-bold text-white mb-6 uppercase tracking-wider">Onboard New Staff Member</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <input type="text" id="staffName" placeholder="Full Name" class="bg-black/40 border border-white/10 p-3.5 rounded-xl text-sm text-white focus:outline-none focus:border-[#ff6b00]/60 placeholder:text-gray-600 transition-colors">
+                <input type="text" id="staffID" placeholder="Staff ID (e.g. BNG-001)" class="bg-black/40 border border-white/10 p-3.5 rounded-xl text-sm text-white focus:outline-none focus:border-[#ff6b00]/60 placeholder:text-gray-600 transition-colors font-mono">
+                <select id="staffDept" class="bg-[#0a0e1a] border border-white/10 p-3.5 rounded-xl text-sm text-gray-400 focus:outline-none focus:border-[#ff6b00]/60 transition-colors">
+                    <option value="">Select Department</option>
+                    <option value="Inspection">Inspection Desk</option>
+                    <option value="Logistics">Logistics Hubs</option>
+                    <option value="Finance">Finance &amp; Escrow</option>
+                </select>
+                <button onclick="addStaff()" class="btn-bold-primary w-full !py-3.5 text-xs font-bold tracking-wider">
+                    Register Staff
+                </button>
+            </div>
+        </section>
+
+        <!-- PERSONNEL DIRECTORY STORAGE RECORD LAYERS -->
+        <section class="glass-panel !p-0 overflow-hidden">
+            <!-- Responsive horizontal touch-scroll layout utility window -->
+            <div class="w-full overflow-x-auto">
+                <table class="w-full text-left min-w-[600px] border-collapse">
+                    <thead class="bg-white/5 text-[10px] uppercase text-gray-500 tracking-widest border-b border-white/5">
+                        <tr>
+                            <th class="p-5 font-bold">Full Name</th>
+                            <th class="p-5 font-bold">ID Number</th>
+                            <th class="p-5 font-bold">Assigned Department</th>
+                            <th class="p-5 font-bold">Operational Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="staffTable">
+                        <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                            <td class="p-5 text-sm font-semibold text-white">John Doe</td>
+                            <td class="p-5 font-mono text-xs text-gray-400">BNG-LOG-042</td>
+                            <td class="p-5"><span class="text-purple-400 text-xs font-bold tracking-wide uppercase">Logistics</span></td>
+                            <td class="p-5">
+                                <span class="bg-green-500/10 text-green-400 border border-green-500/20 px-2.5 py-1 rounded-lg text-[10px] font-bold tracking-wider">
+                                    ACTIVE
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- CORE INTERACTION PROCESSOR SCRIPTS -->
     <script>
         function addStaff() {
-            const name = document.getElementById('staffName').value;
-            const id = document.getElementById('staffID').value;
+            const name = document.getElementById('staffName').value.trim();
+            const id = document.getElementById('staffID').value.trim();
             const dept = document.getElementById('staffDept').value;
 
-            if(!name || !id || !dept) return alert("Please fill all staff details");
+            if(!name || !id || !dept) return alert("Validation Failed: Please fill out all required fields to register personnel accurately.");
 
             const table = document.getElementById('staffTable');
             const newRow = `
-                <tr class="border-t border-white/5 bg-[#f57c00]/5">
-                    <td class="p-6 text-sm font-bold">${name}</td>
-                    <td class="p-6 font-mono text-xs">${id}</td>
-                    <td class="p-6 text-xs font-bold text-gray-400">${dept}</td>
-                    <td class="p-6"><span class="bg-green-500/20 text-green-500 px-2 py-1 rounded text-[10px] font-bold">ACTIVE</span></td>
+                <tr class="border-b border-white/5 bg-[#ff6b00]/5 hover:bg-[#ff6b00]/10 transition-colors">
+                    <td class="p-5 text-sm font-bold text-white">${name}</td>
+                    <td class="p-5 font-mono text-xs text-gray-400">${id}</td>
+                    <td class="p-5"><span class="text-orange-400 text-xs font-bold tracking-wide uppercase">${dept}</span></td>
+                    <td class="p-5">
+                        <span class="bg-green-500/10 text-green-400 border border-green-500/20 px-2.5 py-1 rounded-lg text-[10px] font-bold tracking-wider">
+                            ACTIVE
+                        </span>
+                    </td>
                 </tr>
             `;
             table.insertAdjacentHTML('afterbegin', newRow);
             
-            // Clear inputs
+            // Clean inputs for next entry execution
             document.getElementById('staffName').value = '';
             document.getElementById('staffID').value = '';
+            document.getElementById('staffDept').value = '';
         }
     </script>
 </body>
-</html> 
+</html>

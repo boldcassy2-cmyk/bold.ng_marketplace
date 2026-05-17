@@ -2,137 +2,221 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bold.ng Admin Dashboard - Main Switchboard Switchboard">
     <title>Admin Command | Bold.ng</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Importing a professional tech font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Framework Engine for fluid structural utilities -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Linking our Central CSS Design Blueprint Sheet -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-        .dept-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid #333;
-            transition: 0.3s;
+        /* Setup strict layout boundary containers for desktop admin workflow views */
+        @media (min-width: 1024px) {
+            .admin-workspace-height { height: calc(100vh - 73px); }
         }
-        .dept-card:hover { border-left-color: var(--bold-orange); background: rgba(255,255,255,0.05); }
+        /* Color accent dynamic borders mapped from root styles.css */
+        .dept-card {
+            background: var(--glass);
+            border-left: 4px solid #334155;
+            border-top: 1px solid var(--glass-border);
+            border-right: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s var(--premium-glow);
+        }
+        .dept-card:hover { 
+            border-left-color: var(--bold-orange); 
+            background: rgba(255, 255, 255, 0.05); 
+            transform: translateY(-2px);
+        }
         .dept-finance { border-left-color: #22c55e; }
         .dept-inspection { border-left-color: #3b82f6; }
         .dept-logistics { border-left-color: #a855f7; }
+        
+        .admin-scroll::-webkit-scrollbar { width: 4px; }
+        .admin-scroll::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
     </style>
 </head>
-<body class="bg-[#0a0a0b] text-white flex min-h-screen">
+<body class="bg-[#0a0e1a] text-white min-h-screen flex flex-col overflow-x-hidden lg:overflow-hidden">
 
-    <aside class="w-72 border-r border-white/10 p-8 flex flex-col bg-black">
-        <div class="mb-12">
-            <h1 class="text-2xl font-black tracking-tighter"><span class="text-[#f57c00]">BOLD</span> ADMIN</h1>
-            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Founding Authority</p>
+    <!-- GLOBAL BRAND BACKGROUND GLOW ACCENTS -->
+    <div class="accent-glow-spot" style="top: -10%; left: -5%;"></div>
+
+    <!-- MAIN UNIFORM APP HEADER BAR WITH INTEGRATED NAVIGATION CONTROLS -->
+    <nav class="main-nav">
+        <div class="nav-action-cluster">
+            <a href="index.html" class="logo-area">
+                <div class="bold-logo-box">B</div>
+                <span class="logo-text">Bold<span>.ng</span></span>
+            </a>
         </div>
-
         
-            <nav class="space-y-6">
-    <div>
-        <p class="text-[10px] text-gray-600 font-bold mb-4">MANAGEMENT</p>
-        <div class="space-y-2">
-            <a href="admin.html" class="block p-3 rounded-xl bg-[#f57c00] text-black font-bold text-sm">Main Switchboard</a>
-            <a href="admin_merchants.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Merchant Verification</a>
-            <a href="admin_finance.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm">Escrow Master Vault</a>
+        <div class="flex items-center gap-6">
+            <a href="index.html" class="text-xs font-bold text-gray-400 hover:text-white transition-colors tracking-wider">← MAIN PLATFORM</a>
+            <div class="h-6 w-[1px] bg-white/10 hidden sm:block"></div>
+            <span class="text-[10px] font-black tracking-widest text-[#ff6b00] uppercase hidden sm:block">SYSTEM COMMAND CENTER</span>
+            <!-- Mobile Admin Drawer Toggle Button -->
+            <button class="lg:hidden text-gray-400 hover:text-white" onclick="document.getElementById('adminMobileSidebar').classList.toggle('hidden')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" y2="12"/><line x1="3" y1="6" y2="6"/><line x1="3" y1="18" y2="18"/></svg>
+            </button>
         </div>
-    </div>
+    </nav>
 
-    <div>
-        <p class="text-[10px] text-gray-600 font-bold mb-4">DEPARTMENTS</p>
-        <div class="space-y-2">
-            <a href="inspection_tool.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm text-blue-400">Technical Inspection</a>
-            <a href="admin_logistics.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm text-purple-400">Logistics & Hubs</a>
-            <a href="admin_finance.html" class="block p-3 rounded-xl hover:bg-white/5 text-sm text-green-400">Finance & Payouts</a>
-        </div>
-    </div>
-</nav>
-
-            
-
-        <div class="mt-auto">
-            <button onclick="location.href='index.html'" class="w-full border border-white/10 py-3 rounded-xl text-xs hover:bg-red-500/10 hover:text-red-500 transition">Logout System</button>
-        </div>
-    </aside>
-
-    <main class="flex-1 p-10 overflow-y-auto">
-        <header class="flex justify-between items-end mb-12">
-            <div>
-                <h2 class="text-4xl font-black">Staff Control Center</h2>
-                <p class="text-gray-500">Global Operations Overview for Bold.ng</p>
+    <!-- CORE ADMIN WORKSPACE LAYOUT WRAPPER -->
+    <div class="flex flex-col lg:flex-row flex-1 admin-workspace-height relative w-full">
+        
+        <!-- SIDE NAVIGATION BAR (DESKTOP PERSISTENT) -->
+        <aside class="hidden lg:flex w-72 border-r border-white/5 flex-col bg-[#070a13] overflow-y-auto admin-scroll shrink-0">
+            <div class="p-8 pb-4">
+                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">System Tier</p>
+                <h2 class="text-xs font-black tracking-wider text-gray-300 mt-1 uppercase">FOUNDING AUTHORITY</h2>
             </div>
-            <button onclick="window.location.href='admin_staff.html'" class="bg-[#f57c00] text-black px-6 py-3 rounded-xl font-bold text-sm transition hover:scale-105 active:scale-95">
-    + Add New Staff Member
-</button>
-        </header>
-
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div class="dept-card dept-finance p-6 rounded-2xl">
-                <p class="text-xs text-gray-500 font-bold">FINANCE DEPT</p>
-                <h3 class="text-2xl font-black mt-2">₦842.5M</h3>
-                <p class="text-[10px] text-gray-400 mt-1">Pending Payouts: 14 Sellers</p>
-            </div>
-            <div class="dept-card dept-inspection p-6 rounded-2xl">
-                <p class="text-xs text-gray-500 font-bold">INSPECTION DEPT</p>
-                <h3 class="text-2xl font-black mt-2">28 Assets</h3>
-                <p class="text-[10px] text-gray-400 mt-1">8 Machines, 20 Electronics</p>
-            </div>
-            <div class="dept-card dept-logistics p-6 rounded-2xl">
-                <p class="text-xs text-gray-500 font-bold">LOGISTICS DEPT</p>
-                <h3 class="text-2xl font-black mt-2">12 In Transit</h3>
-                <p class="text-[10px] text-gray-400 mt-1">Lagos Hub → Port Harcourt</p>
-            </div>
-        </section>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <section class="bg-white/5 rounded-3xl p-8 border border-white/5">
-                <h4 class="text-lg font-bold mb-6 flex items-center gap-2">
-                    <span class="w-3 h-3 bg-blue-500 rounded-full"></span> Technical Inspection Queue
-                </h4>
-                <div id="inspectionList" class="space-y-4">
-                    </div>
-            </section>
-
-            <section class="bg-white/5 rounded-3xl p-8 border border-white/5">
-                <h4 class="text-lg font-bold mb-6 flex items-center gap-2">
-                    <span class="w-3 h-3 bg-[#f57c00] rounded-full"></span> Merchant Verification (KYC)
-                </h4>
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5">
-                        <div>
-                            <p class="font-bold text-sm">Alhaji Machinery Ltd</p>
-                            <p class="text-[10px] text-gray-500">CAC Docs Attached</p>
-                        </div>
-                        <button class="bg-[#f57c00] text-black text-[10px] px-3 py-1 rounded font-bold">APPROVE</button>
+            <nav class="p-8 pt-4 space-y-8">
+                <div>
+                    <p class="text-[10px] text-gray-600 font-extrabold mb-4 tracking-widest uppercase">Management</p>
+                    <div class="space-y-1">
+                        <a href="admin.html" class="block p-3 rounded-xl bg-[#ff6b00]/10 text-[#ff6b00] font-bold text-sm tracking-wide">Main Switchboard</a>
+                        <a href="admin_merchants.html" class="block p-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 text-sm font-semibold transition-colors">Merchant Verification</a>
+                        <a href="admin_finance.html" class="block p-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 text-sm font-semibold transition-colors">Escrow Master Vault</a>
                     </div>
                 </div>
-            </section>
-        </div>
-    </main>
+                <div>
+                    <p class="text-[10px] text-gray-600 font-extrabold mb-4 tracking-widest uppercase">Departments</p>
+                    <div class="space-y-1">
+                        <a href="inspection_tool.html" class="block p-3 rounded-xl text-blue-400 hover:bg-white/5 text-sm font-semibold transition-colors">Technical Inspection</a>
+                        <a href="admin_logistics.html" class="block p-3 rounded-xl text-purple-400 hover:bg-white/5 text-sm font-semibold transition-colors">Logistics &amp; Hubs</a>
+                        <a href="admin_finance.html" class="block p-3 rounded-xl text-green-400 hover:bg-white/5 text-sm font-semibold transition-colors">Finance &amp; Payouts</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="p-8 mt-auto border-t border-white/5">
+                <button onclick="location.href='index.html'" class="w-full border border-white/10 py-3 rounded-xl text-xs text-gray-400 font-bold hover:bg-red-500/10 hover:text-red-500 hover:border-red-500/20 transition-all uppercase tracking-wider">
+                    Logout System
+                </button>
+            </div>
+        </aside>
 
+        <!-- SIDE NAVIGATION BAR (MOBILE POPDOWN DRAWER) -->
+        <div id="adminMobileSidebar" class="hidden lg:hidden w-full bg-[#070a13] border-b border-white/5 px-6 py-4 space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <span class="text-[9px] text-gray-600 font-bold uppercase tracking-wider">Management</span>
+                    <a href="admin.html" class="block p-2 text-xs text-[#ff6b00] font-bold bg-[#ff6b00]/5 rounded-lg">Switchboard</a>
+                    <a href="admin_merchants.html" class="block p-2 text-xs text-gray-400 hover:text-white">Merchant Verification</a>
+                    <a href="admin_finance.html" class="block p-2 text-xs text-gray-400 hover:text-white">Escrow Vault</a>
+                </div>
+                <div class="space-y-1">
+                    <span class="text-[9px] text-gray-600 font-bold uppercase tracking-wider">Departments</span>
+                    <a href="inspection_tool.html" class="block p-2 text-xs text-blue-400">Technical Desk</a>
+                    <a href="admin_logistics.html" class="block p-2 text-xs text-purple-400">Logistics Hubs</a>
+                    <a href="admin_finance.html" class="block p-2 text-xs text-green-400">Finance Team</a>
+                </div>
+            </div>
+            <button onclick="location.href='index.html'" class="w-full text-center py-2.5 text-[10px] font-bold text-red-400 bg-red-500/5 rounded-lg block uppercase tracking-wider">Logout Terminal</button>
+        </div>
+
+        <!-- MAIN OPERATIONAL WORKSPACE INTERFACE -->
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto admin-scroll z-10 w-full">
+            <div class="max-w-5xl mx-auto">
+                
+                <!-- HEADER INFORMATION MODULE -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12 pb-6 border-b border-white/5">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tight text-white">Staff Control Center</h2>
+                        <p class="text-gray-500 text-xs md:text-sm mt-1">Global infrastructure network metrics &amp; operational queues for Bold.ng</p>
+                    </div>
+                    <button onclick="window.location.href='admin_staff.html'" class="btn-bold-primary w-full sm:w-auto !py-3.5 !px-6 text-xs tracking-wider shrink-0">
+                        + Onboard Personnel
+                    </button>
+                </div>
+
+                <!-- DEPARTMENT HIGH-VALUE COUNTER METRIC TILES GRID -->
+                <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <div class="dept-card dept-finance p-6 rounded-2xl">
+                        <p class="text-[10px] text-gray-500 font-bold tracking-wider uppercase">Finance Balance Layers</p>
+                        <h3 class="text-2xl md:text-3xl font-black text-white mt-1.5">₦842.5M</h3>
+                        <p class="text-[10px] text-gray-400 mt-1">Protected Escrow • 14 Pending Closures</p>
+                    </div>
+                    <div class="dept-card dept-inspection p-6 rounded-2xl">
+                        <p class="text-[10px] text-gray-500 font-bold tracking-wider uppercase">Inspection Pipeline</p>
+                        <h3 class="text-2xl md:text-3xl font-black text-white mt-1.5">28 Verified Assets</h3>
+                        <p class="text-[10px] text-gray-400 mt-1">8 Heavy Machinery • 20 High-End Devices</p>
+                    </div>
+                    <div class="dept-card dept-logistics p-6 rounded-2xl sm:col-span-2 lg:col-span-1">
+                        <p class="text-[10px] text-gray-500 font-bold tracking-wider uppercase">Active Transit Hubs</p>
+                        <h3 class="text-2xl md:text-3xl font-black text-white mt-1.5">12 In Transit</h3>
+                        <p class="text-[10px] text-gray-400 mt-1">Lagos Main Depot → Port Harcourt Hub</p>
+                    </div>
+                </section>
+
+                <!-- DUAL SPLIT OPERATIONAL FLOW QUEUES -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- LEFT COLUMN: DYNAMIC TECHNICAL DESK QUEUE -->
+                    <section class="glass-panel !p-6 md:p-8">
+                        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-6 flex items-center gap-2.5">
+                            <span class="w-2.5 h-2.5 bg-blue-500 rounded-full shadow-[0_0_10px_#3b82f6]"></span> 
+                            Technical Inspection Queue
+                        </h4>
+                        <div id="inspectionList" class="space-y-4">
+                            <!-- Populated dynamically via localStorage runtime loader below -->
+                        </div>
+                    </section>
+
+                    <!-- RIGHT COLUMN: KYC ENTERPRISE VERIFICATION QUEUE -->
+                    <section class="glass-panel !p-6 md:p-8">
+                        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-6 flex items-center gap-2.5">
+                            <span class="w-2.5 h-2.5 bg-[#ff6b00] rounded-full shadow-[0_0_10px_#ff6b00]"></span> 
+                            Merchant Verification (KYC)
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 bg-black/30 rounded-xl border border-white/5 hover:border-[#ff6b00]/20 transition-all">
+                                <div>
+                                    <p class="font-bold text-sm text-white tracking-wide">Alhaji Machinery Ltd</p>
+                                    <p class="text-[10px] text-gray-500 font-mono mt-0.5">CAC Registry Vault Attached</p>
+                                </div>
+                                <button onclick="window.location.href='admin_merchants.html'" class="bg-[#ff6b00] text-white text-[9px] px-3 py-1.5 rounded-lg font-extrabold uppercase tracking-wider shadow-[0_4px_10px_rgba(255,107,0,0.15)] hover:brightness-110 transition-all">
+                                    Approve
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                    
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- RUNTIME LOCALSTORAGE QUEUE DATA MANAGER -->
     <script>
         function loadAdmin() {
             const products = JSON.parse(localStorage.getItem('boldProducts')) || [];
             const list = document.getElementById('inspectionList');
 
-            // Pull items that are in 'Machinery' or 'Laptops' for inspection
+            // Pull items that are in 'Machinery' or 'Laptops' for verification steps
             const needsInspection = products.slice(0, 3); 
 
             if (needsInspection.length === 0) {
-                list.innerHTML = `<p class="text-center text-gray-500 py-10 italic">No assets awaiting inspection.</p>`;
+                list.innerHTML = `
+                    <div class="text-center py-12 border border-dashed border-white/5 rounded-2xl bg-black/10">
+                        <p class="text-xs text-gray-500 italic">No customer assets currently awaiting tech inspection logs.</p>
+                    </div>`;
                 return;
             }
 
             list.innerHTML = needsInspection.map(p => `
-                <div class="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5">
-                    <div class="flex items-center gap-3">
-                        <img src="${p.image}" class="w-10 h-10 rounded object-cover">
-                        <div>
-                            <p class="font-bold text-sm">${p.name}</p>
-                            <p class="text-[9px] text-blue-400 font-bold uppercase">${p.category}</p>
+                <div class="flex justify-between items-center p-4 bg-black/30 rounded-xl border border-white/5 hover:border-blue-500/20 transition-all">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover border border-white/10 shrink-0" alt="${p.name}">
+                        <div class="min-w-0">
+                            <p class="font-bold text-sm text-white tracking-wide truncate">${p.name}</p>
+                            <p class="text-[9px] text-blue-400 font-extrabold uppercase tracking-wider mt-0.5">${p.category}</p>
                         </div>
                     </div>
-                    <div class="flex gap-2">
-                        <button class="bg-green-500/20 text-green-500 text-[10px] px-3 py-1 rounded font-bold border border-green-500/20">PASS</button>
-                        <button class="bg-red-500/20 text-red-500 text-[10px] px-3 py-1 rounded font-bold border border-red-500/20">FAIL</button>
+                    <div class="flex gap-2 shrink-0">
+                        <button onclick="alert('Asset verified successfully.')" class="bg-green-500/10 hover:bg-green-500/20 text-green-400 text-[9px] px-3 py-1.5 rounded-lg font-bold border border-green-500/20 uppercase tracking-wider transition-colors">Pass</button>
+                        <button onclick="alert('Asset flagged for failing verification criteria.')" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 text-[9px] px-3 py-1.5 rounded-lg font-bold border border-red-500/20 uppercase tracking-wider transition-colors">Fail</button>
                     </div>
                 </div>
             `).join('');

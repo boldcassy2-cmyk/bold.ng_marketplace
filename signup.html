@@ -2,113 +2,188 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Join Bold.ng | Select Your Path</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Account | Bold.ng</title>
+    <!-- Tailwind for structural grid layout rules -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Central Style Connection -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-        .form-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .input-field { background: rgba(0,0,0,0.3) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; }
-        .input-field:focus { border-color: #f57c00 !important; }
-        .tab-btn { border-bottom: 2px solid transparent; transition: 0.3s; color: #666; }
-        .tab-btn.active { border-color: #f57c00; color: #f57c00; font-weight: 900; }
-        .hidden-form { display: none; animation: fadeIn 0.4s ease forwards; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* Only keeping the special radio card active states here */
+        .phase-radio:checked + .glass-panel {
+            border-color: var(--bold-orange);
+            background: rgba(255, 107, 0, 0.06);
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.15);
+        }
+        .toast { transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .toast.show { transform: translateY(0); opacity: 1; }
     </style>
 </head>
-<body class="bg-[#0a0a0b] text-white p-6">
+<body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
-    <main class="max-w-3xl mx-auto py-10">
-        <div class="text-center mb-10">
-            <h1 class="text-5xl font-black italic tracking-tighter">JOIN <span class="text-[#f57c00]">BOLD</span></h1>
-            <p class="text-gray-500 mt-2 font-bold uppercase text-[10px] tracking-[0.4em]">Choose how you want to earn</p>
+    <div class="accent-glow-spot" style="top: -10%; right: -10%;"></div>
+
+    <!-- UNIFORM NAV -->
+    <nav class="main-nav">
+        <div class="nav-action-cluster">
+            <button class="nav-arrow-btn" onclick="history.back()">←</button>
+            <button class="nav-arrow-btn" onclick="history.forward()">→</button>
+            <a href="index.html" class="logo-area">
+                <div class="bold-logo-box">B</div>
+                <span class="logo-text">Bold<span>.ng</span></span>
+            </a>
         </div>
-
-        <div class="flex justify-around mb-12 border-b border-white/5">
-            <button onclick="showForm('seller', this)" class="tab-btn active pb-4 px-4 text-xs font-black">1. INDEPENDENT SELLER</button>
-            <button onclick="showForm('managed', this)" class="tab-btn pb-4 px-4 text-xs font-black">2. MANAGED VENDOR</button>
-            <button onclick="showForm('affiliate', this)" class="tab-btn pb-4 px-4 text-xs font-black">3. AFFILIATE PARTNER</button>
+        <div class="nav-links-wrapper">
+            <a href="marketplace.html">Marketplace</a>
+            <a href="login.html">Login</a>
+            <a href="login.html" class="house-menu-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </a>
         </div>
+    </nav>
 
-        <div class="form-card rounded-[40px] p-8 md:p-12">
+    <!-- MAIN FUNNEL CONTAINER -->
+    <main class="flex-1 flex items-center justify-center p-4 md:p-8 z-10">
+        <div class="w-full max-w-4xl glass-panel rounded-[24px] md:rounded-[32px] overflow-hidden grid grid-cols-1 lg:grid-cols-12 shadow-2xl p-0">
             
-            <form id="form-seller" class="space-y-6">
-                <p class="text-xs text-[#f57c00] font-bold mb-6">Note: Your business details will be visible to all buyers.</p>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <input type="text" placeholder="Full Name" class="input-field p-4 rounded-2xl outline-none w-full" required>
-                    <input type="email" placeholder="Email Address" class="input-field p-4 rounded-2xl outline-none w-full" required>
-                    <input type="tel" placeholder="Phone Number" class="input-field p-4 rounded-2xl outline-none w-full">
-                    <input type="tel" placeholder="WhatsApp Number" class="input-field p-4 rounded-2xl outline-none w-full">
+            <!-- LEFT COLUMN: CONTEXT (Hidden on mobile for speed layout) -->
+            <div class="hidden lg:flex lg:col-span-4 bg-gradient-to-br from-[#0f172a] to-[#0a0e1a] p-10 flex-col justify-between border-r border-white/5">
+                <div>
+                    <h2 class="text-3xl font-bold italic tracking-tighter uppercase mb-3 text-white">The Guard of Trust.</h2>
+                    <p class="text-xs text-gray-400 leading-relaxed">Join Africa's most secure digital infrastructure. Your account is protected by hardware verification checks and escrow guidelines.</p>
                 </div>
-                <select class="input-field p-4 rounded-2xl outline-none w-full">
-                    <option>Select State (All 36 Nigeria States)</option>
-                    <option>Lagos</option><option>Abuja</option><option>Kano</option>
-                </select>
-                <input type="text" placeholder="Business Name" class="input-field p-4 rounded-2xl outline-none w-full">
-                <textarea placeholder="Business Description (Optional)" class="input-field p-4 rounded-2xl outline-none w-full h-24"></textarea>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <input type="password" placeholder="Password" class="input-field p-4 rounded-2xl outline-none w-full">
-                    <input type="password" placeholder="Verify Password" class="input-field p-4 rounded-2xl outline-none w-full">
+                <div class="pt-4 border-t border-white/5">
+                    <p class="text-[10px] uppercase text-gray-500 tracking-wider font-bold">Already registered?</p>
+                    <a href="login.html" class="text-xs text-[#ff6b00] font-bold uppercase tracking-wider hover:underline mt-1 inline-block">Access Space →</a>
                 </div>
-                <button type="submit" class="w-full bg-[#f57c00] text-black font-black py-5 rounded-2xl">REGISTER AS SELLER</button>
-            </form>
+            </div>
 
-            <form id="form-managed" class="hidden-form space-y-6">
-                <p class="text-xs text-blue-400 font-bold mb-6">Note: Bold.ng will manage your business. Details are private to Admins.</p>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <input type="text" placeholder="Full Name" class="input-field p-4 rounded-2xl outline-none w-full">
-                    <input type="tel" placeholder="Phone Number" class="input-field p-4 rounded-2xl outline-none w-full">
-                    <input type="tel" placeholder="WhatsApp Number" class="input-field p-4 rounded-2xl outline-none w-full">
-                    <input type="email" placeholder="Email Address" class="input-field p-4 rounded-2xl outline-none w-full">
-                </div>
-                <input type="text" placeholder="Full Business Address" class="input-field p-4 rounded-2xl outline-none w-full">
-                <div class="bg-white/5 p-6 rounded-3xl border border-white/5 space-y-4">
-                    <p class="text-[10px] font-bold text-gray-500 uppercase">Bank Details (For Direct Payouts)</p>
-                    <input type="text" placeholder="Bank Name" class="input-field p-4 rounded-2xl outline-none w-full">
-                    <input type="text" placeholder="Account Number" class="input-field p-4 rounded-2xl outline-none w-full">
-                </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <input type="password" placeholder="Password" class="input-field p-4 rounded-2xl outline-none w-full">
-                    <input type="password" placeholder="Verify Password" class="input-field p-4 rounded-2xl outline-none w-full">
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white font-black py-5 rounded-2xl">REGISTER AS VENDOR</button>
-            </form>
-
-            <form id="form-affiliate" class="hidden-form space-y-6 text-center">
-                <div class="py-10">
-                    <p class="text-xl font-bold mb-2">Sell & Earn Commission</p>
-                    <p class="text-sm text-gray-500 mb-8">Details visible to Admin dashboard only.</p>
-                    <div class="space-y-4 max-w-md mx-auto">
-                        <input type="text" placeholder="Full Name" class="input-field p-4 rounded-2xl outline-none w-full">
-                        <input type="tel" placeholder="Phone Number" class="input-field p-4 rounded-2xl outline-none w-full">
-                        <input type="email" placeholder="Email Address" class="input-field p-4 rounded-2xl outline-none w-full">
+            <!-- RIGHT COLUMN: RESPONSIVE FORM INTERFACE -->
+            <div class="lg:col-span-8 p-6 md:p-10">
+                <form id="signupForm" onsubmit="executeRegistration(event)" class="space-y-5">
+                    
+                    <div>
+                        <h3 class="text-lg md:text-xl font-bold uppercase tracking-tight text-white">Initialize Account</h3>
+                        <p class="text-xs text-gray-500">Select your operational route layout parameters below.</p>
                     </div>
-                </div>
-                <button type="submit" class="w-full bg-green-600 text-white font-black py-5 rounded-2xl">JOIN AS AFFILIATE</button>
-            </form>
 
-            <div class="mt-10 pt-10 border-t border-white/5 text-center">
-                <label class="flex items-center justify-center gap-3 mb-6 cursor-pointer">
-                    <input type="checkbox" class="w-5 h-5 accent-[#f57c00]">
-                    <span class="text-sm text-gray-500 italic">I am not a robot</span>
-                </label>
-                <p class="text-sm text-gray-500">Already have an account? <a href="index.html" class="text-[#f57c00] font-bold">Login</a></p>
+                    <!-- PHASE SELECTOR (Responsive Stack) -->
+                    <div>
+                        <label class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-2">Workspace Route Type *</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            <label class="relative block cursor-pointer">
+                                <input type="radio" name="account_role" value="free_seller" class="phase-radio hidden" checked>
+                                <div class="glass-panel p-3 text-center rounded-xl">
+                                    <p class="text-xs font-bold text-white">Free Seller</p>
+                                </div>
+                            </label>
+                            <label class="relative block cursor-pointer">
+                                <input type="radio" name="account_role" value="managed_merchant" class="phase-radio hidden">
+                                <div class="glass-panel p-3 text-center rounded-xl">
+                                    <p class="text-xs font-bold text-white">Managed</p>
+                                </div>
+                            </label>
+                            <label class="relative block cursor-pointer">
+                                <input type="radio" name="account_role" value="affiliate_partner" class="phase-radio hidden">
+                                <div class="glass-panel p-3 text-center rounded-xl">
+                                    <p class="text-xs font-bold text-white">Affiliate</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- FIELD ROW 1 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Full Name *</label>
+                            <input type="text" id="regName" required class="field-input-base text-sm" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Username <span class="text-gray-600">(Optional)</span></label>
+                            <input type="text" id="regUsername" class="field-input-base text-sm" placeholder="johndoe_bold">
+                        </div>
+                    </div>
+
+                    <!-- EMAIL SUB-SYSTEM -->
+                    <div>
+                        <label class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Email Address *</label>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="email" id="regEmail" required class="w-full sm:flex-1 field-input-base text-sm" placeholder="name@domain.com">
+                            <button type="button" onclick="sendVerificationCode()" class="w-full sm:w-auto btn-bold-outline px-5 py-3 sm:py-0 text-xs whitespace-nowrap">Verify Channel</button>
+                        </div>
+                        <div id="codeVerificationArea" class="mt-3 hidden bg-white/5 p-4 rounded-xl border border-white/5">
+                            <label class="text-[9px] font-bold uppercase tracking-wider text-[#ff6b00] block mb-1.5">Enter 6-Digit Token</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="verificationCode" maxlength="6" class="w-28 field-input-base text-center font-bold tracking-widest text-sm p-2" placeholder="000000">
+                                <button type="button" onclick="confirmVerificationCode()" class="bg-[#ff6b00] text-white px-4 rounded-xl text-[10px] font-bold uppercase tracking-wider">Confirm</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="emailVerifiedStatus" value="false">
+                    </div>
+
+                    <!-- LOCATION -->
+                    <div>
+                        <label class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Business Location <span class="text-gray-600">(Optional)</span></label>
+                        <input type="text" id="regLocation" class="field-input-base text-sm" placeholder="e.g. Lagos, Nigeria">
+                    </div>
+
+                    <!-- SECURE RESPONSIVE PASSWORDS LAYER -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Password *</label>
+                            <div class="relative">
+                                <input type="password" id="regPassword" required class="field-input-base text-sm pr-12" placeholder="••••••••">
+                                <button type="button" onclick="togglePasswordVisibility('regPassword', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white text-xs font-semibold focus:outline-none">SHOW</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">Verify Password *</label>
+                            <div class="relative">
+                                <input type="password" id="regPasswordVerify" required class="field-input-base text-sm pr-12" placeholder="••••••••">
+                                <button type="button" onclick="togglePasswordVisibility('regPasswordVerify', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white text-xs font-semibold focus:outline-none">SHOW</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full btn-bold-primary py-4 rounded-xl text-xs tracking-[0.2em]">
+                        Initialize Safe Profile
+                    </button>
+
+                </form>
             </div>
         </div>
     </main>
 
+    <!-- NOTIFICATION MODULE -->
+    <div id="statusToast" class="toast fixed bottom-4 right-4 left-4 sm:left-auto z-[9999] max-w-sm p-4 rounded-xl shadow-2xl border flex gap-3 items-center">
+        <div id="toastIcon" class="text-xl"></div>
+        <div>
+            <h4 id="toastTitle" class="font-bold text-xs uppercase tracking-wide"></h4>
+            <p id="toastDesc" class="text-[11px] text-gray-400 mt-0.5"></p>
+        </div>
+    </div>
+
     <script>
-        function showForm(type, btn) {
-            // Reset Tabs
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // Reset Forms
-            document.getElementById('form-seller').style.display = 'none';
-            document.getElementById('form-managed').style.display = 'none';
-            document.getElementById('form-affiliate').style.display = 'none';
-
-            // Show Selected
-            document.getElementById('form-' + type).style.display = 'block';
+        function togglePasswordVisibility(fieldId, btn) {
+            const field = document.getElementById(fieldId);
+            if (field.type === "password") {
+                field.type = "text"; btn.innerText = "HIDE"; btn.style.color = "#ff6b00";
+            } else {
+                field.type = "password"; btn.innerText = "SHOW"; btn.style.color = "#64748b";
+            }
+        }
+        function sendVerificationCode() {
+            if(!document.getElementById('regEmail').value) return;
+            document.getElementById('codeVerificationArea').classList.remove('hidden');
+        }
+        function confirmVerificationCode() {
+            document.getElementById('emailVerifiedStatus').value = "true";
+            document.getElementById('codeVerificationArea').innerHTML = `<p class="text-xs font-bold text-green-500">✓ Security Verification Confirmed</p>`;
+        }
+        function executeRegistration(event) {
+            event.preventDefault();
+            const selectedRole = document.querySelector('input[name="account_role"]:checked').value;
+            window.location.href = selectedRole + '_dashboard.html'; // Dynamic Redirect
         }
     </script>
 </body>
