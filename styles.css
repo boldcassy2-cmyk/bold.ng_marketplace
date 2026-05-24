@@ -1,232 +1,494 @@
-/* --- GLOBAL DESIGN TOKENS & SYSTEM ARCHITECTURE --- */
+/* ==========================================================================
+   BOLD.NG BRAND ARCHITECTURE - PRODUCTION STYLESHEET (style.css)
+   Colors: Deep Midnight Blue (#0a0e1a), Crisp White (#ffffff), Bold Orange (#ff6b00)
+   ========================================================================== */
+
+/* --- PROFESSIONAL FONTS INTERFACE --- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;700&display=swap');
+
 :root {
     --bold-midnight: #0a0e1a;
-    --bold-blue-deep: #0f172a;
+    --bold-blue-surface: #111726;
     --bold-orange: #ff6b00;
+    --bold-orange-hover: #e05e00;
     --bold-white: #ffffff;
-    --glass: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --premium-glow: cubic-bezier(0.4, 0, 0.2, 1);
+    --bold-gray-muted: #64748b;
+    --glass-bg: rgba(255, 255, 255, 0.02);
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --premium-glow: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --- SYSTEM RESET & CORE LAYOUTS --- */
+/* --- RESET & SYSTEM BASICS --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
     background-color: var(--bold-midnight);
     color: var(--bold-white);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    line-height: 1.6;
+    min-height: 100vh;
     overflow-x: hidden;
-    position: relative;
 }
 
-/* --- FLOATING BACKGROUND ILLUMINATION --- */
-.accent-glow-spot {
-    position: absolute;
-    width: 40vw;
-    height: 40vw;
-    background: radial-gradient(circle, rgba(255, 107, 0, 0.06) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
+h1, h2, h3, .logo-text, .italic-heading, .panel-headline {
+    font-family: 'Space Grotesk', sans-serif;
 }
 
-/* --- REUSABLE COMPONENT GLASS PANELS --- */
-.glass-panel {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    padding: 40px;
-    border-radius: 32px;
-    transition: all 0.3s var(--premium-glow);
-    z-index: 2;
+/* --- UNIFORM SYSTEM SCROLLBAR --- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
 
-.glass-panel:hover {
-    border-color: rgba(255, 107, 0, 0.3);
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-2px);
+::-webkit-scrollbar-track {
+    background: var(--bold-midnight);
 }
 
-/* --- PREMIUM INTERACTIVE ACTION BUTTONS --- */
-.btn-bold-primary {
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 107, 0, 0.3);
+    border-radius: 20px;
+    border: 2px solid var(--bold-midnight);
+    transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
     background: var(--bold-orange);
-    color: white;
-    padding: 14px 32px;
-    border-radius: 14px;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s var(--premium-glow);
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.2);
-    text-decoration: none;
 }
 
-.btn-bold-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
-    filter: brightness(1.1);
+/* --- MASTER LAYOUT ARCHITECTURE (The Laptop Sidebar & Phone Split) --- */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 280px 1fr; /* Sidebar fixed width on laptops */
+    min-height: 100vh;
 }
 
-.btn-bold-outline {
-    background: transparent;
-    border: 1px solid var(--glass-border);
-    color: white;
-    padding: 14px 32px;
-    border-radius: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s var(--premium-glow);
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+.main-workspace {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.btn-bold-outline:hover {
-    background: var(--glass);
-    border-color: var(--bold-orange);
+.workspace-scroll-container {
+    padding: 40px;
+    flex-grow: 1;
 }
 
-/* --- RESPONSIVE UNIFORM STICKY HEADER --- */
-.main-nav {
+/* --- UNIFORM SYSTEM SIDEBAR (Left on Laptops, Bottom on Mobile) --- */
+.sidebar-navigation {
+    background-color: var(--bold-blue-surface);
+    border-right: 1px solid var(--glass-border);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    background: rgba(10, 14, 26, 0.8);
+    z-index: 100;
+}
+
+.sidebar-brand-anchor {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-bottom: 40px;
+    transition: transform 0.2s var(--premium-glow);
+}
+
+.sidebar-brand-anchor:hover {
+    transform: scale(1.02);
+}
+
+.sidebar-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.menu-item-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--bold-gray-muted);
+    text-decoration: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s var(--premium-glow);
+}
+
+.menu-item-link:hover, 
+.menu-item-link.active {
+    background: rgba(255, 107, 0, 0.08);
+    color: var(--bold-orange);
+    border: 1px solid rgba(255, 107, 0, 0.15);
+}
+
+.sidebar-exit-footer {
+    padding-top: 24px;
+    border-top: 1px solid var(--glass-border);
+}
+
+/* --- UNIFORM DYNAMIC NAVIGATION HEADER --- */
+.main-nav, .uniform-top-control-bar {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background: rgba(10, 14, 26, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 16px 5%;
+    border-bottom: 1px solid var(--glass-border); /* FIXED: Changed from border-b to border-bottom */
+    padding: 15px 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.logo-area {
+/* Back and Front Navigation Cluster */
+.nav-action-cluster, .control-bar-actions-cluster {
     display: flex;
     align-items: center;
-    text-decoration: none;
+    gap: 16px;
+}
+
+.nav-arrow-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     color: var(--bold-white);
-    transition: transform 0.2s var(--premium-glow);
-}
-
-.logo-area:hover {
-    transform: scale(1.02);
-}
-
-.bold-logo-box {
-    background: var(--bold-orange);
-    color: white;
     width: 36px;
     height: 36px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 900;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+.nav-arrow-btn:hover {
+    border-color: var(--bold-orange);
+    color: var(--bold-orange);
+    background: rgba(255, 107, 0, 0.05);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.bold-logo-box, .bold-logo-box-capital {
+    background: var(--bold-orange);
+    color: var(--bold-white);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
     font-style: italic;
     border-radius: 8px;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.2);
 }
 
-.logo-text {
+.logo-text, .logo-text-string {
     font-weight: 800;
     font-size: 1.4rem;
-    margin-left: 12px;
+    margin-left: 10px;
     letter-spacing: -1px;
+    color: var(--bold-white);
 }
 
-.logo-text span {
+.logo-text span, .logo-accent-dot {
     color: var(--bold-orange);
 }
 
-/* Navigation Link Clusters */
+/* Search Bar Utilities inside Dashboard Headers */
+.search-bar-architecture {
+    position: relative;
+    width: 350px;
+}
+
+.top-search-input-field {
+    width: 100%;
+    background: var(--bold-midnight);
+    border: 1px solid var(--glass-border);
+    padding: 10px 16px 10px 40px;
+    border-radius: 12px;
+    color: var(--bold-white);
+    outline: none;
+}
+
+.top-search-input-field:focus {
+    border-color: var(--bold-orange);
+}
+
+.search-icon-marker {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bold-gray-muted);
+}
+
+/* Navigation Link Controls */
 .nav-links-wrapper {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 30px;
 }
 
 .nav-links-wrapper a {
     color: #94a3b8;
     text-decoration: none;
     font-size: 0.85rem;
-    font-weight: 700;
-    transition: color 0.2s var(--premium-glow);
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
+    transition: color 0.3s;
 }
 
 .nav-links-wrapper a:hover, .nav-links-wrapper a.active {
-    color: var(--bold-orange);
-}
-
-/* Native UI Back/Forward History Controls */
-.nav-action-cluster {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.nav-arrow-btn {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    color: #64748b;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.2s;
-}
-
-.nav-arrow-btn:hover {
     color: var(--bold-white);
-    border-color: rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.05);
 }
 
+/* House Icon Navigation Trigger Shortcut */
 .house-menu-btn {
+    color: var(--bold-orange);
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #94a3b8;
-    transition: color 0.2s;
-}
-.house-menu-btn:hover {
-    color: var(--bold-orange);
-}
-
-/* --- MOBILE TARGET MENU NAVIGATION SLIDEOVER --- */
-.mobile-menu-trigger {
-    display: none;
-    background: transparent;
-    border: none;
-    color: var(--bold-white);
     cursor: pointer;
-    padding: 4px;
+    transition: transform 0.2s;
+    text-decoration: none;
 }
 
+.house-menu-btn:hover {
+    transform: scale(1.1);
+}
+
+/* --- VISUAL ATTRACTIVENESS & PREMIUM COMPONENTS --- */
+
+/* Glassmorphic Presentation Panels */
+.glass-panel, .glass-panel-card {
+    background: var(--bold-blue-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s, background 0.3s, transform 0.3s var(--premium-glow);
+}
+
+.glass-panel:hover, .glass-panel-card:hover {
+    border-color: rgba(255, 107, 0, 0.2);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-4px);
+}
+
+/* Premium Buttons Styling */
+.btn-bold-primary, .btn-bold-action-orange {
+    background: var(--bold-orange);
+    color: var(--bold-white);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.2);
+    transition: all 0.3s var(--premium-glow);
+}
+
+.btn-bold-primary:hover, .btn-bold-action-orange:hover {
+    background: var(--bold-orange-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+}
+
+.btn-bold-outline, .btn-bold-action-outline {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--bold-white);
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-bold-outline:hover, .btn-bold-action-outline:hover {
+    border-color: var(--bold-orange);
+    background: rgba(255, 107, 0, 0.05);
+}
+
+/* Input Fields Blueprint */
+.field-input-base {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: var(--bold-white);
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+
+.field-input-base:focus {
+    outline: none;
+    border-color: var(--bold-orange);
+    background: rgba(255, 107, 0, 0.02);
+    box-shadow: 0 0 15px rgba(255, 107, 0, 0.1);
+}
+
+/* Executive Performance Scorecard Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.metric-card-glass {
+    background: var(--bold-blue-surface);
+    border: 1px solid var(--glass-border);
+    padding: 24px;
+    border-radius: 20px;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    color: var(--bold-gray-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.metric-number {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-top: 12px;
+}
+
+/* Content Matrix Splits */
+.content-split-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
+/* Decorative Orange Glow Accents */
+.accent-glow-spot {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 107, 0, 0.04);
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- SMART MOBILE PHONE VIEWPORT OPTIMIZATIONS (Adaptive Breakpoints) --- */
 @media (max-width: 991px) {
-    .nav-links-wrapper {
-        display: none; /* Controlled via mobile drawer overlays on touch devices */
+    /* Transforms Left Sidebar into a Bottom Fixed Thumb Navigation Menu for Phones */
+    .dashboard-container {
+        grid-template-columns: 1fr;
     }
-    .mobile-menu-trigger {
-        display: block;
+
+    .sidebar-navigation {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        height: 72px;
+        flex-direction: row;
+        padding: 0 16px;
+        border-right: none;
+        border-top: 1px solid var(--glass-border);
+        background: rgba(17, 23, 38, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 1000;
+    }
+
+    /* Clear desktop visual clutter from mobile dock */
+    .sidebar-brand-anchor, 
+    .sidebar-exit-footer,
+    .logo-text-string {
+        display: none !important;
+    }
+
+    .sidebar-menu-links {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        gap: 0;
+    }
+
+    .menu-item-link {
+        flex-direction: column;
+        gap: 4px;
+        padding: 8px;
+        font-size: 0.65rem;
+        font-weight: 500;
+        border: none !important;
+        background: transparent !important;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .menu-item-link.active {
+        color: var(--bold-orange);
+    }
+
+    .menu-item-link span {
+        font-size: 1.3rem; /* Enlarges menu icon touch target size */
+    }
+
+    /* Layout Spacing Overrides for Mobile Screens */
+    .uniform-top-control-bar, .main-nav {
+        padding: 16px 20px;
+    }
+
+    .search-bar-architecture {
+        width: 160px; /* Contracts desktop search field width box */
+    }
+
+    .workspace-scroll-container {
+        padding: 20px 20px 90px 20px; /* Clear padding room for bottom thumb bar overlap */
+    }
+
+    .content-split-layout {
+        grid-template-columns: 1fr; /* Collapses dual desktop columns into one scrolling layer */
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links-wrapper a:not(.house-menu-btn) {
+        display: none; /* Collapses text headers links inside traditional landing navigations */
     }
 }
